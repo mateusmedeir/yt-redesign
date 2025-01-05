@@ -1,0 +1,80 @@
+:root {
+    --yt-color: #FF0033 !important;
+    --yt-spec-text-primary: #F1F1F1 !important;
+    --yt-spec-text-primary-inverse: #0f0f0f !important;
+    --yt-outline-color: #2c2c2c !important;
+    --yt-spec-icon-inactive: #FFFFFF !important;
+    --yt-spec-additive-background: #322629 !important;
+    --yt-chip-cloud-chip-background: #323232 !important;
+}
+
+yt-chip-cloud-chip-renderer[chip-style=STYLE_DEFAULT] #chip-container.yt-chip-cloud-chip-renderer, yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER] #chip-container.yt-chip-cloud-chip-renderer {
+    background-color: var(--yt-chip-cloud-chip-background) !important;
+    padding: 0.625rem 1rem !important;
+    height: auto !important;
+    width: auto !important;
+    max-width: auto !important;
+}
+
+yt-chip-cloud-chip-renderer[chip-style=STYLE_DEFAULT][selected] #chip-container.yt-chip-cloud-chip-renderer, yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER][selected] #chip-container.yt-chip-cloud-chip-renderer {
+    background-color: var(--yt-spec-icon-inactive) !important;
+}
+
+ytd-guide-entry-renderer[active] .yt-spec-icon-shape {
+    color: var(--yt-color) !important;
+}
+
+#sections ytd-guide-section-renderer:nth-last-child(-n+3) {
+    display: none !important;
+}
+
+.guide-icon.ytd-guide-entry-renderer, yt-img-shadow.ytd-guide-entry-renderer {
+    margin-right: 1.25rem !important;
+}
+
+#footer {
+    display: none !important;
+}
+
+.collapsible-header {
+    display: flex;
+    padding-right: 0.75rem;
+}
+
+.collapsible-title:first-child {
+    width: 100% !important;
+}
+
+.collapsible-title {
+    width: 100%;
+}
+
+.collapsible-button {
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem;
+    cursor: pointer;
+    border-radius: 0.625rem;
+}
+
+.collapsible-button:hover {
+    background-color: var(--yt-spec-additive-background);
+}
+
+.collapsible--active .collapsible-button img {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    display: none;
+}
+
+.collapsible--active .collapsible-content {
+    display: block;
+}
+
+.text-lg {
+    font-size: 14px !important;
+    line-height: 20px !important;
+    letter-spacing: 0.1px !important;
+}
