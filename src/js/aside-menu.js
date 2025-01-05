@@ -71,6 +71,7 @@ function mergeSubscriptionBlocks(subscriptionsButton) {
 function AsideMenuObserver() {
   const subscriptionsButton = findSubscriptionButton();
   if (subscriptionsButton) {
+    subscriptionsButton.id = "subscriptions-button";
     mergeSubscriptionBlocks(subscriptionsButton);
     return true;
   }
@@ -82,5 +83,8 @@ const observer = new MutationObserver(() => {
     observer.disconnect();
   }
 });
+
+
+
 
 observer.observe(document.body, { childList: true, subtree: true });

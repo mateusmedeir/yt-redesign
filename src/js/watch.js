@@ -1,29 +1,15 @@
 function findSugestionsDiv() {
-  const sugestionsDiv = document.getElementById("related");
-  return sugestionsDiv;
+  return document.getElementById("related");
 }
 
-function findTransciptDiv() {
-  const transcriptDiv = document.querySelector(
+function findTranscriptDiv() {
+  return document.querySelector(
     "[target-id=engagement-panel-searchable-transcript]"
   );
-
-  return transcriptDiv;
 }
 
 function findLiveChatDiv() {
-  const liveChatDiv = document.getElementById("chat-container");
-  return liveChatDiv;
-}
-
-function findSecondaryVideoWrapper() {
-  const secondaryVideoWrapper = document.getElementById("secondary");
-  return secondaryVideoWrapper;
-}
-
-function findSecondaryInner() {
-  const secondaryInner = document.getElementById("secondary-inner");
-  return secondaryInner;
+  return document.getElementById("chat-container");
 }
 
 function createSecondaryWatchOptions(title, id, parent, isActive) {
@@ -40,108 +26,120 @@ function createSecondaryWatchOptions(title, id, parent, isActive) {
   return option;
 }
 
+function setSelectedOption(selectedId, secondaryInner, options) {
+  for (let i = 0; i < options.length; i++) {
+    options[i].classList.remove("secondary__button--active");
+    if (options[i].id === selectedId) {
+      options[i].classList.add("secondary__button--active");
+    }
+  }
+
+  const sugestionsDiv = findSugestionsDiv();
+  const transciptDiv = findTranscriptDiv();
+  const liveChatDiv = findLiveChatDiv();
+
+  if (selectedId === "sugestions") sugestionsDiv.style.display = "block";
+  else sugestionsDiv.style.display = "none";
+
+  if (transciptDiv && selectedId === "transcript")
+    transciptDiv.style.display = "flex";
+  else if (transciptDiv) transciptDiv.style.display = "none";
+
+  if (liveChatDiv && selectedId === "live-chat")
+    liveChatDiv.style.display = "block";
+  else liveChatDiv.style.display = "none";
+
+  if (selectedId !== "sugestions")
+    secondaryInner.classList.add("secondary-inner--full");
+  else secondaryInner.classList.remove("secondary-inner--full");
+}
+
 let counter = 0;
 
 function VideoPageObserverFunction() {
-  const secondaryVideoWrapper = findSecondaryVideoWrapper();
-  const secondaryInner = findSecondaryInner();
+  const liveButton = document.getElementById("teaser-carousel");
+  const isLive = liveButton
+    ? liveButton?.getAttribute("hidden") === null
+    : false;
+
+  const secondaryInner = document.getElementById("secondary-inner");
+  const secondaryVideoWrapper = secondaryInner?.parentNode;
+
+  const secondaryVideoOptions =
+    document.getElementsByClassName("secondary__options")[0];
+
+  if (!!secondaryVideoOptions) {
+    setSelectedOption(
+      isLive ? "live-chat" : "sugestions",
+      secondaryInner,
+      secondaryVideoOptions.children
+    );
+    return true;
+  }
+
+  if (counter > 0) return false;
 
   const sugestionsDiv = findSugestionsDiv();
-  const transciptDiv = findTransciptDiv();
-  const liveChatDiv = findLiveChatDiv();
+  const transciptDiv = findTranscriptDiv();
 
-  const liveButton = document.getElementsByClassName("ytp-live-badge")[0];
-
-/*   console.log("Secondary Video Wrapper", secondaryVideoWrapper);
-  console.log("Secondary Inner", secondaryInner);
-  console.log("Sugestions Div", sugestionsDiv);
-  console.log("Transcript Div", transciptDiv);
-  console.log("Live Chat Div", liveChatDiv);
-  console.log("Live Button", liveButton); */
-
-  counter++;
   if (
     secondaryVideoWrapper &&
     secondaryInner &&
     sugestionsDiv &&
-    (counter > 25 || transciptDiv)
+    (transciptDiv || liveButton)
   ) {
-    const isLive = liveButton
-      ? liveButton.getAttribute("disabled") !== null
-      : false;
-
     if (isLive) {
       sugestionsDiv.style.display = "none";
       secondaryInner.classList.add("secondary-inner--full");
     }
 
-    const SecondaryVideoOptions = document.createElement("div");
-    SecondaryVideoOptions.classList.add("text-lg", "secondary__options");
+    const newSecondaryVideoOptions = document.createElement("div");
+    newSecondaryVideoOptions.classList.add("text-lg", "secondary__options");
 
     createSecondaryWatchOptions(
       "Sugestões",
       "sugestions",
-      SecondaryVideoOptions,
+      newSecondaryVideoOptions,
       !isLive
     );
     createSecondaryWatchOptions(
       "Transcrição",
       "transcript",
-      SecondaryVideoOptions,
+      newSecondaryVideoOptions,
       false
     );
     createSecondaryWatchOptions(
       "Chat ao vivo",
       "live-chat",
-      SecondaryVideoOptions,
+      newSecondaryVideoOptions,
       isLive
     );
 
     secondaryVideoWrapper.insertBefore(
-      SecondaryVideoOptions,
+      newSecondaryVideoOptions,
       secondaryVideoWrapper.children[0]
     );
 
-    SecondaryVideoOptions.addEventListener("click", (event) => {
+    newSecondaryVideoOptions.addEventListener("click", (event) => {
       if (event.target.classList.contains("secondary__button")) {
-        const options = SecondaryVideoOptions.children;
-        for (let i = 0; i < options.length; i++) {
-          options[i].classList.remove("secondary__button--active");
-        }
-        event.target.classList.add("secondary__button--active");
-
-        if (event.target.id === "sugestions")
-          sugestionsDiv.style.display = "block";
-        else sugestionsDiv.style.display = "none";
-
-        if (transciptDiv && event.target.id === "transcript")
-          transciptDiv.style.display = "flex";
-        else if (transciptDiv) transciptDiv.style.display = "none";
-
-        if (liveChatDiv && event.target.id === "live-chat")
-          liveChatDiv.style.display = "block";
-        else liveChatDiv.style.display = "none";
-
-        if (event.target.id !== "sugestions") {
-          secondaryInner.classList.add("secondary-inner--full");
-        } else {
-          secondaryInner.classList.remove("secondary-inner--full");
-        }
+        setSelectedOption(
+          event.target.id,
+          secondaryInner,
+          newSecondaryVideoOptions.children
+        );
       }
     });
 
+    counter++;
     return true;
   }
   return false;
 }
 
 const VideoPageObserver = new MutationObserver(() => {
-  if (!window.location.href.includes('youtube.com/watch') || VideoPageObserverFunction()) {
+  if (!window.location.href.includes("/watch") || VideoPageObserverFunction()) {
     VideoPageObserver.disconnect();
   }
 });
 
 VideoPageObserver.observe(document.body, { childList: true, subtree: true });
-
-// ENGAGEMENT_PANEL_VISIBILITY_EXPANDED
-// ENGAGEMENT_PANEL_VISIBILITY_HIDDEN
