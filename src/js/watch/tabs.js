@@ -1,4 +1,4 @@
-function findSugestionsDiv() {
+function findSuggestionsDiv() {
   return document.getElementById("related");
 }
 
@@ -34,12 +34,12 @@ function setSelectedOption(selectedId, secondaryInner, options) {
     }
   }
 
-  const sugestionsDiv = findSugestionsDiv();
+  const suggestionsDiv = findSuggestionsDiv();
   const transciptDiv = findTranscriptDiv();
   const liveChatDiv = findLiveChatDiv();
 
-  if (selectedId === "sugestions") sugestionsDiv.style.display = "block";
-  else sugestionsDiv.style.display = "none";
+  if (selectedId === "suggestions") suggestionsDiv.style.display = "block";
+  else suggestionsDiv.style.display = "none";
 
   if (transciptDiv && selectedId === "transcript")
     transciptDiv.style.display = "flex";
@@ -49,14 +49,14 @@ function setSelectedOption(selectedId, secondaryInner, options) {
     liveChatDiv.style.display = "block";
   else liveChatDiv.style.display = "none";
 
-  if (selectedId !== "sugestions")
+  if (selectedId !== "suggestions")
     secondaryInner.classList.add("secondary-inner--full");
   else secondaryInner.classList.remove("secondary-inner--full");
 }
 
 let counter = 0;
 
-function VideoPageObserverFunction() {
+function WatchTabs() {
   const liveButton = document.getElementById("teaser-carousel");
   const isLive = liveButton
     ? liveButton?.getAttribute("hidden") === null
@@ -70,7 +70,7 @@ function VideoPageObserverFunction() {
 
   if (!!secondaryVideoOptions) {
     setSelectedOption(
-      isLive ? "live-chat" : "sugestions",
+      isLive ? "live-chat" : "suggestions",
       secondaryInner,
       secondaryVideoOptions.children
     );
@@ -79,17 +79,19 @@ function VideoPageObserverFunction() {
 
   if (counter > 0) return false;
 
-  const sugestionsDiv = findSugestionsDiv();
+  const suggestionsDiv = findSuggestionsDiv();
   const transciptDiv = findTranscriptDiv();
 
   if (
     secondaryVideoWrapper &&
     secondaryInner &&
-    sugestionsDiv &&
+    suggestionsDiv &&
     (transciptDiv || liveButton)
   ) {
+    liveButton?.classList.add("display-none");
+
     if (isLive) {
-      sugestionsDiv.style.display = "none";
+      suggestionsDiv.style.display = "none";
       secondaryInner.classList.add("secondary-inner--full");
     }
 
@@ -97,19 +99,19 @@ function VideoPageObserverFunction() {
     newSecondaryVideoOptions.classList.add("text-lg", "secondary__options");
 
     createSecondaryWatchOptions(
-      "Sugestões",
-      "sugestions",
+      "Suggestions",
+      "suggestions",
       newSecondaryVideoOptions,
       !isLive
     );
     createSecondaryWatchOptions(
-      "Transcrição",
+      "Transcripts",
       "transcript",
       newSecondaryVideoOptions,
       false
     );
     createSecondaryWatchOptions(
-      "Chat ao vivo",
+      "Live Chat",
       "live-chat",
       newSecondaryVideoOptions,
       isLive
@@ -137,7 +139,7 @@ function VideoPageObserverFunction() {
 }
 
 const VideoPageObserver = new MutationObserver(() => {
-  if (!window.location.href.includes("/watch") || VideoPageObserverFunction()) {
+  if (!window.location.href.includes("/watch") || WatchTabs()) {
     VideoPageObserver.disconnect();
   }
 });

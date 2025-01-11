@@ -1,5 +1,5 @@
 {
-  "name": "Juxtopposed Youtube UI",
+  "name": "Youtube Redesign",
   "version": "0.1.0",
   "description": "Extension based on the Juxtopposed Youtube UI redesign",
   "permissions": ["storage", "tabs", "scripting", "webNavigation"],
@@ -10,24 +10,37 @@
       "js": [
         "src/js/aside-menu.js",
         "src/js/transition-listeners.js",
-        "src/js/watch.js"
+        "src/js/watch/tabs.js",
+        "src/js/watch/player.js"
       ],
-      "css": ["src/style/global.css", "src/style/watch.css"]
-    },
-    {
-      "matches": ["https://*.youtube.com/watch*"],
-      "js": ["src/js/watch.js"],
-      "css": ["src/style/global.css", "src/style/watch.css"]
+      "css": [
+        "src/style/global.css",
+        "src/style/watch/tabs.css",
+        "src/style/watch/player.css"
+      ]
     }
   ],
   "host_permissions": ["https://*.youtube.com/*"],
   "web_accessible_resources": [
     {
-      "scripting": ["src/js/watch.js"],
-      "css": ["src/style/global.css", "src/style/watch.css"],
-      "resources": ["src/assets/arrow-down.svg"],
+      "scripting": ["src/js/watch/tabs.js", "src/js/watch/player.js"],
+      "css": [
+        "src/style/global.css",
+        "src/style/watch/tabs.css",
+         "src/style/watch/player.css"
+      ],
+      "resources": [
+        "src/assets/arrow-down.svg",
+        "src/assets/sticky-player-icon.svg"
+      ],
       "matches": ["https://*.youtube.com/*"]
     }
   ],
+  "icons": {
+    "16": "src/assets/icon-16.png",
+    "32": "src/assets/icon-32.png",
+    "48": "src/assets/icon-48.png",
+    "128": "src/assets/icon-128.png"
+  },
   "manifest_version": 3
 }

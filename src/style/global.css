@@ -1,11 +1,13 @@
 :root {
-    --yt-color: #FF0033 !important;
+    --yt-primary-color: #FF0033 !important;
+    --yt-secondary-color: #F50057 !important;
     --yt-spec-text-primary: #F1F1F1 !important;
     --yt-spec-text-primary-inverse: #0f0f0f !important;
     --yt-outline-color: #2c2c2c !important;
     --yt-spec-icon-inactive: #FFFFFF !important;
-    --yt-spec-additive-background: #322629 !important;
+    --yt-spec-endpoint-background: #322629 !important;
     --yt-chip-cloud-chip-background: #323232 !important;
+    --yt-spec-additive-background: #1d1d1d !important; /* Bg color of description, Watch page buttons, ... */
 }
 
 yt-chip-cloud-chip-renderer[chip-style=STYLE_DEFAULT] #chip-container.yt-chip-cloud-chip-renderer, yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER] #chip-container.yt-chip-cloud-chip-renderer {
@@ -21,7 +23,7 @@ yt-chip-cloud-chip-renderer[chip-style=STYLE_DEFAULT][selected] #chip-container.
 }
 
 ytd-guide-entry-renderer[active] .yt-spec-icon-shape {
-    color: var(--yt-color) !important;
+    color: var(--yt-primary-color) !important;
 }
 
 #sections ytd-guide-section-renderer:nth-last-child(-n+3) {
@@ -34,6 +36,10 @@ ytd-guide-entry-renderer[active] .yt-spec-icon-shape {
 
 #footer {
     display: none !important;
+}
+
+.yt-spec-button-shape-next--mono.yt-spec-button-shape-next--tonal {
+    background-color: var(--yt-spec-badge-chip-background) !important;
 }
 
 .collapsible-header {
@@ -57,8 +63,12 @@ ytd-guide-entry-renderer[active] .yt-spec-icon-shape {
     border-radius: 0.625rem;
 }
 
-.collapsible-button:hover {
-    background-color: var(--yt-spec-additive-background);
+.collapsible-button:hover, ytd-guide-entry-renderer:hover:has(> #endpoint), ytd-guide-entry-renderer[active]:has(> #endpoint) {
+    background-color: var(--yt-spec-endpoint-background);
+}
+
+#endpoint:hover {
+    background-color: transparent !important;
 }
 
 .collapsible--active .collapsible-button img {
@@ -71,6 +81,10 @@ ytd-guide-entry-renderer[active] .yt-spec-icon-shape {
 
 .collapsible--active .collapsible-content {
     display: block;
+}
+
+.display-none {
+    display: none !important;
 }
 
 .text-lg {

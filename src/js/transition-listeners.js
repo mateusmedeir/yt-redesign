@@ -12,6 +12,9 @@
           subscriptionsButton.removeAttribute("active");
         }
       }
+      if (location.href.includes("youtube.com/@")) {
+        ChannelPresentation();
+      }
     }
   },
   true
@@ -22,7 +25,8 @@
   function (event) {
     if (event.target.id === "progress") {
       if (location.href.includes("youtube.com/watch")) {
-        VideoPageObserverFunction();
+        WatchTabs();
+        WatchMiniPlayer();
       }
     }
   },
