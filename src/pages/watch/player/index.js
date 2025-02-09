@@ -19,7 +19,8 @@ function WatchFullPlayer() {}
 let miniplayerCounter = 0;
 
 function WatchMiniPlayer() {
-  if (miniplayerCounter > 0) return false;
+  if (!location.href.includes("youtube.com/watch")) return true;
+  if (miniplayerCounter > 0) return true;
 
   const playerRightControls =
     document.getElementsByClassName("ytp-right-controls")[0];
@@ -32,7 +33,7 @@ function WatchMiniPlayer() {
 
     const stickyButton = document.createElement("button");
     stickyButton.classList.add("ytp-sticky-player", "ytp-button");
-    stickyButton.title = "Sticky";
+    stickyButton.title = "Sticky (s)";
 
     const stickyDiv = document.createElement("div");
     stickyDiv.classList.add("ytp-sticky-player__content");
@@ -67,3 +68,17 @@ const WatchPlayerObserver = new MutationObserver(() => {
 });
 
 WatchPlayerObserver.observe(document.body, { childList: true, subtree: true });
+
+window.addEventListener('keydown', (event) => {
+  if (event.key === 's') {
+    const target = event.target;
+    
+    const isInput = target.tagName === 'INPUT' || 
+                    target.tagName === 'TEXTAREA' || 
+                    target.isContentEditable;
+
+    if (!isInput) {
+      WatchPlayer();
+    }
+  }
+});

@@ -57,7 +57,10 @@ function setSelectedOption(selectedId, secondaryInner, options) {
 let counter = 0;
 
 function WatchTabs() {
+  if (!location.href.includes("youtube.com/watch")) return true;
+
   const liveButton = document.getElementById("teaser-carousel");
+
   const isLive = liveButton
     ? liveButton?.getAttribute("hidden") === null
     : false;
@@ -139,7 +142,7 @@ function WatchTabs() {
 }
 
 const VideoPageObserver = new MutationObserver(() => {
-  if (!window.location.href.includes("/watch") || WatchTabs()) {
+  if (WatchTabs()) {
     VideoPageObserver.disconnect();
   }
 });

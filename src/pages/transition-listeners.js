@@ -27,6 +27,8 @@
       if (location.href.includes("youtube.com/watch")) {
         WatchTabs();
         WatchMiniPlayer();
+        WatchMenu();
+        WatchComments();
       }
     }
   },

@@ -1,0 +1,80 @@
+#top-row #menu {
+    display: flex !important;
+    justify-content: end !important;
+}
+
+#top-row #menu ytd-menu-renderer.ytd-watch-metadata {
+    width: auto !important;
+}
+
+#top-row #menu button:not(.yt-spec-button-shape-next--segmented-end, .yt-spec-button-shape-next--segmented-start) {
+    padding: 0 !important;
+    width: 36px !important;
+}
+
+.yt-spec-button-shape-next--size-m.yt-spec-button-shape-next--icon-leading .yt-spec-button-shape-next__icon {
+    margin: 0 !important;
+}
+
+#top-row #menu button:not(.yt-spec-button-shape-next--segmented-end, .yt-spec-button-shape-next--segmented-start) .yt-spec-button-shape-next__button-text-content {
+    display: none !important;
+}
+
+.yt-watch-menu-more {
+    max-height: auto !important;
+    padding: 8px 0 !important;
+}
+
+.yt-watch-menu-more #items {
+    padding: 0 !important;
+}
+
+.yt-watch-menu-more yt-button-view-model button, .yt-watch-menu-more .yt-spec-button-shape-next--mono.yt-spec-button-shape-next--tonal {
+    width: 100% !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    justify-content: left !important;
+    gap: 16px !important;
+}
+
+.yt-watch-menu-more ytd-button-renderer {
+    width: 100% !important;
+}
+
+.yt-watch-menu-more yt-button-view-model.ytd-menu-renderer {
+    margin: 0 !important;
+}
+
+.yt-watch-menu-more .yt-watch-menu-more__button-wrapper, .yt-watch-menu-more .yt-watch-menu-more__button-wrapper > * {
+    width: 100%;
+}
+
+.yt-watch-menu-more .yt-watch-menu-more__button-wrapper:hover {
+    background-color: var(--yt-spec-10-percent-layer);
+}
+
+.yt-watch-menu-data {
+    display: flex !important;
+    font: 400 16px Roboto, Arial, sans-serif !important;
+    color: var(--yt-white-color) !important;
+    gap: 16px !important;
+    margin-right: 16px !important;
+}
+
+.yt-watch-menu-data__views, .yt-watch-menu-data__date {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.yt-watch-menu-data__views > #view-count > * {
+    display: block !important;
+}
+
+.yt-watch-info-text--hidden {
+    display: none !important;
+}
+
+like-button-view-model button {
+    gap: 6px !important;
+}

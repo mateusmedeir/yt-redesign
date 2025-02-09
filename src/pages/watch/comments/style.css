@@ -1,0 +1,108 @@
+#header #placeholder-area {
+    border: none !important;
+    padding: 16px !important;
+}
+
+#creation-box .underline.tp-yt-paper-input-container {
+    display: none !important;
+}
+
+#creation-box .input-wrapper.tp-yt-paper-input-container, #header #placeholder-area {
+    border: 1px solid var(--yt-spec-10-percent-layer) !important;
+    border-radius: 8px !important;
+}
+
+#creation-box #contenteditable-textarea {
+    margin: 0 !important;
+    padding: 16px !important;
+}
+
+#comments #contents ytd-comment-thread-renderer {
+    margin-bottom: 40px !important;
+}
+
+#comments #contents #replies #expander #contents {
+    margin-top: 26px !important;
+    gap: 24px !important;
+}
+
+#comments #contents #replies #expander #contents ytd-comment-view-model {
+    margin: 0 !important;
+}
+
+#comment #main, #expander-contents #main {
+    gap: 10px !important
+}
+
+#comment #main > *, #expander-contents #main > * {
+    margin: 0 !important;
+}
+
+#comment #main #reply-dialog {
+    margin-top: 26px !important;
+}
+
+#comment #main #header-author, #expander-contents #main #header-author {
+    gap: 8px !important;
+}
+
+#comment #main #author-text, #expander-contents #main #author-text {
+    margin: 0 !important;
+}
+
+.yt-watch-comment__buttons-wrapper {
+    display: flex !important;
+    gap: 20px !important;
+    margin-top: 6px !important;
+}
+
+.yt-watch-comment__buttons {
+    display: flex !important;
+    align-items: center !important;
+    background-color: var(--yt-spec-badge-chip-background) !important;
+    border-radius: 100px !important;
+    padding: 2px 0 !important;
+}
+
+.yt-watch-comment__button--icon {
+    padding: 2px 16px !important;
+}
+
+.yt-watch-comment__expander {
+    color: var(--yt-tertiary-color) !important;
+}
+
+.yt-watch-comment__expander--hidden {
+    display: none !important;
+}
+
+.yt-watch-comment__buttons .yt-watch-comment__button:first-child {
+    border-right: 2px solid var(--yt-buttons-border-color) !important;
+}
+
+.yt-watch-comment__button {
+    display: flex;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 16px;
+    cursor: pointer !important;
+}
+
+.yt-watch-comment__button, #vote-count-middle.ytd-comment-engagement-bar {
+    font: 400 14px Roboto, Arial, sans-serif !important;
+    line-height: 16.41px !important;
+    margin: 0 !important;
+    color: var(--yt-white-color);
+}
+
+.yt-watch-comment__buttons #reply-button-end {
+    margin: 0 !important;
+}
+
+.yt-watch-comment__buttons button {
+    padding: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    line-height: 16.41px !important;
+    height: auto;
+}

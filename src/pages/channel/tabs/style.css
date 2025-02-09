@@ -1,0 +1,76 @@
+/* :root {
+    --ytd-grid-max-width: 1470px !important;
+    --ytd-grid-6-columns-width: 1470px !important;
+} */
+
+#contentContainer.tp-yt-app-header-layout {
+    padding-top: 400px !important;
+}
+
+ytd-tabbed-page-header[has-banner] #page-header.ytd-tabbed-page-header {
+    padding-top: 0 !important;
+}
+
+/* ytd-tabbed-page-header.grid-6-columns #page-header.ytd-tabbed-page-header, ytd-tabbed-page-header.grid-6-columns[has-inset-banner] #page-header-banner.ytd-tabbed-page-header {
+    padding-left: calc(50% - (var(--ytd-grid-max-width) / 2)) !important;
+    padding-right: calc(50% - (var(--ytd-grid-max-width) / 2)) !important;
+}
+
+ytd-tabbed-page-header.grid-6-columns tp-yt-paper-tabs.ytd-tabbed-page-header {
+    margin-left: calc(50% - (var(--ytd-grid-max-width) / 2)) !important;
+    margin-right: calc(50% - (var(--ytd-grid-max-width) / 2)) !important;
+} */
+
+.page-header-view-model-wiz__page-header-headline-image {
+    margin-top: -81px !important;
+    margin-left: 27px !important;
+    margin-right: 0 !important;
+    border: 3px solid var(--yt-spec-base-background) !important;
+    border-radius: 100% !important;
+}
+
+.page-header-view-model-wiz__page-header-title--page-header-title-large {
+    font-size: 28px !important;
+    line-height: normal !important;
+    margin-bottom: 18px !important;
+}
+
+.yt-tab-group-shape-wiz__slider {
+    display: none;
+}
+
+.yt-tab-shape-wiz:hover .yt-tab-shape-wiz__tab-bar {
+    width: 34px !important;
+    height: 3px !important;
+    margin: auto !important;
+    border-radius: 100px 100px 0 0 !important;
+}
+
+.yt-tab-shape-wiz__tab-bar--tab-bar-selected {
+    background: linear-gradient(to right, var(--yt-primary-color), var(--yt-secondary-color)) !important;
+    width: 34px !important;
+    height: 3px !important;
+    margin: auto !important;
+    border-radius: 100px 100px 0 0 !important;
+}
+
+.channel-header__presentation {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    padding-top: 16px !important;
+    padding-bottom: 12px !important;
+    align-items: start !important;
+}
+
+.channel-header__presentation-primary {
+    padding-left: 20px !important;
+}
+
+.channel-header__subscribe-button > * {
+    margin: 0 !important;
+}
+
+.channel-header__verified-icon {
+    width: 16px !important;
+    height: 16px !important;
+}

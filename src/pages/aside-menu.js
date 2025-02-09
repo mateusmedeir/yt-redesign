@@ -11,7 +11,7 @@ function createCollapsible(title, content) {
 
   const collapsibleButtonIcon = document.createElement("img");
   collapsibleButtonIcon.src = chrome.runtime.getURL(
-    "src/assets/arrow-down.svg"
+    "src/assets/arrow-down-icon.svg"
   );
   collapsibleButton.appendChild(collapsibleButtonIcon);
 
