@@ -38,8 +38,9 @@ function findSubscriptionButton() {
   const asideMenuButtons = document.getElementsByClassName(
     "yt-simple-endpoint style-scope ytd-guide-entry-renderer"
   );
+
   const asideMenuSubscriptionButtonChildren = Array.from(asideMenuButtons).find(
-    (button) => button.getAttribute("title") === "Subscriptions"
+    (button) => button.href.includes("subscriptions")
   );
 
   if (asideMenuSubscriptionButtonChildren) {

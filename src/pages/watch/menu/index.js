@@ -33,17 +33,6 @@ function formatNumber(num) {
     return num.toString();
 }
 
-function formatData(data) {
-    const splitData = data.replace(/,/g, '').split(" ");
-
-    const day = !isNaN(splitData[0]) ? splitData[0] : splitData[1];
-    const month = !isNaN(splitData[0]) ? splitData[1] : splitData[0];
-    const year = splitData[2].slice(-2);
-
-    return `${day} ${month} ${year}`;
-}
-
-
 function WatchMenuData(menu) {
     if (!location.href.includes("youtube.com/watch")) return true;
 
@@ -71,7 +60,7 @@ function WatchMenuData(menu) {
         viewsWrapper.appendChild(viewsWrapperIcon);
 
         const viewsWrapperText = document.createElement("p");
-        viewsWrapperText.innerHTML = formatNumber(parseInt(views.replace(/,/g, '')));
+        viewsWrapperText.innerHTML = formatNumber(parseInt(views.replace(/\D/g, '')));
         viewsWrapper.appendChild(viewsWrapperText);
 
         const dateWrapper = document.createElement("div");
@@ -84,11 +73,14 @@ function WatchMenuData(menu) {
         dateWrapper.appendChild(dateWrapperIcon);
 
         const dateWrapperText = document.createElement("p");
-        dateWrapperText.innerHTML = formatData(date);
+        dateWrapperText.innerHTML = date;
         dateWrapper.appendChild(dateWrapperText);
 
         dataWrapper.appendChild(viewsWrapper);
-        dataWrapper.appendChild(dateWrapper);
+
+        const isLive = document.getElementsByClassName("ytp-live");
+
+        if (isLive.length === 0) dataWrapper.appendChild(dateWrapper);
         menu.insertBefore(dataWrapper, menu.firstChild);
 
         infoWrapper.classList.add("yt-watch-info-text--hidden");
@@ -131,7 +123,6 @@ function WatchMenu() {
         });
 
         WatchMenuMoreObserver.observe(moreWrapper, { childList: true, subtree: true });
-
 
         watchMenuCounter++;
     }
