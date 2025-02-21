@@ -1,0 +1,67 @@
+#masthead #container #center, #masthead #container #center #voice-search-button button {
+    border: 1px solid var(--yt-outline-color) !important;
+    border-radius: 20000px !important;
+}
+
+#masthead #container #center, #masthead #container #center yt-searchbox {
+    gap: 12px !important;
+}
+
+#masthead #container #center yt-searchbox {
+    flex-direction: row-reverse !important;
+    padding: 0 !important;
+}
+
+#masthead #container #center yt-searchbox button, #masthead #container #center #voice-search-button {
+    width: 48px !important;
+}
+
+#masthead #container #center yt-searchbox, #masthead #container #center yt-searchbox div, #masthead #container #center #voice-search-button {
+    margin: 0 !important;
+}
+
+#masthead #container #center yt-searchbox .ytSearchboxComponentInputBox {
+    padding: 0 !important;
+}
+
+#masthead #container #center yt-searchbox .ytSearchboxComponentInputBox, #masthead #container #center yt-searchbox button, #masthead #container #center #voice-search-button {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+#masthead #container #center yt-searchbox .ytSearchboxComponentInputBox, #masthead #container #center yt-searchbox button {
+    border: none !important;
+}
+
+#masthead #container #center #voice-search-button {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+#masthead #container #center #voice-search-button ytd-button-renderer {
+    width: 100% !important;
+}
+
+#masthead #container #center #voice-search-button button {
+    border: none !important;
+}
+
+#masthead #container #center yt-searchbox div .ytSearchboxComponentInnerSearchIcon {
+    display: none !important;
+}
+
+#masthead #container #end #buttons ytd-button-renderer button {
+    padding: 0 !important;
+    background: transparent !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 100% !important;
+}
+
+#masthead #container #end #buttons ytd-button-renderer button:hover {
+    background: var(--yt-spec-10-percent-layer) !important;
+}
+
+#masthead #container #end #buttons ytd-button-renderer button .yt-spec-button-shape-next__button-text-content{
+    display: none !important;
+}

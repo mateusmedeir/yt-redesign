@@ -7,21 +7,22 @@
     {
       "matches": ["https://*.youtube.com/*"],
       "js": [
-        "src/pages/aside-menu.js",
-        "src/pages/transition-listeners.js",
+        "src/transition-listeners.js",
+
+        "src/components/aside/index.js",
 
         "src/pages/channel/tabs/index.js",
-
         "src/pages/watch/tabs/index.js",
         "src/pages/watch/player/index.js",
         "src/pages/watch/menu/index.js",
         "src/pages/watch/comments/index.js"
       ],
       "css": [
-        "src/pages/global.css",
+        "src/global.css",
+
+        "src/components/header/style.css",
 
         "src/pages/channel/tabs/style.css",
-
         "src/pages/watch/style.css",
         "src/pages/watch/tabs/style.css",
         "src/pages/watch/player/style.css",
