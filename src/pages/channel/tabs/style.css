@@ -1,34 +1,11 @@
-/* :root {
-    --ytd-grid-max-width: 1470px !important;
-    --ytd-grid-6-columns-width: 1470px !important;
-} */
-
-#contentContainer.tp-yt-app-header-layout {
-    padding-top: 400px !important;
+#header.ytd-browse {
+    margin-bottom: 12px !important;
 }
 
 ytd-tabbed-page-header[has-banner] #page-header.ytd-tabbed-page-header {
     padding-top: 0 !important;
+    padding-bottom: 28px !important;
 }
-
-/* ytd-tabbed-page-header.grid-6-columns #page-header.ytd-tabbed-page-header, ytd-tabbed-page-header.grid-6-columns[has-inset-banner] #page-header-banner.ytd-tabbed-page-header {
-    padding-left: calc(50% - (var(--ytd-grid-max-width) / 2)) !important;
-    padding-right: calc(50% - (var(--ytd-grid-max-width) / 2)) !important;
-}
-
-ytd-tabbed-page-header.grid-6-columns tp-yt-paper-tabs.ytd-tabbed-page-header {
-    margin-left: calc(50% - (var(--ytd-grid-max-width) / 2)) !important;
-    margin-right: calc(50% - (var(--ytd-grid-max-width) / 2)) !important;
-} */
-
-.page-header-view-model-wiz__page-header-headline-image {
-    margin-top: -81px !important;
-    margin-left: 27px !important;
-    margin-right: 0 !important;
-    border: 3px solid var(--yt-spec-base-background) !important;
-    border-radius: 100% !important;
-}
-
 .page-header-view-model-wiz__page-header-title--page-header-title-large {
     font-size: 28px !important;
     line-height: normal !important;
@@ -36,41 +13,55 @@ ytd-tabbed-page-header.grid-6-columns tp-yt-paper-tabs.ytd-tabbed-page-header {
 }
 
 .yt-tab-group-shape-wiz__slider {
-    display: none;
-}
-
-.yt-tab-shape-wiz:hover .yt-tab-shape-wiz__tab-bar {
-    width: 34px !important;
-    height: 3px !important;
-    margin: auto !important;
-    border-radius: 100px 100px 0 0 !important;
-}
-
-.yt-tab-shape-wiz__tab-bar--tab-bar-selected {
     background: linear-gradient(to right, var(--yt-primary-color), var(--yt-secondary-color)) !important;
-    width: 34px !important;
+}
+    
+.yt-tab-group-shape-wiz__slider , .yt-tab-shape-wiz:hover .yt-tab-shape-wiz__tab-bar {
     height: 3px !important;
-    margin: auto !important;
     border-radius: 100px 100px 0 0 !important;
 }
 
-.channel-header__presentation {
-    display: grid !important;
-    grid-template-columns: auto 1fr auto !important;
-    padding-top: 16px !important;
-    padding-bottom: 12px !important;
-    align-items: start !important;
+#page-header .page-header-view-model-wiz__page-header-headline-image {
+    margin-top: -81px !important;
+    margin-left: 27px !important;
+    margin-right: 0 !important;
+    border: 3px solid var(--yt-spec-base-background) !important;
+    border-radius: 100% !important;
 }
 
-.channel-header__presentation-primary {
-    padding-left: 20px !important;
+#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding-top: 16px;
+    padding-left: 20px;
 }
 
-.channel-header__subscribe-button > * {
+#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info > :nth-last-child(1) {
+    grid-column: 2;
+    grid-row: 1;
     margin: 0 !important;
 }
 
-.channel-header__verified-icon {
-    width: 16px !important;
-    height: 16px !important;
+#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info > :not(:nth-last-child(1)) {
+    grid-column: 1;
+}
+
+#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-description, #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-attribution {
+    margin-top: 6px !important;
+}
+
+#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-title--page-header-title-large {
+    margin-bottom: 18px !important;
+}
+
+#header #wrapper #tabsContent, #header #wrapper .yt-tab-group-shape-wiz {
+    width: 100% !important;
+}
+
+#header #wrapper .yt-tab-shape-wiz__tab--last-tab {
+    margin-left: auto !important;
+}
+
+#header #wrapper ytd-expandable-tab-renderer:not([show-input]) form.ytd-expandable-tab-renderer {
+    display: none !important;
 }

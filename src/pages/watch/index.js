@@ -4,16 +4,17 @@ function WatchPage() {
   const body = document.querySelector("body");
 
   const WatchPageListener = (event) => {
-    if (watchPageTries > 2) {
+    if (watchPageTries > 6) {
       body.removeEventListener("transitionend", WatchPageListener);
       watchPageTries = 0;
       return;  
     }
-    WatchTabs();
-    WatchMiniPlayer();
-    WatchMenu();
-    WatchComments();
 
+    if (WatchTabs() && WatchMiniPlayer() && WatchMenu() && WatchComments()) {
+      body.removeEventListener("transitionend", WatchPageListener);
+      watchPageTries = 0;
+      return;
+    }
     watchPageTries++;
   };
 

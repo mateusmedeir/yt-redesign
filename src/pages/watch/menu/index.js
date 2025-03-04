@@ -1,3 +1,5 @@
+let watchPageOldData = {date: "", views: ""};
+
 function formatNumber(num) {
     if (num >= 1e9) return (num / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
     if (num >= 1e6) return (num / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
@@ -5,17 +7,51 @@ function formatNumber(num) {
     return num.toString();
 }
 
-function WatchMenuData(topRow) {
+function WatchMenuDataExtract() {
     const infoWrapper = document.getElementById("ytd-watch-info-text");
-    
-    const existingDataWrapper = document.querySelector(".yt-watch-menu-data");
-    if (existingDataWrapper) return true;
-    
-    if (topRow && infoWrapper) {
+
+    if (infoWrapper) {
         const [fullViews, date, ...rest] = infoWrapper?.querySelector("#tooltip")?.innerHTML.split(" • ");
         if (!fullViews || !date) return false;
-        
-        const views = fullViews.trim().split(" ")[0];
+
+        return { views: fullViews.trim().split(" ")[0], date };
+    }
+    return false;
+}
+
+function WatchMenuDataUpdate(existingDataWrapper) {
+    const data = WatchMenuDataExtract();
+
+    if (data) {
+        if (watchPageOldData.date === data.date && watchPageOldData.views === data.views) return true;
+        watchPageOldData = data;
+
+        const { views, date } = data;
+
+        const viewsText = existingDataWrapper.querySelector(".yt-watch-menu-data__views-text");
+        viewsText.innerHTML = formatNumber(parseInt(views.replace(/\D/g, '')));
+
+        const dateText = existingDataWrapper.querySelector(".yt-watch-menu-data__date-text");
+        dateText.innerHTML = date;
+
+        return true;
+    }
+    return false;
+}
+
+function WatchMenuData(topRow) {
+    try {
+        const existingDataWrapper = document.querySelector(".yt-watch-menu-data");
+        if (existingDataWrapper) return WatchMenuDataUpdate(existingDataWrapper);
+    } catch (error) {}
+
+    const infoWrapper = document.getElementById("ytd-watch-info-text");
+    
+    if (topRow && infoWrapper) {
+
+        const data = WatchMenuDataExtract();
+        if (!data) return false;
+        const { views, date } = data;
         
         const dataWrapper = document.createElement("div");
         dataWrapper.classList.add("yt-watch-menu-data");
@@ -28,6 +64,7 @@ function WatchMenuData(topRow) {
         viewsWrapper.appendChild(viewsWrapperIcon);
 
         const viewsWrapperText = document.createElement("p");
+        viewsWrapperText.classList.add("yt-watch-menu-data__views-text");
         viewsWrapperText.innerHTML = formatNumber(parseInt(views.replace(/\D/g, '')));
         viewsWrapper.appendChild(viewsWrapperText);
 
@@ -39,92 +76,36 @@ function WatchMenuData(topRow) {
         dateWrapper.appendChild(dateWrapperIcon);
 
         const dateWrapperText = document.createElement("p");
+        dateWrapperText.classList.add("yt-watch-menu-data__date-text");
         dateWrapperText.innerHTML = date;
         dateWrapper.appendChild(dateWrapperText);
 
         dataWrapper.appendChild(viewsWrapper);
-
-        const isLive = document.getElementsByClassName("ytp-live");
-
-        if (isLive.length === 0) dataWrapper.appendChild(dateWrapper);
+        dataWrapper.appendChild(dateWrapper);
         topRow.insertBefore(dataWrapper, topRow.lastChild);
 
         infoWrapper.classList.add("yt-watch-info-text");
+        const infoWrapperObserver = new MutationObserver(mutations => {
+            WatchMenuDataUpdate(dataWrapper);
+        }
+        );
+        infoWrapperObserver.observe(infoWrapper, { childList: true, subtree: true });
 
         return true;
     }
     return false;
 }
 
-/* 
-let watchMenuButtonsMoreCounter = false;
-
-function WatchMenuButtonsMore(moreWrapper, moreWrapperButtons) {
-    if (watchMenuButtonsMoreCounter) return true;
-
-    const items = moreWrapper.querySelector("ytd-menu-popup-renderer");
-    
-    if (items) {
-        items.classList.add("yt-watch-menu-more");
-
-        const buttonsCopy = [...moreWrapperButtons].reverse();
-
-        for (const moreWrapperButton of buttonsCopy) {
-            moreWrapperButton.classList.add("yt-watch-menu-more__button");
-    
-            const moreWrapperButtonWrapper = document.createElement("div");
-            moreWrapperButtonWrapper.classList.add("yt-watch-menu-more__button-wrapper");
-    
-            moreWrapperButtonWrapper.appendChild(moreWrapperButton);
-
-            items.insertBefore(moreWrapperButtonWrapper, items.firstChild);
-        }
-
-        watchMenuButtonsMoreCounter = true;
-        return true;
-    }
-}
-
-let watchMenuButtonsCounter = false;
-
-function WatchMenuButtons(menu) {
-    if (watchMenuButtonsCounter) return true;
-
-    const flexibleButtonsWrapper = menu.querySelector("#flexible-item-buttons");
-    const moreWrapper = document.querySelector("ytd-popup-container.ytd-app");
-    const moreButton = menu.querySelector("#button-shape");
-    
-    if (flexibleButtonsWrapper && moreWrapper) {   
-        if (flexibleButtonsWrapper.children.length === 0) return false;
-   
-        const moreWrapperButtons = flexibleButtonsWrapper.querySelectorAll(":scope > *");
-
-        if (watchMenuButtonsCounter) return true;
-
-        const moreButtonListener = (event) => {
-            WatchMenuButtonsMore(moreWrapper, moreWrapperButtons);
-            moreButton.removeEventListener("click", moreButtonListener);
-        }
-
-        moreButton.addEventListener("click", moreButtonListener);
-
-        watchMenuButtonsCounter = true;
-        return true;
-    }
-    return false;
-} */
-
-let watchMenuChecker = false;
 
 function WatchMenu() {
-    if (watchMenuChecker) return true;
-
-    const topRow = document.getElementById("top-row");
-    // const menu = topRow?.querySelector("#menu.ytd-watch-metadata");
-
-    if (WatchMenuData(topRow)) {
-        watchMenuChecker = true;
-        return true;
+    try {
+        const topRow = document.getElementById("top-row");
+    
+        if (WatchMenuData(topRow)) {
+            return true;
+        }
+    } catch (error) {
+        return false;
     }
 
     return false;

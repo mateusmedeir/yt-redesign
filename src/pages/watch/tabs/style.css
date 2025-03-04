@@ -86,3 +86,7 @@
     inset: 0;
     cursor: pointer;
 }
+
+#primary #below #teaser-carousel {
+    display: none !important;
+}

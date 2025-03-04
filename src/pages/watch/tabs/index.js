@@ -20,20 +20,6 @@ const watchTabsArray = [
   }
 ]
 
-function findSuggestionsDiv() {
-  return document.getElementById("related");
-}
-
-function findTranscriptDiv() {
-  return document.querySelector(
-    "[target-id=engagement-panel-searchable-transcript]"
-  );
-}
-
-function findLiveChatDiv() {
-  return document.getElementById("chat-container");
-}
-
 function createWatchTabs(name, options) {
   const tabOptions = document.createElement("ul");
   tabOptions.classList.add("yt-watch-tabs__options");
@@ -60,50 +46,74 @@ function createWatchTabs(name, options) {
   return tabOptions;
 }
 
-let counter = 0;
+function WatchTabsIsLive() {
+  const isLive = document.getElementsByClassName("ytp-live");
+  if (isLive.length > 0) {
+    watchTabsArray[0].options[0].activated = false;
+    watchTabsArray[0].options[watchTabsArray[0].options.length - 1].activated = true;
+  } else {
+    watchTabsArray[0].options[0].activated = true;
+    watchTabsArray[0].options[watchTabsArray[0].options.length - 1].activated = false;
+  }
+}
+
+function WatchTabsUpdate(secondaryTabs) {
+  try {
+    WatchTabsIsLive();
+  } catch (error) {}
+
+  const tabs = secondaryTabs.querySelectorAll(".yt-watch-tabs__option");
+  watchTabsArray[0].options.forEach((option, index) => {
+    const tab = tabs[index];
+    const tabInput = tab.querySelector("input");
+    tabInput.checked = !!option.activated;
+  }
+  );
+
+  return true;
+}
+
+function WatchTabsCreate(secondaryVideoWrapper, secondaryInner) {
+  try {
+    WatchTabsIsLive();
+  } catch (error) {}
+
+  secondaryInner.classList.add("secondary-inner");
+
+  const newSecondaryVideoOptions = document.createElement("div");
+  newSecondaryVideoOptions.classList.add("text-lg", "secondary__tabs");
+
+  const watchTabs = createWatchTabs(
+    watchTabsArray[0].name,
+    watchTabsArray[0].options
+  )
+
+  newSecondaryVideoOptions.appendChild(watchTabs);
+
+  secondaryVideoWrapper.insertBefore(
+    newSecondaryVideoOptions,
+    secondaryVideoWrapper.firstChild
+  );
+
+  return true;
+}
 
 function WatchTabs() {
-  const liveButton = document.getElementById("teaser-carousel");
+  try {
+    const secondaryTabs = document.querySelector(".secondary__tabs");
+    if (secondaryTabs) return WatchTabsUpdate(secondaryTabs);
+  } catch (error) {}
 
-  const isLive = liveButton
-    ? liveButton?.getAttribute("hidden") === null
-    : false;
-
-  const secondaryInner = document.getElementById("secondary-inner");
-  const secondaryVideoWrapper = secondaryInner?.parentNode;
-
-  if (counter > 0) return false;
-
-  const suggestionsDiv = findSuggestionsDiv();
-  const transciptDiv = findTranscriptDiv();
-
-  if (
-    secondaryVideoWrapper &&
-    secondaryInner &&
-    suggestionsDiv &&
-    (transciptDiv || liveButton)
-  ) {
-    liveButton?.classList.add("display-none");
-
-    secondaryInner.classList.add("secondary-inner");
-
-    const newSecondaryVideoOptions = document.createElement("div");
-    newSecondaryVideoOptions.classList.add("text-lg", "secondary__tabs");
-
-    const watchTabs = createWatchTabs(
-      watchTabsArray[0].name,
-      watchTabsArray[0].options
-    )
-
-    newSecondaryVideoOptions.appendChild(watchTabs);
-
-    secondaryVideoWrapper.insertBefore(
-      newSecondaryVideoOptions,
-      secondaryVideoWrapper.firstChild
-    );
-
-    counter++;
-    return true;
+  try {
+    const secondaryInner = document.getElementById("secondary-inner");
+    const secondaryVideoWrapper = secondaryInner?.parentNode;
+  
+    if (secondaryVideoWrapper && secondaryInner) {
+      return WatchTabsCreate(secondaryVideoWrapper, secondaryInner);
+    }
+  } catch (error) {
+    return false;
   }
+
   return false;
 }

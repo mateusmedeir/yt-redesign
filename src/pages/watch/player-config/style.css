@@ -23,3 +23,27 @@
     top: 5px !important;
     transform: translateX(10px) !important;
 }
+
+/* AUTO NAV BUTTON */
+
+.ytp-small-mode .ytp-autonav-toggle-button, .ytp-autonav-toggle-button {
+    height: 16px !important;
+    width: 32px !important;
+    border: 2px solid var(--yt-player-config-option-border-color) !important;
+    background-image: none !important;
+}
+
+.ytp-autonav-toggle-button[aria-checked=true] {
+    background-image: none !important;
+}
+
+.ytp-autonav-toggle-button::after {
+    top: 5px !important;
+    left: 3px !important;
+    height: 12px !important;
+    width: 12px !important;
+}
+
+.ytp-autonav-toggle-button[aria-checked=true]::after {
+    left: 1px !important;
+}

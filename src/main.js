@@ -27,9 +27,6 @@ const UrlChecker = () => {
       if (oldHref.includes("youtube.com/watch")) {
         WatchPage();
       }
-      if (oldHref.includes("youtube.com/@")) {
-        ChannelPage();
-      }
     }
   });
   observer.observe(body, { childList: true, subtree: true });

@@ -12,7 +12,6 @@
         "src/components/aside/index.js",
         "src/components/select/index.js",
 
-        "src/pages/channel/tabs/index.js",
         "src/pages/results/filters/index.js",
         "src/pages/watch/index.js",
         "src/pages/watch/tabs/index.js",
