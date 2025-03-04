@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
     --yt-primary-color: #FF0033 !important;
     --yt-secondary-color: #F50057 !important;
     --yt-tertiary-color: #FFAABB !important;
     --yt-white-color: #FFFFFF !important;
-    --yt-subscribe-button-color: #FF325B !important;
+    --yt-accent-color: #FF325B !important;
     --yt-spec-text-primary: #F1F1F1 !important;
     --yt-spec-text-primary-inverse: #0f0f0f !important;
     --yt-outline-color: #2c2c2c !important;
@@ -12,6 +14,9 @@
     --yt-chip-cloud-chip-background: #323232 !important;
     --yt-spec-additive-background: #1d1d1d !important; /* Bg color of description, Watch page buttons, ... */
     --yt-buttons-border-color: #ffffff33 !important;
+    --yt-suport-text-color: #adadad !important;
+    --yt-select-option-hover-color: #4F4F4F !important;
+    --yt-player-config-option-border-color: #79747e !important;
 }
 
 yt-chip-cloud-chip-renderer[chip-style=STYLE_DEFAULT] #chip-container.yt-chip-cloud-chip-renderer, yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER] #chip-container.yt-chip-cloud-chip-renderer {
@@ -95,4 +100,5 @@ ytd-guide-entry-renderer[active] .yt-spec-icon-shape, ytd-mini-guide-entry-rende
     font-size: 14px !important;
     line-height: 20px !important;
     letter-spacing: 0.1px !important;
+    font-family: "Roboto", Arial, sans-serif !important;
 }

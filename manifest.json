@@ -7,11 +7,14 @@
     {
       "matches": ["https://*.youtube.com/*"],
       "js": [
-        "src/transition-listeners.js",
+        "src/main.js",
 
         "src/components/aside/index.js",
+        "src/components/select/index.js",
 
         "src/pages/channel/tabs/index.js",
+        "src/pages/results/filters/index.js",
+        "src/pages/watch/index.js",
         "src/pages/watch/tabs/index.js",
         "src/pages/watch/player/index.js",
         "src/pages/watch/menu/index.js",
@@ -21,11 +24,14 @@
         "src/global.css",
 
         "src/components/header/style.css",
+        "src/components/select/style.css",
 
         "src/pages/channel/tabs/style.css",
+        "src/pages/results/filters/style.css",
         "src/pages/watch/style.css",
         "src/pages/watch/tabs/style.css",
         "src/pages/watch/player/style.css",
+        "src/pages/watch/player-config/style.css",
         "src/pages/watch/menu/style.css",
         "src/pages/watch/comments/style.css"
       ]

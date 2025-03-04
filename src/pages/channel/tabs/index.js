@@ -1,4 +1,4 @@
-function ChannelPresentation() {
+function ChannelPage() {
     const channelPageHeaderContainer = document.querySelector("tp-yt-app-header#header");
     const presentationDiv = channelPageHeaderContainer.querySelector(".page-header-view-model-wiz__page-header-headline-info");
 

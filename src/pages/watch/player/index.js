@@ -40,7 +40,7 @@ function WatchMiniPlayer() {
 
     const stickyIcon = document.createElement("img");
     stickyIcon.classList.add("ytp-sticky-player__icon");
-    stickyIcon.src = chrome.runtime.getURL("src/assets/sticky-player-icon.svg");
+    stickyIcon.src = stickyPlayerIcon;
 
     stickyButton.appendChild(stickyDiv);
     stickyDiv.appendChild(stickyIcon);
@@ -60,14 +60,6 @@ function WatchMiniPlayer() {
   }
   return false;
 }
-
-const WatchPlayerObserver = new MutationObserver(() => {
-  if (WatchMiniPlayer()) {
-    WatchPlayerObserver.disconnect();
-  }
-});
-
-WatchPlayerObserver.observe(document.body, { childList: true, subtree: true });
 
 window.addEventListener('keydown', (event) => {
   if (event.key === 's') {

@@ -1,5 +1,5 @@
 #subscribe-button-shape button {
-    background: var(--yt-subscribe-button-color) !important;
+    background: var(--yt-accent-color) !important;
     color: var(--yt-spec-text-primary) !important;
     filter: brightness(80%) !important;
 }

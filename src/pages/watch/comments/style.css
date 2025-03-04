@@ -1,3 +1,19 @@
+/* +===== HEADER =====+ */
+
+#comments #header #count .count-text {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    gap: 8px !important;
+    font-size: 18px !important;
+    font-weight: 500;
+}
+
+#comments #header #count .count-text span:first-child {
+    color: var(--yt-suport-text-color) !important;
+}
+
+/* +===== COMMENTS =====+ */
+
 #header #placeholder-area {
     border: none !important;
     padding: 16px !important;

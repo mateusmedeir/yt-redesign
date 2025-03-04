@@ -1,10 +1,55 @@
-#top-row #menu {
+/* +===== DATA =====+ */
+
+#top-row {
     display: flex !important;
-    justify-content: end !important;
+    flex-wrap: wrap !important;
 }
+
+#top-row #actions {
+    flex: none !important;
+}
+
+#top-row #owner, #top-row #actions {
+    min-width: auto !important;
+}
+
+.yt-watch-info-text {
+    display: none !important;
+}
+
+.yt-watch-menu-data {
+    display: flex;
+    font: 400 16px Roboto, Arial, sans-serif;
+    color: var(--yt-white-color);
+    gap: 16px;
+    margin-top: 12px;
+    margin-right: 16px;
+}
+
+.yt-watch-menu-data__views, .yt-watch-menu-data__date {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.yt-watch-menu-data__views > #view-count > * {
+    display: block !important;
+}
+
+like-button-view-model button {
+    gap: 6px !important;
+}
+
+
+
+/* +===== BUTTONS =====+ */
 
 #top-row #menu ytd-menu-renderer.ytd-watch-metadata {
     width: auto !important;
+}
+
+#top-row #menu #flexible-item-buttons {
+    display: none !important;
 }
 
 #top-row #menu button:not(.yt-spec-button-shape-next--segmented-end, .yt-spec-button-shape-next--segmented-start) {
@@ -19,6 +64,8 @@
 #top-row #menu button:not(.yt-spec-button-shape-next--segmented-end, .yt-spec-button-shape-next--segmented-start) .yt-spec-button-shape-next__button-text-content {
     display: none !important;
 }
+
+/* 
 
 .yt-watch-menu-more {
     max-height: auto !important;
@@ -51,30 +98,5 @@
 
 .yt-watch-menu-more .yt-watch-menu-more__button-wrapper:hover {
     background-color: var(--yt-spec-10-percent-layer);
-}
-
-.yt-watch-menu-data {
-    display: flex !important;
-    font: 400 16px Roboto, Arial, sans-serif !important;
-    color: var(--yt-white-color) !important;
-    gap: 16px !important;
-    margin-right: 16px !important;
-}
-
-.yt-watch-menu-data__views, .yt-watch-menu-data__date {
-    display: flex !important;
-    align-items: center !important;
-    gap: 4px !important;
-}
-
-.yt-watch-menu-data__views > #view-count > * {
-    display: block !important;
-}
-
-.yt-watch-info-text--hidden {
-    display: none !important;
-}
-
-like-button-view-model button {
-    gap: 6px !important;
-}
+} 
+*/

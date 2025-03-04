@@ -1,3 +1,25 @@
+const watchTabsArray = [
+  {
+    label: "Suggestions",
+    name: "watch-tabs",
+    options: [
+      {
+        label: "Suggestions",
+        value: "suggestions",
+        activated: true,
+      },
+      {
+        label: "Transcripts",
+        value: "transcript",
+      },
+      {
+        label: "Live Chat",
+        value: "live-chat",
+      },
+    ],
+  }
+]
+
 function findSuggestionsDiv() {
   return document.getElementById("related");
 }
@@ -12,53 +34,35 @@ function findLiveChatDiv() {
   return document.getElementById("chat-container");
 }
 
-function createSecondaryWatchOptions(title, id, parent, isActive) {
-  const option = document.createElement("div");
+function createWatchTabs(name, options) {
+  const tabOptions = document.createElement("ul");
+  tabOptions.classList.add("yt-watch-tabs__options");
 
-  option.classList.add("secondary__button");
-  if (isActive) {
-    option.classList.add("secondary__button--active");
-  }
-  option.id = id;
-  option.innerHTML = title;
-  parent.appendChild(option);
+  options.forEach((option) => {
+    const tabOption = document.createElement("li");
+    tabOption.classList.add("yt-watch-tabs__option");
 
-  return option;
-}
+    const tabOptionInput = document.createElement("input");
+    tabOptionInput.type = "radio";
+    tabOptionInput.name = name;
+    tabOptionInput.value = option.value;
+    tabOptionInput["data-label"] = option.label;
+    tabOptionInput.checked = !!option.activated;
+    tabOption.appendChild(tabOptionInput);
 
-function setSelectedOption(selectedId, secondaryInner, options) {
-  for (let i = 0; i < options.length; i++) {
-    options[i].classList.remove("secondary__button--active");
-    if (options[i].id === selectedId) {
-      options[i].classList.add("secondary__button--active");
-    }
-  }
+    const tabOptionSpan = document.createElement("span");
+    tabOptionSpan.innerHTML = option.label;
+    tabOption.appendChild(tabOptionSpan);
 
-  const suggestionsDiv = findSuggestionsDiv();
-  const transciptDiv = findTranscriptDiv();
-  const liveChatDiv = findLiveChatDiv();
+    tabOptions.appendChild(tabOption);
+  });
 
-  if (selectedId === "suggestions") suggestionsDiv.style.display = "block";
-  else suggestionsDiv.style.display = "none";
-
-  if (transciptDiv && selectedId === "transcript")
-    transciptDiv.style.display = "flex";
-  else if (transciptDiv) transciptDiv.style.display = "none";
-
-  if (liveChatDiv && selectedId === "live-chat")
-    liveChatDiv.style.display = "block";
-  else liveChatDiv.style.display = "none";
-
-  if (selectedId !== "suggestions")
-    secondaryInner.classList.add("secondary-inner--full");
-  else secondaryInner.classList.remove("secondary-inner--full");
+  return tabOptions;
 }
 
 let counter = 0;
 
 function WatchTabs() {
-  if (!location.href.includes("youtube.com/watch")) return true;
-
   const liveButton = document.getElementById("teaser-carousel");
 
   const isLive = liveButton
@@ -67,18 +71,6 @@ function WatchTabs() {
 
   const secondaryInner = document.getElementById("secondary-inner");
   const secondaryVideoWrapper = secondaryInner?.parentNode;
-
-  const secondaryVideoOptions =
-    document.getElementsByClassName("secondary__options")[0];
-
-  if (!!secondaryVideoOptions) {
-    setSelectedOption(
-      isLive ? "live-chat" : "suggestions",
-      secondaryInner,
-      secondaryVideoOptions.children
-    );
-    return true;
-  }
 
   if (counter > 0) return false;
 
@@ -93,58 +85,25 @@ function WatchTabs() {
   ) {
     liveButton?.classList.add("display-none");
 
-    if (isLive) {
-      suggestionsDiv.style.display = "none";
-      secondaryInner.classList.add("secondary-inner--full");
-    }
+    secondaryInner.classList.add("secondary-inner");
 
     const newSecondaryVideoOptions = document.createElement("div");
-    newSecondaryVideoOptions.classList.add("text-lg", "secondary__options");
+    newSecondaryVideoOptions.classList.add("text-lg", "secondary__tabs");
 
-    createSecondaryWatchOptions(
-      "Suggestions",
-      "suggestions",
-      newSecondaryVideoOptions,
-      !isLive
-    );
-    createSecondaryWatchOptions(
-      "Transcripts",
-      "transcript",
-      newSecondaryVideoOptions,
-      false
-    );
-    createSecondaryWatchOptions(
-      "Live Chat",
-      "live-chat",
-      newSecondaryVideoOptions,
-      isLive
-    );
+    const watchTabs = createWatchTabs(
+      watchTabsArray[0].name,
+      watchTabsArray[0].options
+    )
+
+    newSecondaryVideoOptions.appendChild(watchTabs);
 
     secondaryVideoWrapper.insertBefore(
       newSecondaryVideoOptions,
-      secondaryVideoWrapper.children[0]
+      secondaryVideoWrapper.firstChild
     );
-
-    newSecondaryVideoOptions.addEventListener("click", (event) => {
-      if (event.target.classList.contains("secondary__button")) {
-        setSelectedOption(
-          event.target.id,
-          secondaryInner,
-          newSecondaryVideoOptions.children
-        );
-      }
-    });
 
     counter++;
     return true;
   }
   return false;
 }
-
-const VideoPageObserver = new MutationObserver(() => {
-  if (WatchTabs()) {
-    VideoPageObserver.disconnect();
-  }
-});
-
-VideoPageObserver.observe(document.body, { childList: true, subtree: true });

@@ -1,31 +1,3 @@
-let watchMenuMoreCounter = 0;
-
-function WatchMenuMore(moreWrapper, moreWrapperButtons) {
-    if (watchMenuMoreCounter > 0) return true;
-
-    const items = moreWrapper.querySelector("ytd-menu-popup-renderer");
-    
-    if (items) {
-        items.classList.add("yt-watch-menu-more");
-
-        moreWrapperButtons.reverse();
-
-        for (moreWrapperButton of moreWrapperButtons) {
-            moreWrapperButton.classList.add("yt-watch-menu-more__button");
-    
-            const moreWrapperButtonWrapper = document.createElement("div");
-            moreWrapperButtonWrapper.classList.add("yt-watch-menu-more__button-wrapper");
-    
-            moreWrapperButtonWrapper.appendChild(moreWrapperButton);
-
-            items.insertBefore(moreWrapperButtonWrapper, items.firstChild);
-        }
-
-        watchMenuMoreCounter++;
-        return true;
-    }
-}
-
 function formatNumber(num) {
     if (num >= 1e9) return (num / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
     if (num >= 1e6) return (num / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
@@ -33,30 +5,26 @@ function formatNumber(num) {
     return num.toString();
 }
 
-function WatchMenuData(menu) {
-    if (!location.href.includes("youtube.com/watch")) return true;
-
+function WatchMenuData(topRow) {
     const infoWrapper = document.getElementById("ytd-watch-info-text");
     
     const existingDataWrapper = document.querySelector(".yt-watch-menu-data");
     if (existingDataWrapper) return true;
     
-    if (menu && infoWrapper) {
+    if (topRow && infoWrapper) {
         const [fullViews, date, ...rest] = infoWrapper?.querySelector("#tooltip")?.innerHTML.split(" • ");
         if (!fullViews || !date) return false;
-
+        
         const views = fullViews.trim().split(" ")[0];
-
+        
         const dataWrapper = document.createElement("div");
         dataWrapper.classList.add("yt-watch-menu-data");
-
+        
         const viewsWrapper = document.createElement("div");
         viewsWrapper.classList.add("yt-watch-menu-data__views");
-
+        
         const viewsWrapperIcon = document.createElement("img");
-        viewsWrapperIcon.src = chrome.runtime.getURL(
-          "src/assets/views-icon.svg"
-        );
+        viewsWrapperIcon.src = viewsIcon;
         viewsWrapper.appendChild(viewsWrapperIcon);
 
         const viewsWrapperText = document.createElement("p");
@@ -67,9 +35,7 @@ function WatchMenuData(menu) {
         dateWrapper.classList.add("yt-watch-menu-data__date");
 
         const dateWrapperIcon = document.createElement("img");
-        dateWrapperIcon.src = chrome.runtime.getURL(
-            "src/assets/calendar-icon.svg"
-        );
+        dateWrapperIcon.src = calendarIcon;
         dateWrapper.appendChild(dateWrapperIcon);
 
         const dateWrapperText = document.createElement("p");
@@ -81,57 +47,85 @@ function WatchMenuData(menu) {
         const isLive = document.getElementsByClassName("ytp-live");
 
         if (isLive.length === 0) dataWrapper.appendChild(dateWrapper);
-        menu.insertBefore(dataWrapper, menu.firstChild);
+        topRow.insertBefore(dataWrapper, topRow.lastChild);
 
-        infoWrapper.classList.add("yt-watch-info-text--hidden");
+        infoWrapper.classList.add("yt-watch-info-text");
 
         return true;
     }
     return false;
 }
 
-let watchMenuCounter = 0;
+/* 
+let watchMenuButtonsMoreCounter = false;
 
-function WatchMenu() {
-    const topRow = document.getElementById("top-row");
-    const menu = topRow?.querySelector("#menu");
-    const allButtonViewModels = menu?.querySelectorAll("yt-button-view-model");
+function WatchMenuButtonsMore(moreWrapper, moreWrapperButtons) {
+    if (watchMenuButtonsMoreCounter) return true;
 
-    WatchMenuData(menu);
-
-    if (allButtonViewModels?.length === 1) return false;
-
-    const downloadButton = menu?.querySelector("ytd-download-button-renderer");
-
-    const moreWrapper = document.querySelector("ytd-popup-container.ytd-app");
+    const items = moreWrapper.querySelector("ytd-menu-popup-renderer");
     
-    if (allButtonViewModels && downloadButton && moreWrapper) {
-        const [first, ...buttonViewModels] = allButtonViewModels;
+    if (items) {
+        items.classList.add("yt-watch-menu-more");
 
-        const moreWrapperButtons = [downloadButton, ...buttonViewModels];
-        
-        for (moreWrapperButton of moreWrapperButtons)
-            moreWrapperButton.parentElement.removeChild(moreWrapperButton);
-        
+        const buttonsCopy = [...moreWrapperButtons].reverse();
 
-        if (watchMenuCounter > 0) return false;
+        for (const moreWrapperButton of buttonsCopy) {
+            moreWrapperButton.classList.add("yt-watch-menu-more__button");
+    
+            const moreWrapperButtonWrapper = document.createElement("div");
+            moreWrapperButtonWrapper.classList.add("yt-watch-menu-more__button-wrapper");
+    
+            moreWrapperButtonWrapper.appendChild(moreWrapperButton);
 
-        const WatchMenuMoreObserver = new MutationObserver(() => {
-            if (WatchMenuMore(moreWrapper, moreWrapperButtons)) {
-                WatchMenuMoreObserver.disconnect();
-            }
-        });
+            items.insertBefore(moreWrapperButtonWrapper, items.firstChild);
+        }
 
-        WatchMenuMoreObserver.observe(moreWrapper, { childList: true, subtree: true });
-
-        watchMenuCounter++;
+        watchMenuButtonsMoreCounter = true;
+        return true;
     }
-    return false;
 }
 
-const WatchMenuObserver = new MutationObserver(() => {
-    if (WatchMenu()) {
-        WatchMenuObserver.disconnect();
+let watchMenuButtonsCounter = false;
+
+function WatchMenuButtons(menu) {
+    if (watchMenuButtonsCounter) return true;
+
+    const flexibleButtonsWrapper = menu.querySelector("#flexible-item-buttons");
+    const moreWrapper = document.querySelector("ytd-popup-container.ytd-app");
+    const moreButton = menu.querySelector("#button-shape");
+    
+    if (flexibleButtonsWrapper && moreWrapper) {   
+        if (flexibleButtonsWrapper.children.length === 0) return false;
+   
+        const moreWrapperButtons = flexibleButtonsWrapper.querySelectorAll(":scope > *");
+
+        if (watchMenuButtonsCounter) return true;
+
+        const moreButtonListener = (event) => {
+            WatchMenuButtonsMore(moreWrapper, moreWrapperButtons);
+            moreButton.removeEventListener("click", moreButtonListener);
+        }
+
+        moreButton.addEventListener("click", moreButtonListener);
+
+        watchMenuButtonsCounter = true;
+        return true;
     }
-  });
-WatchMenuObserver.observe(document.body, { childList: true, subtree: true });
+    return false;
+} */
+
+let watchMenuChecker = false;
+
+function WatchMenu() {
+    if (watchMenuChecker) return true;
+
+    const topRow = document.getElementById("top-row");
+    // const menu = topRow?.querySelector("#menu.ytd-watch-metadata");
+
+    if (WatchMenuData(topRow)) {
+        watchMenuChecker = true;
+        return true;
+    }
+
+    return false;
+}

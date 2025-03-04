@@ -1,9 +1,43 @@
-.secondary-inner--full {
+/* Suggestions */
+
+#secondary .secondary-inner #related {
+    display: none !important;
+}
+
+#secondary:has(input[type="radio"][name="watch-tabs"][value="suggestions"]:checked) .secondary-inner #related {
+    display: block !important;
+}
+
+/* Transcript */
+
+#secondary .secondary-inner ytd-engagement-panel-section-list-renderer[target-id=engagement-panel-searchable-transcript] {
+    display: none !important;
+}
+
+#secondary:has(input[type="radio"][name="watch-tabs"][value="transcript"]:checked) .secondary-inner ytd-engagement-panel-section-list-renderer[target-id=engagement-panel-searchable-transcript] {
+    display: flex !important;
+}
+
+/* Live chat */
+
+#secondary .secondary-inner #chat-container {
+    display: none !important;
+}
+
+#secondary:has(input[type="radio"][name="watch-tabs"][value="live-chat"]:checked) .secondary-inner #chat-container {
+    display: block !important;
+}
+
+/* Transcript/Live chat sticky */
+
+#secondary:has(input[type="radio"][name="watch-tabs"][value="live-chat"]:checked, input[type="radio"][name="watch-tabs"][value="transcript"]:checked) .secondary-inner {
     position: sticky;
     top: 122px;
 }
 
-.secondary__options {
+/* Tabs */
+
+.secondary__tabs {
     display: flex;
     position: sticky;
     top: 60px;
@@ -12,7 +46,26 @@
     margin-bottom: 24px;
 }
 
-.secondary__button {
+.yt-watch-tabs__options {
+    display: flex;
+    width: 100%;
+
+    list-style: none;
+}
+
+.yt-watch-tabs__options .yt-watch-tabs__option:first-of-type {
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+.yt-watch-tabs__options .yt-watch-tabs__option:last-of-type {
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+}
+
+.yt-watch-tabs__option {
+    position: relative;
+
     width: 100%;
     text-align: center;
     color: var(--yt-spec-text-primary);
@@ -22,29 +75,14 @@
     cursor: pointer;
 }
 
-.secondary__button--active {
+.yt-watch-tabs__option:has(input[type="radio"]:checked) {
     color: var(--yt-spec-text-primary-inverse);
     background-color: var(--yt-spec-text-primary);
 }
 
-.secondary__options .secondary__button:first-of-type {
-    border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px;
-}
-
-.secondary__options .secondary__button:last-of-type {
-    border-top-right-radius: 100px;
-    border-bottom-right-radius: 100px;
-}
-
-.secondary__option--flex {
-    display: flex !important;
-}
-
-.secondary__option--block {
-    display: block !important;
-}
-
-.secondary__option--hidden {
-    display: none !important;
+.yt-watch-tabs__option input[type="radio"] {
+    all: unset;
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
 }

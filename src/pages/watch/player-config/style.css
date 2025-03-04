@@ -1,0 +1,25 @@
+.ytp-menuitem-toggle-checkbox {
+    height: 20px !important;
+    width: 36px !important;
+    border: 2px solid var(--yt-player-config-option-border-color) !important;
+    background: transparent !important;
+}
+
+.ytp-menuitem-toggle-checkbox::after {
+    top: 8px !important;
+    left: 6px !important;
+    height: 10px !important;
+    width: 10px !important;
+}
+
+.ytp-menuitem[aria-checked=true] .ytp-menuitem-toggle-checkbox {
+    background: var(--yt-accent-color) !important;
+    border-color: var(--yt-accent-color) !important;
+}
+
+.ytp-menuitem[aria-checked=true] .ytp-menuitem-toggle-checkbox::after {
+    height: 16px !important;
+    width: 16px !important;
+    top: 5px !important;
+    transform: translateX(10px) !important;
+}

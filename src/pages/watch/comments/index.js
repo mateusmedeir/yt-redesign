@@ -21,12 +21,7 @@ function WatchCommentsRate(toolbar) {
     return likeDislikeWrapper;
 }
 
-function WatchComments() {
-    if (!location.href.includes("youtube.com/watch")) return false;
-
-    const commentsWrapper = document.querySelector("#sections.ytd-comments");
-    if (!commentsWrapper) return false;
-    
+function WatchCommentsCallback(commentsWrapper) {    
     const comments = commentsWrapper.querySelectorAll("ytd-comment-thread-renderer:not(.yt-watch-comment), #expander-contents ytd-comment-view-model:not(.yt-watch-comment)");
     if (comments.length === 0) return false;
     
@@ -59,7 +54,7 @@ function WatchComments() {
         expanderButton.classList.add("yt-watch-comment__expander");
 
         const expanderButtonIcon = document.createElement("img");
-        expanderButtonIcon.src = chrome.runtime.getURL("src/assets/comments-icon.svg");
+        expanderButtonIcon.src = commentsIcon;
         expanderButton.appendChild(expanderButtonIcon);
 
         const expanderButtonText = document.createElement("p");
@@ -92,10 +87,23 @@ function WatchComments() {
     return false;
 }
 
-const WatchCommentsObserver = new MutationObserver(() => {
-    if (WatchComments()) {
-        WatchCommentsObserver.disconnect();
-    }
-});
-WatchCommentsObserver.observe(document.body, { childList: true, subtree: true });
+let watchCommentsChecker = false;
 
+function WatchComments() {
+    if (watchCommentsChecker) return true;
+
+    const commentsWrapper = document.querySelector("ytd-comments#comments");
+    if (!commentsWrapper) return false;
+
+    watchCommentsChecker = true;
+
+    const commentsObserver = new MutationObserver(() => {
+        if (WatchCommentsCallback(commentsWrapper)) {
+            commentsObserver.disconnect();
+        }
+    });
+
+    commentsObserver.observe(commentsWrapper, { childList: true, subtree: true, attributes: true });
+
+    return true;
+}
