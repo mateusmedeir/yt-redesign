@@ -1,6 +1,6 @@
 {
   "name": "Youtube Redesign",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Extension based on the Juxtopposed Youtube UI redesign",
 
   "content_scripts": [
@@ -12,7 +12,11 @@
         "src/components/aside/index.js",
         "src/components/select/index.js",
 
+        "src/pages/collections/index.js",
+        
+        "src/pages/results/index.js",
         "src/pages/results/filters/index.js",
+        
         "src/pages/watch/index.js",
         "src/pages/watch/tabs/index.js",
         "src/pages/watch/player/index.js",
@@ -26,6 +30,7 @@
         "src/components/select/style.css",
 
         "src/pages/channel/tabs/style.css",
+        "src/pages/collections/style.css",
         "src/pages/results/filters/style.css",
         "src/pages/watch/style.css",
         "src/pages/watch/tabs/style.css",
@@ -44,7 +49,10 @@
         "src/assets/sticky-player-icon.svg",
         "src/assets/calendar-icon.svg",
         "src/assets/views-icon.svg",
-        "src/assets/comments-icon.svg"
+        "src/assets/comments-icon.svg",
+        "src/assets/collections-icon.svg",
+        "src/assets/verified-icon.svg",
+        "src/assets/pencil-icon.svg"
       ],
       "matches": ["https://*.youtube.com/*"]
     }

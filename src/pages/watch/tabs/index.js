@@ -81,7 +81,7 @@ function WatchTabsCreate(secondaryVideoWrapper, secondaryInner) {
   secondaryInner.classList.add("secondary-inner");
 
   const newSecondaryVideoOptions = document.createElement("div");
-  newSecondaryVideoOptions.classList.add("text-lg", "secondary__tabs");
+  newSecondaryVideoOptions.classList.add("text-base", "secondary__tabs");
 
   const watchTabs = createWatchTabs(
     watchTabsArray[0].name,

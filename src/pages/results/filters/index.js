@@ -1,5 +1,3 @@
-let resultsFiltersCounter = 0;
-
 const resultsFiltersArray = {
     "type": {
         label: "Type",
@@ -204,9 +202,10 @@ function setResultsFilters(event) {
     window.location.href = url.href;
 }
 
-function ResultsFilters() {
-    if (resultsFiltersCounter > 0) return false;
-    
+function ResultsFilters() {   
+    const existingFiltersContainer = document.querySelector(".yt-results-filters");
+    if (existingFiltersContainer) return true;
+
     const ytSearchContainer = document.querySelector("ytd-search #container");
     
     if (ytSearchContainer) {
@@ -228,16 +227,8 @@ function ResultsFilters() {
         
         ytSearchContainer.insertBefore(filtersContainer, ytSearchContainer.firstChild);
 
-        resultsFiltersCounter++;
         return true;
     }
 
     return false;
 }
-
-const ResultsObserver = new MutationObserver(() => {
-    if (ResultsFilters()) {
-        ResultsObserver.disconnect();
-    }
-  });
-ResultsObserver.observe(document.body, { childList: true, subtree: true });

@@ -1,22 +1,12 @@
-let watchPageTries = 0;
-
 function WatchPage() {
-  const body = document.querySelector("body");
+  const watchTabs = WatchTabs();
+  const watchMiniPlayer = WatchMiniPlayer();
+  const watchMenu = WatchMenu();
+  const watchComments = WatchComments();
 
-  const WatchPageListener = (event) => {
-    if (watchPageTries > 6) {
-      body.removeEventListener("transitionend", WatchPageListener);
-      watchPageTries = 0;
-      return;  
-    }
+  if (watchTabs && watchMiniPlayer && watchMenu && watchComments) {
+    return true;
+  }
 
-    if (WatchTabs() && WatchMiniPlayer() && WatchMenu() && WatchComments()) {
-      body.removeEventListener("transitionend", WatchPageListener);
-      watchPageTries = 0;
-      return;
-    }
-    watchPageTries++;
-  };
-
-  body.addEventListener("transitionend", WatchPageListener);
+  return false;
 }

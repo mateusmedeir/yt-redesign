@@ -1,0 +1,215 @@
+ytd-section-list-renderer[is-constrained-list][responsive-sizing=STANDARD], ytd-tabbed-page-header[is-constrained-list][responsive-sizing=STANDARD] #page-header-container {
+    max-width: 1470px !important;
+}
+
+ytd-browse[page-subtype='subscriptions-channels'] #header #page-header-container #page-header {
+    display: none !important;
+}
+
+ytd-browse[page-subtype='subscriptions-channels'] #primary.ytd-two-column-browse-results-renderer #header-container #header {
+    display: none !important;
+}
+
+
+/* YT Channel Card */
+
+#grid-container.ytd-expanded-shelf-contents-renderer {
+    display: flex !important;
+    flex-direction: row !important;
+
+    gap: 35px !important;
+}
+
+#grid-container.ytd-expanded-shelf-contents-renderer>*.ytd-expanded-shelf-contents-renderer {
+    flex: 0 !important;
+}
+
+#grid-container.ytd-expanded-shelf-contents-renderer>*.ytd-expanded-shelf-contents-renderer #content-section,
+.yt-collections__collection #content-section {
+    display: flex !important;
+    flex-direction: column !important;
+
+    gap: 16px !important;
+}
+
+#grid-container.ytd-expanded-shelf-contents-renderer>*.ytd-expanded-shelf-contents-renderer #content-section #avatar-section,
+.yt-collections__collection #avatar-section {
+    margin: auto !important;
+}
+
+#grid-container.ytd-expanded-shelf-contents-renderer #content-section yt-img-shadow.ytd-channel-renderer , #grid-container.ytd-expanded-shelf-contents-renderer #content-section img {
+    width: 46px !important;
+    height: 46px !important;
+}
+
+#grid-container.ytd-expanded-shelf-contents-renderer #info-section,
+.yt-collections__collection #info-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+}
+
+#grid-container.ytd-expanded-shelf-contents-renderer #info-section #info,
+.yt-collections__collection #info {
+    padding: 0 !important;
+}
+
+/* Channel name */
+#grid-container.ytd-expanded-shelf-contents-renderer #info-section #channel-title,
+.yt-collections__collection #channel-title {
+    margin: auto !important;
+    max-width: 150px !important;
+}
+
+#grid-container.ytd-expanded-shelf-contents-renderer #info-section #channel-title #text,
+.yt-collections__collection #channel-title #text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Metadata */
+#grid-container.ytd-expanded-shelf-contents-renderer #info-section #metadata,
+.yt-collections__collection #metadata {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    max-height: none !important;
+}
+
+/* Channel @ */
+#grid-container.ytd-expanded-shelf-contents-renderer #info-section #metadata #subscribers,
+.yt-collections__collection #metadata #subscribers {
+    text-align: center !important;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px !important;
+}
+
+/* Subscribers count */
+#grid-container.ytd-expanded-shelf-contents-renderer #info-section #metadata #video-count,
+.yt-collections__collection #metadata #video-count {
+    text-align: center !important;
+}
+
+/* Metadata description and dot */
+#grid-container.ytd-expanded-shelf-contents-renderer #info-section #description, #grid-container.ytd-expanded-shelf-contents-renderer #info-section #dot,
+.yt-collections__collection #description, .yt-collections__collection #dot {
+    display: none !important;
+}
+
+/* CUSTOM */
+
+.yt-collections__dialog {
+    border-radius: 8px;
+    font-size: 18px;
+    color: var(--yt-white-color);
+    background-color: var(--yt-button-bg-color);
+    border: none;
+}
+
+.yt-collections__dialog[open] {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.yt-collections__button {
+    display: flex;
+    color: var(--yt-white-color);
+    background-color: var(--yt-button-bg-color);
+
+    width: fit-content;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 23.15px;
+}
+
+.yt-collections__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.yt-collections__form-channels {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.yt-collections__collections {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    padding-bottom: 34px;
+}
+
+.yt-collections__collection {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 34px;
+    border-bottom: 1px solid var(--yt-chip-cloud-chip-background);
+}
+
+.yt-collection__header {
+    display: flex;
+    gap: 8px;
+}
+
+.yt-collection__title {
+    color: var(--yt-white-color);
+}
+
+.yt-collection__channels {
+    display: flex;
+    gap: 35px;
+}
+
+.yt-collection__channel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    min-width: 150.47px;
+}
+
+.yt-collection__channel-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 100%;
+}
+
+.yt-collection__channel-title {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    max-width: 150px;
+}
+
+.yt-collection__channel-name {
+    color: var(--yt-spec-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.yt-collection__channel-verified {
+    width: 14px;
+    height: 14px;
+}
+
+.yt-collection__channel-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.yt-collection__channel-metadata {
+    display: flex;
+    flex-direction: column;
+    color: var(--yt-spec-text-secondary);
+    text-align: center;
+}

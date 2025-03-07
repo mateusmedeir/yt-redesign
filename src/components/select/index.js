@@ -1,7 +1,7 @@
 function CreateSelect(label, name, options, selectedValue, optionalCallback) {
     const select = document.createElement("div");
     select.classList.add("select");
-    select.classList.add("text-lg");
+    select.classList.add("text-base");
 
 
     const selectButton = document.createElement("div");

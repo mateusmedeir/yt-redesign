@@ -79,10 +79,11 @@ function AsideMenuObserver() {
   return false;
 }
 
-const observer = new MutationObserver(() => {
+/* const observer = new MutationObserver(() => {
   if (AsideMenuObserver()) {
     observer.disconnect();
   }
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
+ */

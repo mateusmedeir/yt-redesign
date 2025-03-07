@@ -7,11 +7,11 @@ function WatchCommentsRate(toolbar) {
     likeDislikeWrapper.classList.add("yt-watch-comment__buttons");
     
     dislikeButton.classList.add("yt-watch-comment__button");
-    dislikeButton.classList.add("yt-watch-comment__button--icon");
+    dislikeButton.classList.add("yt-watch-comment__button-icon");
 
     const likeWrapper = document.createElement("div");
     likeWrapper.classList.add("yt-watch-comment__button");
-    likeWrapper.classList.add("yt-watch-comment__button--icon");
+    likeWrapper.classList.add("yt-watch-comment__button-icon");
     likeWrapper.appendChild(likeButton);
     if (likeCount) likeWrapper.appendChild(likeCount);  
     
@@ -50,7 +50,7 @@ function WatchCommentsCallback(commentsWrapper) {
         
         const expanderButton = document.createElement("div");
         expanderButton.classList.add("yt-watch-comment__button");
-        expanderButton.classList.add("yt-watch-comment__button--icon");
+        expanderButton.classList.add("yt-watch-comment__button-icon");
         expanderButton.classList.add("yt-watch-comment__expander");
 
         const expanderButtonIcon = document.createElement("img");

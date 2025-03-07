@@ -16,11 +16,9 @@ function WatchPlayer() {
 
 function WatchFullPlayer() {}
 
-let miniplayerCounter = 0;
-
 function WatchMiniPlayer() {
-  if (!location.href.includes("youtube.com/watch")) return true;
-  if (miniplayerCounter > 0) return true;
+  const existingStickyPlayer = document.querySelector(".ytp-sticky-player");
+  if (existingStickyPlayer) return true;
 
   const playerRightControls =
     document.getElementsByClassName("ytp-right-controls")[0];
@@ -55,7 +53,6 @@ function WatchMiniPlayer() {
       playerRightControls.children[4]
     );
 
-    miniplayerCounter++;
     return true;
   }
   return false;
