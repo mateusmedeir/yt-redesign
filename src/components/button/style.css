@@ -1,0 +1,55 @@
+.ytr-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 23px;
+  font-size: 16px;
+  font-weight: 500;
+
+  background-color: var(--ytr-foreground-color);
+  color: var(--yt-white-color);
+}
+
+.ytr-button:has(.ytr-button__icon) {
+  padding: 6px 24px 6px 20px;
+}
+
+.ytr-button:hover {
+  filter: brightness(120%);
+}
+
+.ytr-button[size="small"] {
+  padding: 8px 24px;
+  font-size: 14px;
+}
+
+.ytr-button[size="small"]:has(.ytr-button__icon) {
+  padding: 4px 24px 4px 20px;
+}
+
+.ytr-button[text-size="small"] {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.ytr-button[variant="primary"] {
+  background: var(--yt-primary-color);
+}
+
+.ytr-button[variant="accent"] {
+  background: var(--yt-accent-color);
+  filter: brightness(80%);
+}
+
+.ytr-button[variant="accent"]:hover {
+  filter: brightness(100%);
+}
+
+.ytr-button[variant="default"] {
+  background: var(--ytr-default-foreground-color);
+}
+
+.ytr-button[variant="default"]:hover {
+  filter: brightness(120%);
+}

@@ -1,89 +1,161 @@
-function createCollapsible(title, content) {
-  const collapsibleWrapper = document.createElement("div");
-  collapsibleWrapper.classList.add("collapsible");
+function ExtractAsideMenuSectionData(asideMenuSections, position) {
+  if (position < 0 || position >= asideMenuSections.length) return null
 
-  const collapsibleTitle = document.createElement("div");
-  collapsibleTitle.classList.add("collapsible-title");
-  collapsibleTitle.appendChild(title);
+  const asideMenuSection = asideMenuSections[position]
+  const asideMenuSectionTitle = asideMenuSection.querySelector(
+    'h3 yt-formatted-string'
+  )
 
-  const collapsibleButton = document.createElement("div");
-  collapsibleButton.classList.add("collapsible-button");
-
-  const collapsibleButtonIcon = document.createElement("img");
-  collapsibleButtonIcon.src = chrome.runtime.getURL(
-    "src/assets/arrow-down-icon.svg"
-  );
-  collapsibleButton.appendChild(collapsibleButtonIcon);
-
-  const collapsibleHeader = document.createElement("div");
-  collapsibleHeader.classList.add("collapsible-header");
-  collapsibleHeader.appendChild(collapsibleTitle);
-  collapsibleHeader.appendChild(collapsibleButton);
-
-  const collapsibleContent = document.createElement("div");
-  collapsibleContent.classList.add("collapsible-content");
-  collapsibleContent.appendChild(content);
-
-  collapsibleWrapper.appendChild(collapsibleHeader);
-  collapsibleWrapper.appendChild(collapsibleContent);
-
-  collapsibleButton.addEventListener("click", () => {
-    collapsibleWrapper.classList.toggle("collapsible--active");
-  });
-
-  return collapsibleWrapper;
-}
-
-function findSubscriptionButton() {
-  const asideMenuButtons = document.getElementsByClassName(
-    "yt-simple-endpoint style-scope ytd-guide-entry-renderer"
-  );
-
-  const asideMenuSubscriptionButtonChildren = Array.from(asideMenuButtons).find(
-    (button) => button.href.includes("subscriptions")
-  );
-
-  if (asideMenuSubscriptionButtonChildren) {
-    const asideMenuSubscriptionButton =
-      asideMenuSubscriptionButtonChildren.parentElement;
-    return asideMenuSubscriptionButton;
-  } else {
-    return null;
+  const asideMenuSectionContent = asideMenuSection.querySelector('div#items')
+  return {
+    section: asideMenuSection,
+    title: asideMenuSectionTitle ? asideMenuSectionTitle.innerText : null,
+    content: asideMenuSectionContent ? asideMenuSectionContent : null
   }
 }
 
-function mergeSubscriptionBlocks(subscriptionsButton) {
-  const asideMenuDivs = document.getElementsByClassName(
-    "style-scope ytd-guide-renderer"
-  );
-  const subscriptionsDiv = Array.from(asideMenuDivs).find((element) => {
-    const children = element.children[0];
-    return children.localName === "h3" && children.hidden !== true;
-  });
+function RefactorAsideMenuSections() {
+  const asideMenuDivs = document.querySelectorAll(
+    'ytd-guide-renderer#guide-renderer div#sections.style-scope.ytd-guide-renderer ytd-guide-section-renderer'
+  )
+  if (!asideMenuDivs || asideMenuDivs.length < 3) return false
 
-  subscriptionsDiv.children[0].remove();
+  const asideMenuFirstItems = asideMenuDivs[0].querySelector('div#items')
+  if (!asideMenuFirstItems) return false
 
-  subscriptionsDiv.insertBefore(
-    createCollapsible(subscriptionsButton, subscriptionsDiv.children[0]),
-    subscriptionsDiv.firstChild
-  );
+  const oldSubscriptionsButton = asideMenuFirstItems.children[2]
+  if (!oldSubscriptionsButton) return false
+
+  let subscriptionsExists = 1
+  const oldSubscriptionsButtonA =
+    oldSubscriptionsButton.querySelector('a#endpoint')
+  if (
+    !oldSubscriptionsButtonA ||
+    !oldSubscriptionsButtonA.href.includes('/feed/subscriptions')
+  )
+    subscriptionsExists = 0
+  else oldSubscriptionsButton.id = 'ytr-old-subscriptions-button'
+
+  const exploreDiv = ExtractAsideMenuSectionData(
+    asideMenuDivs,
+    1 + subscriptionsExists
+  )
+  if (!exploreDiv || !exploreDiv.section || !exploreDiv.title) return false
+  exploreDiv.section.classList.add('ytr-hidden')
+
+  if (subscriptionsExists) {
+    const subscriptionsDiv = ExtractAsideMenuSectionData(asideMenuDivs, 1)
+    if (
+      !subscriptionsDiv ||
+      !subscriptionsDiv.section ||
+      !subscriptionsDiv.title
+    )
+      return false
+
+    const subscriptionsShowMore = subscriptionsDiv.content.querySelector(
+      'ytd-guide-collapsible-entry-renderer'
+    )
+    if (subscriptionsShowMore.getAttribute('can-show-more') === '') {
+      const subscriptionsShowMoreLink =
+        subscriptionsShowMore.querySelector('a#endpoint')
+
+      subscriptionsShowMoreLink.click()
+    }
+
+    subscriptionsDiv.section.children[0].remove()
+
+    subscriptionsDiv.section.insertBefore(
+      createCollapsible(
+        createCollapsibleButton(
+          subscriptionsDiv.title,
+          '/feed/subscriptions',
+          subscriptionsIcon,
+          subscriptionsAIcon
+        ),
+        subscriptionsDiv.content
+      ),
+      subscriptionsDiv.section.firstChild
+    )
+    subscriptionsDiv.section.firstChild.classList.add(
+      'ytr-subscriptions-collapsible'
+    )
+
+    const collectionsList = JSON.parse(localStorage.getItem('yt-collections'))
+    const colectionsContent = document.createElement('div')
+    colectionsContent.classList.add('yt-collections__content')
+
+    Object.entries(collectionsList).forEach(([key, value]) => {
+      const collectionButton = createEndpoint(
+        '/feed/subscriptions',
+        key,
+        null,
+        null,
+        () => {
+          localStorage.setItem('yt-collection-selected', key)
+          url = null
+          TriggerObserver()
+        },
+        true
+      )
+
+      colectionsContent.appendChild(collectionButton)
+    })
+
+    subscriptionsDiv.section.insertBefore(
+      createCollapsible(
+        createCollapsibleButton(
+          'Collections',
+          '/feed/channels',
+          collectionsIcon,
+          collectionsAIcon
+        ),
+        colectionsContent
+      ),
+      subscriptionsDiv.section.firstChild
+    )
+  }
+
+  asideMenuFirstItems.insertBefore(
+    createCollapsible(
+      createCollapsibleButton(
+        exploreDiv.title,
+        '/feed/trending?bp=6gQJRkVleHBsb3Jl',
+        exploreIcon,
+        exploreAIcon
+      ),
+      exploreDiv.content
+    ),
+    asideMenuFirstItems.children[1]
+  )
+
+  return true
 }
 
 function AsideMenuObserver() {
-  const subscriptionsButton = findSubscriptionButton();
-  if (subscriptionsButton) {
-    subscriptionsButton.id = "subscriptions-button";
-    mergeSubscriptionBlocks(subscriptionsButton);
-    return true;
+  if (RefactorAsideMenuSections()) {
+    UpdateEndpointsState()
+    return true
   }
-  return false;
+  return false
 }
 
-/* const observer = new MutationObserver(() => {
-  if (AsideMenuObserver()) {
-    observer.disconnect();
-  }
-});
+let asideMenuCheck = false
+function AsideMenu() {
+  if (asideMenuCheck) return true
 
-observer.observe(document.body, { childList: true, subtree: true });
- */
+  const asideMenuFull = document.querySelector(
+    '#content.ytd-app tp-yt-app-drawer'
+  )
+  if (!asideMenuFull) return false
+
+  asideMenuCheck = true
+  const asideMenuFullObserver = new MutationObserver(() => {
+    if (AsideMenuObserver()) {
+      asideMenuFullObserver.disconnect()
+    }
+  })
+  asideMenuFullObserver.observe(asideMenuFull, {
+    childList: true,
+    subtree: true
+  })
+}

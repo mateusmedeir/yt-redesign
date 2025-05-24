@@ -1,0 +1,63 @@
+.collapsible-button:hover,
+ytd-guide-entry-renderer:hover:has(> #endpoint),
+ytd-guide-entry-renderer[active]:has(> #endpoint),
+ytd-mini-guide-entry-renderer[is-active],
+ytd-mini-guide-entry-renderer:hover,
+ytd-mini-guide-entry-renderer:focus {
+  background-color: var(--yt-spec-endpoint-background) !important;
+}
+
+ytd-guide-entry-renderer[active] .yt-spec-icon-shape,
+ytd-mini-guide-entry-renderer[is-active] .yt-spec-icon-shape {
+  color: var(--yt-primary-color) !important;
+}
+
+.guide-icon.ytd-guide-entry-renderer,
+yt-img-shadow.ytd-guide-entry-renderer {
+  margin-right: 1.25rem !important;
+}
+
+.collapsible ytd-guide-entry-renderer {
+  width: 100% !important;
+}
+
+.collapsible-header {
+  display: flex;
+  gap: 12px;
+}
+
+.collapsible-title:first-child {
+  width: 100% !important;
+}
+
+.collapsible-title {
+  width: 100%;
+}
+
+.collapsible:has(.ytr-endpoint--active, ytd-guide-entry-renderer[active]) .collapsible-button {
+  background-color: var(--yt-spec-endpoint-background) !important;
+}
+
+.collapsible-button {
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  cursor: pointer;
+  border-radius: 0.625rem;
+}
+
+#endpoint:hover {
+  background-color: transparent !important;
+}
+
+.collapsible--open .collapsible-button img {
+  transform: rotate(180deg);
+}
+
+.collapsible-content {
+  display: none;
+}
+
+.collapsible--open .collapsible-content {
+  display: block;
+}

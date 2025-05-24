@@ -1,0 +1,59 @@
+.yt-collections__add-wrapper {
+    padding-top: 40px;
+}
+
+.yt-collections__dialog {
+    border-radius: 8px;
+    font-size: 18px;
+    color: var(--yt-white-color);
+    background-color: var(--yt-button-bg-color);
+    border: none;
+}
+
+.yt-collections__dialog[open] {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.yt-collections__button {
+    display: flex;
+    color: var(--yt-white-color);
+    background-color: var(--yt-button-bg-color);
+
+    width: fit-content;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 23.15px;
+}
+
+.yt-collections__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.yt-collections__form-channels {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.ytr-tabs {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    border-bottom: 1px solid var(--yt-chip-cloud-chip-background);
+}
+
+.ytr-tabs__option {
+    padding: 18px 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--yt-white-color);
+}
+
+.ytr-divider--tabs {
+    min-height: 28px;
+    max-height: 28px;
+}

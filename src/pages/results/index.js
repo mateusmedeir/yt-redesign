@@ -1,7 +1,7 @@
 function ResultsPage() {
-    try {
-        return ResultsFilters();
-    } catch(error) {
-        return false;
-    }
+  try {
+    return ResultsFilters()
+  } catch (error) {
+    return false
+  }
 }

@@ -1,0 +1,49 @@
+ytd-guide-entry-renderer {
+  width: 100% !important;
+}
+
+.ytr-endpoint {
+  max-width: -webkit-fill-available !important;
+  width: 100% !important;
+  height: 40px !important;
+  padding: 0 12px !important;
+  display: flex !important;
+  gap: 12.5px !important;
+  align-items: center !important;
+  text-decoration: none !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+}
+
+.ytr-endpoint:hover {
+  background-color: var(--yt-spec-endpoint-background) !important;
+}
+
+.ytr-endpoint--active {
+  background-color: var(--yt-spec-endpoint-background) !important;
+}
+
+.ytr-endpoint .ytr-endpoint__a-icon {
+  display: none;
+}
+
+.ytr-endpoint--active:has(.ytr-endpoint__a-icon) .ytr-endpoint__a-icon {
+  display: block !important;
+}
+
+.ytr-endpoint--active .ytr-endpoint__icon {
+  display: none;
+}
+
+.ytr-endpoint--active:not(:has(.ytr-endpoint__a-icon)) .ytr-endpoint__icon {
+  display: block !important;
+  filter: brightness(0) saturate(100%) invert(24%) sepia(96%) saturate(6047%) hue-rotate(347deg) brightness(98%) contrast(113%);
+}
+
+.ytr-endpoint__text {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  color: var(--yt-spec-text-primary);
+}

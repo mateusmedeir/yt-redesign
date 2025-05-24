@@ -52,7 +52,7 @@ function WatchMenuData(topRow) {
         const data = WatchMenuDataExtract();
         if (!data) return false;
         const { views, date } = data;
-        
+
         const dataWrapper = document.createElement("div");
         dataWrapper.classList.add("yt-watch-menu-data");
         

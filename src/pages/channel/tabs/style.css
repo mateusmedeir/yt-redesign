@@ -1,27 +1,28 @@
-#header.ytd-browse {
+ytd-browse[page-subtype="channels"] #header.ytd-browse {
     margin-bottom: 12px !important;
 }
 
-ytd-tabbed-page-header[has-banner] #page-header.ytd-tabbed-page-header {
+ytd-browse[page-subtype="channels"] ytd-tabbed-page-header[has-banner] #page-header.ytd-tabbed-page-header {
     padding-top: 0 !important;
     padding-bottom: 28px !important;
 }
-.page-header-view-model-wiz__page-header-title--page-header-title-large {
+
+ytd-browse[page-subtype="channels"] .page-header-view-model-wiz__page-header-title--page-header-title-large {
     font-size: 28px !important;
     line-height: normal !important;
     margin-bottom: 18px !important;
 }
 
-.yt-tab-group-shape-wiz__slider {
+ytd-browse[page-subtype="channels"] .yt-tab-group-shape-wiz__slider {
     background: linear-gradient(to right, var(--yt-primary-color), var(--yt-secondary-color)) !important;
 }
     
-.yt-tab-group-shape-wiz__slider , .yt-tab-shape-wiz:hover .yt-tab-shape-wiz__tab-bar {
+ytd-browse[page-subtype="channels"] .yt-tab-group-shape-wiz__slider , .yt-tab-shape-wiz:hover .yt-tab-shape-wiz__tab-bar {
     height: 3px !important;
     border-radius: 100px 100px 0 0 !important;
 }
 
-#page-header .page-header-view-model-wiz__page-header-headline-image {
+ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline-image {
     margin-top: -81px !important;
     margin-left: 27px !important;
     margin-right: 0 !important;
@@ -29,39 +30,39 @@ ytd-tabbed-page-header[has-banner] #page-header.ytd-tabbed-page-header {
     border-radius: 100% !important;
 }
 
-#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info {
+ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info {
     display: grid;
     grid-template-columns: 1fr auto;
     padding-top: 16px;
     padding-left: 20px;
 }
 
-#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info > :nth-last-child(1) {
+ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info > :nth-last-child(1) {
     grid-column: 2;
     grid-row: 1;
     margin: 0 !important;
 }
 
-#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info > :not(:nth-last-child(1)) {
+ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info > :not(:nth-last-child(1)) {
     grid-column: 1;
 }
 
-#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-description, #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-attribution {
+ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-description, #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-attribution {
     margin-top: 6px !important;
 }
 
-#page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-title--page-header-title-large {
+ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-title--page-header-title-large {
     margin-bottom: 18px !important;
 }
 
-#header #wrapper #tabsContent, #header #wrapper .yt-tab-group-shape-wiz {
+ytd-browse[page-subtype="channels"] #header #wrapper #tabsContent, #header #wrapper .yt-tab-group-shape-wiz {
     width: 100% !important;
 }
 
-#header #wrapper .yt-tab-shape-wiz__tab--last-tab {
+ytd-browse[page-subtype="channels"] #header #wrapper .yt-tab-shape-wiz__tab--last-tab {
     margin-left: auto !important;
 }
 
-#header #wrapper ytd-expandable-tab-renderer:not([show-input]) form.ytd-expandable-tab-renderer {
+ytd-browse[page-subtype="channels"] #header #wrapper ytd-expandable-tab-renderer:not([show-input]) form.ytd-expandable-tab-renderer {
     display: none !important;
 }

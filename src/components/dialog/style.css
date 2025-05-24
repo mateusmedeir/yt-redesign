@@ -1,0 +1,70 @@
+body:has(.ytr-dialog[open]) {
+    overflow: hidden;
+}
+
+.ytr-dialog {
+  width: 100%;
+  max-width: 1002px;
+  border-radius: 20px;
+  padding: 18px 0;
+  font-size: 18px;
+  color: var(--yt-white-color);
+  background-color: var(--yt-button-bg-color);
+  border: none;
+}
+
+.ytr-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.ytr-dialog-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.ytr-dialog__header, .ytr-dialog__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ytr-dialog__header .ytr-dialog__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ytr-dialog__title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--yt-spec-text-primary);
+}
+
+.ytr-dialog__content {
+  padding: 24px 0;
+  overflow: auto;
+}
+
+.ytr-dialog__content .ytr-dialog__wrapper>div {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding-bottom: 104px;
+}
+
+.ytr-dialog__wrapper {
+  padding: 0 24px;
+}
+
+.ytr-dialog__divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--ytr-dialog-border);
+}
+
+.ytr-dialog__buttons {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 12px;
+}

@@ -1,0 +1,7 @@
+#ytr-old-subscriptions-button {
+  display: none !important;
+}
+
+.ytr-subscriptions-collapsible #items #expanded #collapser-item, .ytr-subscriptions-collapsible #items #expanded #expandable-items ytd-guide-entry-renderer:nth-last-child(-n+1) {
+  display: none !important;
+} 

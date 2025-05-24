@@ -1,0 +1,86 @@
+.ytr-mult-select {
+  position: relative;
+}
+
+.ytr-mult-select__options {
+  display: none;
+  position: fixed;
+  z-index: 400;
+  width: 100%;
+  max-height: 250px;
+  overflow: auto;
+  margin-top: 2px;
+  padding: 12px 0;
+
+  background-color: var(--ytr-select-bg) !important;
+  border-radius: 8px !important;
+  color: var(--yt-spec-text-primary) !important;
+  list-style: none;
+}
+
+.ytr-mult-select[active="true"] .ytr-mult-select__options {
+  display: flex;
+  flex-direction: column;
+}
+
+.ytr-mult-select__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  max-width: 100%;
+  font-size: 16px;
+  padding: 10px 16px;
+}
+
+.ytr-mult-select__option[hidden="true"] {
+  display: none;
+}
+
+.ytr-mult-select__option:hover {
+  background-color: var(--ytr-select-bg-hover);
+}
+
+.ytr-mult-select__option input[type="checkbox"] {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.ytr-mult-select__option:not(:has(input[type="checkbox"]:checked)) .ytr-mult-select__option-label {
+  margin-left: 27px;
+}
+
+.ytr-mult-select__option .ytr-mult-select__option-check {
+  display: none;
+  width: 19px;
+  height: 19px;
+}
+
+.ytr-mult-select__option:has(input[type="checkbox"]:checked) .ytr-mult-select__option-check {
+  display: flex;
+}
+
+.ytr-mult-select__selected-options {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.ytr-mult-select__selected-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 16px;
+  background-color: var(--yt-white-color) !important;
+  border-radius: 8px !important;
+  color: var(--yt-spec-text-primary-inverse) !important;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ytr-mult-select__selected-option-remove {
+  filter: invert(1) brightness(0.06);
+}
