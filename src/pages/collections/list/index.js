@@ -1,14 +1,18 @@
-function ColletionsUpdateForm(event, oldName) {
-  const nameInput = event.target.querySelector("[data-name='collection-name']")
+function ValidateColletionsUpdateForm(form) {
+  const nameInput = form.querySelector("[data-name='collection-name']")
   const name = formItem['input'](nameInput).value
   if (!name || name.length < 1) return false
-  if (!collections || !collections[oldName]) return false
 
-  const channelInput = event.target.querySelector(
-    "[data-name='collection-channels']"
-  )
-  const channels = formItem['mult-select'](channelInput).value
+  const channelsInput = form.querySelector("[data-name='collection-channels']")
+  const channels = formItem['mult-select'](channelsInput).value
   if (!channels || channels.length < 1) return false
+
+  return true
+}
+
+function ColletionsUpdateForm(event, oldName) {
+  if (!ValidateColletionsUpdateForm(event.target)) return false
+  if (!collections || !collections[oldName]) return false
 
   const collectionChannels = {}
   Array.from(channels).forEach(channel => {
@@ -29,7 +33,11 @@ function ColletionsUpdateForm(event, oldName) {
     collectionChannels[channel.value] = collectionChannel
   })
 
-  Object.defineProperty(collections, name, Object.getOwnPropertyDescriptor(collections, oldName))
+  Object.defineProperty(
+    collections,
+    name,
+    Object.getOwnPropertyDescriptor(collections, oldName)
+  )
   delete collections[oldName]
   collections[name] = collectionChannels
   localStorage.setItem('yt-collections', JSON.stringify(collections))
@@ -63,15 +71,13 @@ function CollectionUpdateDialog(collection) {
   const formContent = CreateFormContent([nameInput, channelsMultSelect])
   formContent.classList.add('yt-collections__form')
 
-  const dialog = CreateDialog(
-    'Manage Collection',
-    formContent,
-    (event) => {
-      ColletionsUpdateForm(event, collection[0])
-      dialog.close()
-    },
-    'Save'
-  )
+  const dialog = CreateDialog({
+    title: 'Manage Collection',
+    content: formContent,
+    onSubmit: ColletionsUpdateForm,
+    submitText: 'Save',
+    validateForm: ValidateColletionsUpdateForm
+  })
   return dialog
 }
 
@@ -84,9 +90,7 @@ function CollectionsPageListItem(collection) {
   collectionHeaderWrapper.classList.add('button')
   collectionHeaderWrapper.classList.add('yt-collection__header-wrapper')
   collectionHeaderWrapper.onclick = () => {
-    collectionWrapper.classList.toggle(
-      'yt-collections__collection--collapsed'
-    )
+    collectionWrapper.classList.toggle('yt-collections__collection--collapsed')
   }
 
   const collectionHeader = document.createElement('div')
@@ -119,11 +123,10 @@ function CollectionsPageListItem(collection) {
 
   const collectionHeaderManageDialog = CollectionUpdateDialog(collection)
 
-
   const collectionHeaderManageButton = CreateButton({
     text: 'Manage Collection',
     textSize: 'small',
-    onclick: (event) => {
+    onclick: event => {
       event.stopPropagation()
       collectionHeaderManageDialog.showModal()
     }
@@ -215,7 +218,8 @@ function CollectionsPageList(wrapper, isUpdate = false) {
     '.yt-collections__collections'
   )
   if (existingCollections && !isUpdate) return true
-  else if (existingCollections && isUpdate) existingCollections.parentNode.removeChild(existingCollections)
+  else if (existingCollections && isUpdate)
+    existingCollections.parentNode.removeChild(existingCollections)
 
   const content = wrapper.querySelector('#primary')
 

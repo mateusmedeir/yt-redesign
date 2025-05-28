@@ -19,6 +19,11 @@
   filter: brightness(120%);
 }
 
+.ytr-button:disabled {
+  filter: brightness(50%) !important;
+  pointer-events: none;
+}
+
 .ytr-button[size="small"] {
   padding: 8px 24px;
   font-size: 14px;

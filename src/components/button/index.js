@@ -4,7 +4,10 @@ function CreateButton({
   variant = '',
   size = 'medium',
   textSize = 'medium',
-  onclick = null
+  type = 'button',
+  onclick = null,
+  form = null,
+  validateForm = null
 }) {
   const button = document.createElement('button')
   button.classList.add('button')
@@ -12,6 +15,11 @@ function CreateButton({
   button.setAttribute('variant', variant)
   button.setAttribute('size', size)
   button.setAttribute('text-size', textSize)
+  button.type = type
+
+  if (type === 'submit' && form && validateForm) {
+    button.disabled = !validateForm(form)
+  }
 
   if (icon) {
     const buttonIcon = document.createElement('img')
@@ -24,6 +32,12 @@ function CreateButton({
   buttonText.classList.add('ytr-button__text')
   buttonText.innerHTML = text
   button.appendChild(buttonText)
+
+  if (type === 'submit' && form && validateForm) {
+    form.addEventListener('input', event => {
+      button.disabled = !validateForm(form)
+    })
+  }
 
   if (onclick) button.onclick = onclick
 

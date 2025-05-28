@@ -126,8 +126,8 @@ yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER][selected] #chip-contai
 }
 
 .divider--vertical {
-  width: 100%;
-  max-width: 0.5px;
-  margin: 8px 0;
-  background-color: var(--yt-spec-10-percent-layer);
+    width: 100%;
+    max-width: 0.5px;
+    margin: 8px 0;
+    background-color: var(--yt-spec-10-percent-layer);
 }

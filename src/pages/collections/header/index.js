@@ -11,17 +11,21 @@ function CollectionsAddButton(dialog) {
   return button
 }
 
-function ColletionsAddForm(event) {
-  const nameInput = event.target.querySelector("[data-name='collection-name']")
+function ValidateColletionsAddForm(form) {
+  const nameInput = form.querySelector("[data-name='collection-name']")
   const name = formItem['input'](nameInput).value
   if (!name || name.length < 1) return false
   if (collections && collections[name]) return false
 
-  const channelInput = event.target.querySelector(
-    "[data-name='collection-channels']"
-  )
-  const channels = formItem['mult-select'](channelInput).value
+  const channelsInput = form.querySelector("[data-name='collection-channels']")
+  const channels = formItem['mult-select'](channelsInput).value
   if (!channels || channels.length < 1) return false
+
+  return true
+}
+
+function ColletionsAddForm(event) {
+  if (!IsColletionsAddFormValid(event.target)) return false
 
   const collectionChannels = {}
   Array.from(channels).forEach(channel => {
@@ -48,7 +52,7 @@ function ColletionsAddForm(event) {
   collections[name] = collectionChannels
   localStorage.setItem('yt-collections', JSON.stringify(collections))
 
-   UpsertCollectionCallback()
+  UpsertCollectionCallback()
 
   return true
 }
@@ -75,15 +79,13 @@ function CollectionsAddDialog() {
   const formContent = CreateFormContent([nameInput, channelsMultSelect])
   formContent.classList.add('yt-collections__form')
 
-  const dialog = CreateDialog(
-    'New Collection',
-    formContent,
-    (event) => {
-      ColletionsAddForm(event)
-      dialog.close()
-    },
-    'Create Collection'
-  )
+  const dialog = CreateDialog({
+    title: 'Create Collection',
+    content: formContent,
+    onSubmit: ColletionsAddForm,
+    submitText: 'Create Collection',
+    validateForm: ValidateColletionsAddForm
+  })
   return dialog
 }
 
@@ -116,7 +118,7 @@ function CollectionsPageHeader(wrapper) {
       `.ytr-channel-collections__header .ytr-tabs input[value="${selectedTab}"]`
     )
     if (existingTab) existingTab.checked = true
-    
+
     return true
   }
 
@@ -130,12 +132,12 @@ function CollectionsPageHeader(wrapper) {
       {
         label: 'Channels',
         value: 'channels',
-        checked: selectedTab === 'channels',
+        checked: selectedTab === 'channels'
       },
       {
         label: 'Collections',
         value: 'collections',
-        checked: selectedTab === 'collections',
+        checked: selectedTab === 'collections'
       }
     ]
   })

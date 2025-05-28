@@ -1,4 +1,10 @@
-function CreateDialog(title, content, onSubmit = null, submitText = 'Submit') {
+function CreateDialog({
+  title = '',
+  content = null,
+  onSubmit = null,
+  submitText = 'Submit',
+  validateForm = null
+}) {
   const dialog = document.createElement('dialog')
   dialog.classList.add('ytr-dialog')
 
@@ -13,6 +19,7 @@ function CreateDialog(title, content, onSubmit = null, submitText = 'Submit') {
     dialogWrapper.onsubmit = event => {
       event.preventDefault()
       onSubmit(event)
+      dialog.close()
     }
   }
   dialogWrapper.classList.add('ytr-dialog-wrapper')
@@ -86,7 +93,10 @@ function CreateDialog(title, content, onSubmit = null, submitText = 'Submit') {
 
     const dialogFooterButtonSubmit = CreateButton({
       text: submitText,
-      variant: 'accent'
+      variant: 'accent',
+      type: 'submit',
+      form: dialogWrapper,
+      validateForm
     })
     dialogFooterButtons.appendChild(dialogFooterButtonSubmit)
   }
