@@ -1,18 +1,27 @@
 function ValidateColletionsUpdateForm(form) {
   const nameInput = form.querySelector("[data-name='collection-name']")
-  const name = formItem['input'](nameInput).value
+  const { value: name, defaultValue: oldName } = formItem['input'](nameInput)
   if (!name || name.length < 1) return false
 
   const channelsInput = form.querySelector("[data-name='collection-channels']")
   const channels = formItem['mult-select'](channelsInput).value
   if (!channels || channels.length < 1) return false
+  if (!collections || !collections[oldName]) return false
+
 
   return true
 }
 
-function ColletionsUpdateForm(event, oldName) {
+function ColletionsUpdateForm(event) {
   if (!ValidateColletionsUpdateForm(event.target)) return false
-  if (!collections || !collections[oldName]) return false
+
+  const nameInput = event.target.querySelector("[data-name='collection-name']")
+  const { value: name, defaultValue: oldName } = formItem['input'](nameInput)
+
+  const channelsInput = event.target.querySelector(
+    "[data-name='collection-channels']"
+  )
+  const channels = formItem['mult-select'](channelsInput).value
 
   const collectionChannels = {}
   Array.from(channels).forEach(channel => {

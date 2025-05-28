@@ -1,9 +1,11 @@
 formItem['input'] = inputWrapper => {
   const input = inputWrapper.querySelector('input')
   const value = input.value
+  const defaultValue = inputWrapper.getAttribute('data-default-value')
 
   return {
-    value
+    value,
+    defaultValue,
   }
 }
 
@@ -18,6 +20,7 @@ function CreateInput({
   const inputWrapper = document.createElement('div')
   inputWrapper.setAttribute('data-type', 'input')
   inputWrapper.setAttribute('data-name', name)
+  inputWrapper.setAttribute('data-default-value', defaultValue)
   inputWrapper.classList.add('ytr-input-wrapper')
 
   const inputLabel = document.createElement('label')

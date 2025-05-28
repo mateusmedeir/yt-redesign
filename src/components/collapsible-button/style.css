@@ -38,6 +38,10 @@ yt-img-shadow.ytd-guide-entry-renderer {
   background-color: var(--yt-spec-endpoint-background) !important;
 }
 
+.collapsible:has(.collapsible-content:empty, .collapsible-content > *:empty) .collapsible-button, .collapsible:has(.collapsible-content:empty, .collapsible-content > *:empty) .collapsible--hr {
+  display: none;
+}
+
 .collapsible-button {
   display: flex;
   align-items: center;

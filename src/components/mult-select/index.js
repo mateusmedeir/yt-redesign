@@ -8,9 +8,11 @@ formItem['mult-select'] = multSelectWrapper => {
       value: option.getAttribute('value')
     }
   })
+  const defaultValue = multSelectWrapper.getAttribute('data-default-value').split(',')
 
   return {
-    value: selectedValues
+    value: selectedValues,
+    defaultValue: defaultValue,
   }
 }
 
@@ -51,6 +53,9 @@ function CreateMultSelect(label, name, placeholder = '', options) {
   const multSelectWrapper = document.createElement('div')
   multSelectWrapper.setAttribute('data-type', 'mult-select')
   multSelectWrapper.setAttribute('data-name', name)
+  multSelectWrapper.setAttribute('data-default-value', options.map(option => {
+    return option.value
+  }).join(','))
   multSelectWrapper.classList.add('ytr-input-wrapper')
   multSelectWrapper.classList.add('ytr-mult-select-wrapper')
 
@@ -137,27 +142,37 @@ function CreateMultSelect(label, name, placeholder = '', options) {
     multSelectOptions.appendChild(multSelectOption)
   })
 
+  const multSelectOptionsEmpty = document.createElement('li')
+  multSelectOptionsEmpty.classList.add('ytr-mult-select__empty')
+  multSelectOptionsEmpty.innerHTML = 'No results found.'
+  multSelectOptions.appendChild(multSelectOptionsEmpty)
+
   multSelectWrapper.addEventListener('reset', event => {
+    multSelectOptions.querySelectorAll('li').forEach(option => {
+      option.hidden = false
+    })
+
     multSelectSelectedOptions.innerHTML = ''
 
-    options.filter(option => {
-      return option.checked
-    }
-    ).forEach(option => {
-      const multSelectOptionInput = multSelectOptions.querySelector(
-        `input[value="${option.value}"]`
-      )
-      if (!multSelectOptionInput) return
+    options
+      .filter(option => {
+        return option.checked
+      })
+      .forEach(option => {
+        const multSelectOptionInput = multSelectOptions.querySelector(
+          `input[value="${option.value}"]`
+        )
+        if (!multSelectOptionInput) return
 
-      multSelectOptionInput.checked = true
+        multSelectOptionInput.checked = true
 
-      CreateMultSelectSelectedOption(
-        multSelectOptionInput,
-        multSelectSelectedOptions,
-        option.label,
-        option.value
-      )
-    })
+        CreateMultSelectSelectedOption(
+          multSelectOptionInput,
+          multSelectSelectedOptions,
+          option.label,
+          option.value
+        )
+      })
   })
 
   window.addEventListener('click', event => {
@@ -175,6 +190,7 @@ function CreateMultSelect(label, name, placeholder = '', options) {
       multSelect.getAttribute('active') === 'true'
     ) {
       multSelect.setAttribute('active', false)
+      multSelectInput.blur()
       event.preventDefault()
     }
   })

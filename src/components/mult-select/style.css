@@ -28,9 +28,22 @@
   align-items: center;
   gap: 8px;
   position: relative;
+}
+
+.ytr-mult-select__option,
+.ytr-mult-select__empty {
   max-width: 100%;
-  font-size: 16px;
-  padding: 10px 16px;
+  font-size: 15px;
+  padding: 8px 16px;
+}
+
+.ytr-mult-select__empty {
+  display: none;
+  text-align: center;
+}
+
+.ytr-mult-select__options:not(:has(.ytr-mult-select__option:not([hidden]))) .ytr-mult-select__empty {
+  display: block;
 }
 
 .ytr-mult-select__option[hidden="true"] {

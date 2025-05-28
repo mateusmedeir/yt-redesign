@@ -8,6 +8,7 @@ function createCollapsible(title, content) {
 
   const collapsibleHr = document.createElement('hr')
   collapsibleHr.classList.add('divider--vertical')
+  collapsibleHr.classList.add('collapsible--hr')
 
   const collapsibleButton = document.createElement('button')
   collapsibleButton.classList.add('button')
@@ -30,13 +31,13 @@ function createCollapsible(title, content) {
 
   collapsibleWrapper.appendChild(collapsibleHeader)
 
+  const collapsibleContent = document.createElement('div')
+  collapsibleContent.classList.add('collapsible-content')
   if (content) {
-    const collapsibleContent = document.createElement('div')
-    collapsibleContent.classList.add('collapsible-content')
     collapsibleContent.appendChild(content)
-
-    collapsibleWrapper.appendChild(collapsibleContent)
   }
+
+  collapsibleWrapper.appendChild(collapsibleContent)
 
   return collapsibleWrapper
 }
@@ -46,7 +47,7 @@ function createCollapsibleButton({
   endpoint,
   icon = null,
   iconActive = null,
-  onClick = null,
+  onClick = null
 }) {
   const collapsibleButton = createEndpoint(
     endpoint,

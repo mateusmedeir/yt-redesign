@@ -15,7 +15,6 @@ function CreateButton({
   button.setAttribute('variant', variant)
   button.setAttribute('size', size)
   button.setAttribute('text-size', textSize)
-  button.type = type
 
   if (type === 'submit' && form && validateForm) {
     button.disabled = !validateForm(form)

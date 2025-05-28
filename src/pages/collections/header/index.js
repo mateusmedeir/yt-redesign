@@ -25,7 +25,15 @@ function ValidateColletionsAddForm(form) {
 }
 
 function ColletionsAddForm(event) {
-  if (!IsColletionsAddFormValid(event.target)) return false
+  if (!ValidateColletionsAddForm(event.target)) return false
+
+  const nameInput = event.target.querySelector("[data-name='collection-name']")
+  const name = formItem['input'](nameInput).value
+
+  const channelsInput = event.target.querySelector(
+    "[data-name='collection-channels']"
+  )
+  const channels = formItem['mult-select'](channelsInput).value
 
   const collectionChannels = {}
   Array.from(channels).forEach(channel => {
