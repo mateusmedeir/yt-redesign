@@ -1,8 +1,3 @@
-ytd-browse[page-subtype="subscriptions-channels"] ytd-section-list-renderer[is-constrained-list][responsive-sizing=STANDARD],
-ytd-tabbed-page-header[is-constrained-list][responsive-sizing=STANDARD] #page-header-container {
-    max-width: 1470px !important;
-}
-
 ytd-browse[page-subtype='subscriptions-channels'] #header #page-header-container #page-header {
     display: none !important;
 }

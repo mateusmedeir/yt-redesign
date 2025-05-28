@@ -101,6 +101,7 @@ yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER][selected] #chip-contai
 }
 
 .ytr-input__label {
+    text-align: left;
     font-size: 16px;
     font-weight: 500;
     color: var(--yt-spec-text-primary);

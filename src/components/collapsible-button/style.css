@@ -34,7 +34,7 @@ yt-img-shadow.ytd-guide-entry-renderer {
   width: 100%;
 }
 
-.collapsible:has(.ytr-endpoint--active, ytd-guide-entry-renderer[active]) .collapsible-button {
+.collapsible:has(.collapsible-content .ytr-endpoint--active, .collapsible-content #items > ytd-guide-entry-renderer[active]:not(within #expandable-items), #expandable-items ytd-guide-entry-renderer[active]:not(:last-of-type)) .collapsible-button {
   background-color: var(--yt-spec-endpoint-background) !important;
 }
 

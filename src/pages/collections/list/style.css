@@ -1,9 +1,15 @@
+ytd-browse[page-subtype="subscriptions-channels"] ytd-section-list-renderer[is-constrained-list][responsive-sizing=STANDARD],
+ytd-tabbed-page-header[is-constrained-list][responsive-sizing=STANDARD] #page-header-container,
+.yt-collections__collections {
+    max-width: 1470px !important;
+}
+
 /* YT Channel Card */
 
 ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-shelf-contents-renderer {
     display: flex !important;
     flex-direction: row !important;
-  
+
     gap: 35px !important;
 }
 
@@ -90,9 +96,21 @@ ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-s
     display: none !important;
 }
 
+ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-shelf-contents-renderer #info-section #metadata > * {
+    width: fit-content !important;
+    margin: 0 auto !important;
+}   
+
 /* CUSTOM */
 
+ytd-browse[page-subtype="subscriptions-channels"]:not(:has(.ytr-channel-collections__header input[name="channel-collection-tabs"][value="collections"]:checked)) .yt-collections__collections,
+ytd-browse[page-subtype="subscriptions-channels"]:has(.ytr-channel-collections__header):not(:has(.ytr-channel-collections__header input[name="channel-collection-tabs"][value="channels"]:checked)) #primary #contents {
+    display: none;
+}
+
 .yt-collections__collections {
+    width: 100%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 34px;
@@ -104,29 +122,44 @@ ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-s
     flex-direction: column;
     gap: 40px;
     padding-bottom: 34px;
+}
+
+.yt-collections__collection:not(:last-child) {
     border-bottom: 1px solid var(--yt-chip-cloud-chip-background);
 }
 
 .yt-collection__header-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    cursor: pointer;
 }
 
 .yt-collection__header {
+    position: relative;
+    cursor: pointer;
+
     display: flex;
     gap: 8px;
 }
 
 .yt-collection__header-actions {
-  display: flex;
-  gap: 16px;
-  align-items: center;
+    display: flex;
+    gap: 16px;
+    align-items: center;
 }
 
 .yt-collection__title {
     color: var(--yt-white-color);
+}
+
+.yt-collections__collection--collapsed .yt-collection__header-collapse {
+    transform: rotate(180deg);
+}
+
+.yt-collections__collection--collapsed .yt-collection__channels {
+    display: none;
 }
 
 .yt-collection__channels {

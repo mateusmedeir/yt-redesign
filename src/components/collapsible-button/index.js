@@ -41,14 +41,22 @@ function createCollapsible(title, content) {
   return collapsibleWrapper
 }
 
-function createCollapsibleButton(title, endpoint, icon, iconActive) {
+function createCollapsibleButton({
+  title,
+  endpoint,
+  icon = null,
+  iconActive = null,
+  onClick = null,
+}) {
   const collapsibleButton = createEndpoint(
     endpoint,
     title,
     icon,
     iconActive,
     () => {
-      localStorage.removeItem('yt-collection-selected')
+      if (onClick) {
+        onClick()
+      }
       url = null
       TriggerObserver()
     }

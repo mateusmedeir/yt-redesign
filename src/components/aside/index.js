@@ -14,6 +14,29 @@ function ExtractAsideMenuSectionData(asideMenuSections, position) {
   }
 }
 
+function InsertAsideCollectionsContent(colectionsContent) {
+  const collectionsList = JSON.parse(localStorage.getItem('yt-collections'))
+
+  if (collectionsList) {
+    Object.entries(collectionsList).forEach(([key, value]) => {
+      const collectionButton = createEndpoint(
+        '/feed/subscriptions',
+        key,
+        null,
+        null,
+        () => {
+          localStorage.setItem('yt-collection-selected', key)
+          url = null
+          TriggerObserver()
+        },
+        true
+      )
+
+      colectionsContent.appendChild(collectionButton)
+    })
+  }
+}
+
 function RefactorAsideMenuSections() {
   const asideMenuDivs = document.querySelectorAll(
     'ytd-guide-renderer#guide-renderer div#sections.style-scope.ytd-guide-renderer ytd-guide-section-renderer'
@@ -66,12 +89,12 @@ function RefactorAsideMenuSections() {
 
     subscriptionsDiv.section.insertBefore(
       createCollapsible(
-        createCollapsibleButton(
-          subscriptionsDiv.title,
-          '/feed/subscriptions',
-          subscriptionsIcon,
-          subscriptionsAIcon
-        ),
+        createCollapsibleButton({
+          title: subscriptionsDiv.title,
+          endpoint: '/feed/subscriptions',
+          icon: subscriptionsIcon,
+          iconActive: subscriptionsAIcon
+        }),
         subscriptionsDiv.content
       ),
       subscriptionsDiv.section.firstChild
@@ -80,35 +103,22 @@ function RefactorAsideMenuSections() {
       'ytr-subscriptions-collapsible'
     )
 
-    const collectionsList = JSON.parse(localStorage.getItem('yt-collections'))
     const colectionsContent = document.createElement('div')
     colectionsContent.classList.add('yt-collections__content')
 
-    Object.entries(collectionsList).forEach(([key, value]) => {
-      const collectionButton = createEndpoint(
-        '/feed/subscriptions',
-        key,
-        null,
-        null,
-        () => {
-          localStorage.setItem('yt-collection-selected', key)
-          url = null
-          TriggerObserver()
-        },
-        true
-      )
-
-      colectionsContent.appendChild(collectionButton)
-    })
+    InsertAsideCollectionsContent(colectionsContent)
 
     subscriptionsDiv.section.insertBefore(
       createCollapsible(
-        createCollapsibleButton(
-          'Collections',
-          '/feed/channels',
-          collectionsIcon,
-          collectionsAIcon
-        ),
+        createCollapsibleButton({
+          title: 'Collections',
+          endpoint: '/feed/channels',
+          icon: collectionsIcon,
+          iconActive: collectionsAIcon,
+          onClick: () => {
+            localStorage.setItem('ytr-selected-collections-tab', 'collections')
+          }
+        }),
         colectionsContent
       ),
       subscriptionsDiv.section.firstChild
@@ -117,12 +127,12 @@ function RefactorAsideMenuSections() {
 
   asideMenuFirstItems.insertBefore(
     createCollapsible(
-      createCollapsibleButton(
-        exploreDiv.title,
-        '/feed/trending?bp=6gQJRkVleHBsb3Jl',
-        exploreIcon,
-        exploreAIcon
-      ),
+      createCollapsibleButton({
+        title: exploreDiv.title,
+        endpoint: '/feed/trending?bp=6gQJRkVleHBsb3Jl',
+        icon: exploreIcon,
+        iconActive: exploreAIcon
+      }),
       exploreDiv.content
     ),
     asideMenuFirstItems.children[1]

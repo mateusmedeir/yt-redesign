@@ -29,6 +29,10 @@ ytd-rich-item-renderer[rendered-from-rich-grid][is-category-selected="false"] {
   grid-area: 4;
 } */
 
+#contents[is-collection-selected="true"] ytd-rich-section-renderer:not(:first-of-type) {
+  display: none !important;
+}
+
 ytd-rich-section-renderer,
 ytd-continuation-item-renderer.ytd-rich-grid-renderer {
   grid-column: span var(--ytd-rich-grid-items-per-row, 4) !important;

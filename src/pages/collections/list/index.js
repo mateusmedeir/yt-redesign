@@ -1,8 +1,8 @@
-function submitColletionsAddForm(event) {
+function ColletionsUpdateForm(event, oldName) {
   const nameInput = event.target.querySelector("[data-name='collection-name']")
   const name = formItem['input'](nameInput).value
   if (!name || name.length < 1) return false
-  if (collections && collections[name]) return false
+  if (!collections || !collections[oldName]) return false
 
   const channelInput = event.target.querySelector(
     "[data-name='collection-channels']"
@@ -29,11 +29,14 @@ function submitColletionsAddForm(event) {
     collectionChannels[channel.value] = collectionChannel
   })
 
-  if (collections === null) {
-    collections = {}
-  }
+  Object.defineProperty(collections, name, Object.getOwnPropertyDescriptor(collections, oldName))
+  delete collections[oldName]
   collections[name] = collectionChannels
   localStorage.setItem('yt-collections', JSON.stringify(collections))
+
+  UpsertCollectionCallback()
+
+  return true
 }
 
 function CollectionUpdateDialog(collection) {
@@ -63,8 +66,8 @@ function CollectionUpdateDialog(collection) {
   const dialog = CreateDialog(
     'Manage Collection',
     formContent,
-    () => {
-      submitColletionsAddForm(event)
+    (event) => {
+      ColletionsUpdateForm(event, collection[0])
       dialog.close()
     },
     'Save'
@@ -77,8 +80,14 @@ function CollectionsPageListItem(collection) {
   collectionWrapper.classList.add('yt-collections__collection')
   collectionWrapper.setAttribute('collection-name', collection[0])
 
-  const collectionHeaderWrapper = document.createElement('div')
+  const collectionHeaderWrapper = document.createElement('button')
+  collectionHeaderWrapper.classList.add('button')
   collectionHeaderWrapper.classList.add('yt-collection__header-wrapper')
+  collectionHeaderWrapper.onclick = () => {
+    collectionWrapper.classList.toggle(
+      'yt-collections__collection--collapsed'
+    )
+  }
 
   const collectionHeader = document.createElement('div')
   collectionHeader.classList.add('yt-collection__header')
@@ -109,12 +118,13 @@ function CollectionsPageListItem(collection) {
   collectionHeaderActions.appendChild(collectionHeaderManage)
 
   const collectionHeaderManageDialog = CollectionUpdateDialog(collection)
-  collectionHeaderManage.appendChild(collectionHeaderManageDialog)
+
 
   const collectionHeaderManageButton = CreateButton({
     text: 'Manage Collection',
     textSize: 'small',
-    onclick: () => {
+    onclick: (event) => {
+      event.stopPropagation()
       collectionHeaderManageDialog.showModal()
     }
   })
@@ -139,8 +149,12 @@ function CollectionsPageListItem(collection) {
     })
     if (!channelElement) return false
 
-    const channelWrapper = document.createElement('div')
+    const channelWrapper = document.createElement('button')
+    channelWrapper.classList.add('button')
     channelWrapper.classList.add('yt-collection__channel')
+    channelWrapper.onclick = () => {
+      channelElement.querySelector('a#main-link').click()
+    }
 
     const channelAvatar = document.createElement('img')
     channelAvatar.classList.add('yt-collection__channel-avatar')
@@ -194,13 +208,16 @@ function CollectionsPageListItem(collection) {
   return collectionWrapper
 }
 
-function CollectionsPageList(wrapper) {
-  if (!collections) return false
+function CollectionsPageList(wrapper, isUpdate = false) {
+  if (!collections) return true
 
-  const content = wrapper.querySelector('#contents.ytd-shelf-renderer')
+  const existingCollections = wrapper.querySelector(
+    '.yt-collections__collections'
+  )
+  if (existingCollections && !isUpdate) return true
+  else if (existingCollections && isUpdate) existingCollections.parentNode.removeChild(existingCollections)
 
-  /* if (content.classList.contains('yt-collections__content')) {
-      } */
+  const content = wrapper.querySelector('#primary')
 
   const collectionsWrapper = document.createElement('div')
   collectionsWrapper.classList.add('yt-collections__collections')
@@ -212,8 +229,10 @@ function CollectionsPageList(wrapper) {
     collectionsWrapper.appendChild(collectionWrapper)
   })
 
-  content.insertBefore(collectionsWrapper, content.firstChild)
-  content.classList.add('yt-collections__content')
+  content.firstChild.insertBefore(
+    collectionsWrapper,
+    content.firstChild.firstChild
+  )
 
   return true
 }

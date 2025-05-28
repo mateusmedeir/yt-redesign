@@ -2,11 +2,20 @@ let collections = null
 let subscribedChannels = {}
 let subscribedChannelsElements = []
 
-function CollectionsPage() {
-  if (!collections) {
-    collections = JSON.parse(localStorage.getItem('yt-collections'))
-  }
+function UpsertCollectionCallback() {
+  CollectionsPageList(
+    document.querySelector("ytd-browse[page-subtype='subscriptions-channels']"),
+    true
+  )
 
+  const asideCollectionContent = document.querySelector(".collapsible-content .yt-collections__content")
+  if (asideCollectionContent) {
+    asideCollectionContent.innerHTML = ''
+    InsertAsideCollectionsContent(asideCollectionContent)
+  }
+}
+
+function UpdateSubscripedChannels() {
   const wrapper = document.querySelector(
     "ytd-browse[page-subtype='subscriptions-channels']"
   )
@@ -18,19 +27,47 @@ function CollectionsPage() {
   if (!channels) return false
 
   subscribedChannelsElements = Array.from(channels)
+  if (!subscribedChannelsElements.length) return false
 
-  subscribedChannelsElements.forEach(element => {
-    const name = element.querySelector('#info #text-container #text').innerHTML
-    const subscribers = element.querySelector(
-      '#metadata #video-count'
-    ).innerHTML
+  let hasImg = false
 
-    if (name && subscribers) {
-      subscribedChannels[name] = { subscribers }
-    } else {
-      return false
-    }
-  })
+  try {
+    subscribedChannelsElements.forEach(element => {
+      const name = element.querySelector(
+        '#info #text-container #text'
+      ).innerHTML
+      const subscribers = element.querySelector(
+        '#metadata #video-count'
+      ).innerHTML
+      const img = element.querySelector('#avatar img').src
+      if (img) hasImg = true
+      const url = element.querySelector('a#main-link').href
+
+      if (name && subscribers && url) {
+        subscribedChannels[name] = { subscribers, img, url }
+      } else {
+        throw new Error('Invalid channel data')
+      }
+    })
+  } catch (error) {
+    return false
+  }
+  if (!hasImg) return false
+
+  return true
+}
+
+function CollectionsPage() {
+  if (!collections) {
+    collections = JSON.parse(localStorage.getItem('yt-collections'))
+  }
+
+  const wrapper = document.querySelector(
+    "ytd-browse[page-subtype='subscriptions-channels']"
+  )
+  if (!wrapper) return false
+
+  if (!UpdateSubscripedChannels()) return false
 
   return CollectionsPageHeader(wrapper) && CollectionsPageList(wrapper)
 }

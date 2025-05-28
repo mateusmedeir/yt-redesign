@@ -121,6 +121,7 @@ function UpdateEndpointsState() {
 function UpdatedUrl() {
   UpdateEndpointsState()
   localStorage.removeItem('yt-collection-selected')
+  localStorage.removeItem('ytr-selected-collections-tab')
 }
 
 function TryURLFunction(urlFunction, oldUrl) {

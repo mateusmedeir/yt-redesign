@@ -11,7 +11,7 @@ function CollectionsAddButton(dialog) {
   return button
 }
 
-function submitColletionsAddForm(event) {
+function ColletionsAddForm(event) {
   const nameInput = event.target.querySelector("[data-name='collection-name']")
   const name = formItem['input'](nameInput).value
   if (!name || name.length < 1) return false
@@ -47,6 +47,10 @@ function submitColletionsAddForm(event) {
   }
   collections[name] = collectionChannels
   localStorage.setItem('yt-collections', JSON.stringify(collections))
+
+   UpsertCollectionCallback()
+
+  return true
 }
 
 function CollectionsAddDialog() {
@@ -74,8 +78,8 @@ function CollectionsAddDialog() {
   const dialog = CreateDialog(
     'New Collection',
     formContent,
-    () => {
-      submitColletionsAddForm(event)
+    (event) => {
+      ColletionsAddForm(event)
       dialog.close()
     },
     'Create Collection'
@@ -88,7 +92,6 @@ function CollectionsAdd() {
   addWrapper.classList.add('yt-collections__add-wrapper')
 
   const dialog = CollectionsAddDialog()
-  addWrapper.appendChild(dialog)
 
   const button = CollectionsAddButton(dialog)
   addWrapper.appendChild(button)
@@ -102,30 +105,41 @@ function CollectionsPageHeader(wrapper) {
   )
   if (!header) return false
 
+  const selectedTab =
+    localStorage.getItem('ytr-selected-collections-tab') || 'channels'
+
+  const existingHeader = header.querySelector(
+    '.ytr-channel-collections__header'
+  )
+  if (existingHeader) {
+    const existingTab = existingHeader.querySelector(
+      `.ytr-channel-collections__header .ytr-tabs input[value="${selectedTab}"]`
+    )
+    if (existingTab) existingTab.checked = true
+    
+    return true
+  }
+
   const headerWrapper = document.createElement('div')
   headerWrapper.classList.add('ytr-channel-collections__header')
   header.appendChild(headerWrapper)
 
-/*   const headerTabs = document.createElement('div')
-  headerTabs.classList.add('ytr-tabs')
+  const headerTabs = CreateTabs({
+    name: 'channel-collection-tabs',
+    options: [
+      {
+        label: 'Channels',
+        value: 'channels',
+        checked: selectedTab === 'channels',
+      },
+      {
+        label: 'Collections',
+        value: 'collections',
+        checked: selectedTab === 'collections',
+      }
+    ]
+  })
   headerWrapper.appendChild(headerTabs)
-
-  const headerTabsChannels = document.createElement('button')
-  headerTabsChannels.classList.add('button')
-  headerTabsChannels.classList.add('ytr-tabs__option')
-  headerTabsChannels.innerHTML = 'Channels'
-  headerTabs.appendChild(headerTabsChannels)
-
-  const headerTabsHr = document.createElement('hr')
-  headerTabsHr.classList.add('divider--vertical')
-  headerTabsHr.classList.add('ytr-divider--tabs')
-  headerTabs.appendChild(headerTabsHr)
-
-  const headerTabsCollections = document.createElement('button')
-  headerTabsCollections.classList.add('button')
-  headerTabsCollections.classList.add('ytr-tabs__option')
-  headerTabsCollections.innerHTML = 'Collections'
-  headerTabs.appendChild(headerTabsCollections) */
 
   const addWrapper = CollectionsAdd()
   headerWrapper.appendChild(addWrapper)

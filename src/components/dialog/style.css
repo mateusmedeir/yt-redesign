@@ -3,6 +3,7 @@ body:has(.ytr-dialog[open]) {
 }
 
 .ytr-dialog {
+  cursor: initial;
   width: 100%;
   max-width: 1002px;
   border-radius: 20px;

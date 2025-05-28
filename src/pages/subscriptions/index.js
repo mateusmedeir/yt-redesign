@@ -4,12 +4,14 @@ function SubscriptionsVideosCallback(videosWrapper) {
   if (videos.length === 0) return false
 
   const channelToCollectionsMap = {}
-  for (const [collectionName, channels] of Object.entries(collections)) {
-    for (const channelName in channels) {
-      if (!channelToCollectionsMap[channelName]) {
-        channelToCollectionsMap[channelName] = []
+  if (collections) {
+    for (const [collectionName, channels] of Object.entries(collections)) {
+      for (const channelName in channels) {
+        if (!channelToCollectionsMap[channelName]) {
+          channelToCollectionsMap[channelName] = []
+        }
+        channelToCollectionsMap[channelName].push(collectionName)
       }
-      channelToCollectionsMap[channelName].push(collectionName)
     }
   }
 
@@ -45,6 +47,7 @@ function SubscriptionsVideos(selectedCollection) {
 
   videosWrapper.classList.add('ytr-subscriptions-videos')
   videosWrapper.setAttribute('collection-selected', selectedCollection || '')
+  videosWrapper.setAttribute('is-collection-selected', !!selectedCollection)
 
   if (subscriptionsVideosChecker) {
     SubscriptionsVideosCallback(videosWrapper)

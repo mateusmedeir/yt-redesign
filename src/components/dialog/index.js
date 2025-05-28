@@ -96,5 +96,7 @@ function CreateDialog(title, content, onSubmit = null, submitText = 'Submit') {
       dialogWrapper.reset()
       content.dispatchEvent(new Event('reset'))
     })
+
+  document.body.appendChild(dialog)
   return dialog
 }
