@@ -77,6 +77,103 @@ function SubscriptionsVideos(selectedCollection) {
   return true
 }
 
+function SubscriptionsPageHeader() {
+  const selectedCollection = localStorage.getItem('yt-collection-selected')
+
+  const wrapper = document.querySelector(
+    'ytd-browse[page-subtype="subscriptions"] #contents.ytd-rich-grid-renderer'
+  )
+  if (!wrapper) return false
+
+  let subscriptionsHeader = wrapper.parentNode.querySelector('.ytr-subscriptions__header')
+  let headerTitleSpan
+  let headerTitleText
+  let headerManageCollectionButton
+
+  if (!subscriptionsHeader) {
+    subscriptionsHeader = document.createElement('div')
+    subscriptionsHeader.classList.add('ytr-subscriptions__header')
+    wrapper.parentNode.insertBefore(subscriptionsHeader, wrapper)
+
+    const headerTitle = document.createElement('h2')
+    headerTitle.classList.add('text')
+    headerTitle.classList.add('text-xl')
+    headerTitle.classList.add('ytr-subscriptions__title')
+    subscriptionsHeader.appendChild(headerTitle)
+
+    headerTitleSpan = document.createElement('span')
+    headerTitleSpan.classList.add('ytr-subscriptions__title-span')
+    headerTitle.appendChild(headerTitleSpan)
+
+    headerTitleText = document.createElement('span')
+    headerTitleText.classList.add('ytr-subscriptions__title-text')
+    headerTitle.appendChild(headerTitleText)
+
+    const headerManageSubscriptionsButton = CreateButton({
+      text: 'Manage Subscriptions',
+      textSize: 'small',
+      href: '/feed/channels',
+      className: 'ytr-subscriptions__manage-subscriptions',
+    })
+    subscriptionsHeader.appendChild(headerManageSubscriptionsButton)
+
+    headerManageCollectionButton = CreateButton({
+      text: 'Manage Collections',
+      textSize: 'small',
+      href: '/feed/channels',
+      className: 'ytr-subscriptions__manage-collection',
+      onclick: () => {
+        localStorage.setItem('ytr-selected-collections-tab', 'collections')
+        localStorage.setItem('ytr-collection-to-edit', selectedCollection || '')
+      }
+    })
+    subscriptionsHeader.appendChild(headerManageCollectionButton)
+  } else {
+    headerTitleSpan = subscriptionsHeader.querySelector(
+      '.ytr-subscriptions__title-span'
+    )
+    headerTitleText = subscriptionsHeader.querySelector(
+      '.ytr-subscriptions__title-text'
+    )
+
+    headerManageCollectionButton = subscriptionsHeader.querySelector(
+      '.ytr-subscriptions__manage-collection'
+    )
+
+    subscriptionsHeader.removeChild(headerManageCollectionButton)
+    headerManageCollectionButton = CreateButton({
+      text: 'Manage Collections',
+      textSize: 'small',
+      href: '/feed/channels',
+      className: 'ytr-subscriptions__manage-collection',
+      onclick: () => {
+        localStorage.setItem('ytr-selected-collections-tab', 'collections')
+        localStorage.setItem('ytr-collection-to-edit', selectedCollection || '')
+      }
+    })
+    subscriptionsHeader.appendChild(headerManageCollectionButton)
+  }
+
+  subscriptionsHeader.setAttribute(
+    'collection-selected',
+    selectedCollection || ''
+  )
+  subscriptionsHeader.setAttribute(
+    'is-collection-selected',
+    !!selectedCollection
+  )
+
+  if (!!selectedCollection) {
+    headerTitleSpan.innerHTML = 'Collection: '
+    headerTitleText.innerHTML = selectedCollection
+  } else {
+    headerTitleSpan.innerHTML = ''
+    headerTitleText.innerHTML = 'Subscriptions'
+  }
+
+  return true
+}
+
 function SubscriptionsPage() {
   if (!collections) {
     collections = JSON.parse(localStorage.getItem('yt-collections'))
@@ -85,9 +182,5 @@ function SubscriptionsPage() {
   const selectedCollection = localStorage.getItem('yt-collection-selected')
   lastSelectedCollection = selectedCollection
 
-  const subscriptionsVideos = SubscriptionsVideos(selectedCollection)
-
-  if (subscriptionsVideos) return true
-
-  return false
+  return SubscriptionsPageHeader() && SubscriptionsVideos(selectedCollection)
 }

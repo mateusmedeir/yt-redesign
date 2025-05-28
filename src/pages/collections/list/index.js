@@ -22,7 +22,6 @@ function ColletionsUpdateForm(event) {
     "[data-name='collection-channels']"
   )
   const channels = formItem['mult-select'](channelsInput).value
-
   const collectionChannels = {}
   Array.from(channels).forEach(channel => {
     const collectionChannel = subscribedChannels[channel.value]
@@ -84,6 +83,7 @@ function CollectionUpdateDialog(collection) {
     title: 'Manage Collection',
     content: formContent,
     onSubmit: ColletionsUpdateForm,
+        isOpen: localStorage.getItem('ytr-collection-to-edit') === collection[0],
     submitText: 'Save',
     validateForm: ValidateColletionsUpdateForm
   })
@@ -226,7 +226,18 @@ function CollectionsPageList(wrapper, isUpdate = false) {
   const existingCollections = wrapper.querySelector(
     '.yt-collections__collections'
   )
-  if (existingCollections && !isUpdate) return true
+  if (existingCollections && !isUpdate) {
+    const collectionToEdit = localStorage.getItem('ytr-collection-to-edit')
+    if (!collectionToEdit) return true
+
+     const collectionToEditElement = existingCollections.querySelector('.yt-collections__collection[collection-name="' + collectionToEdit + '"]')
+     if (!collectionToEditElement) return true
+
+     const collectionToEditDialogButton = collectionToEditElement.querySelector('.yt-collection__header-manage button')
+     if (collectionToEditDialogButton) collectionToEditDialogButton.click()
+
+    return true
+  }
   else if (existingCollections && isUpdate)
     existingCollections.parentNode.removeChild(existingCollections)
 

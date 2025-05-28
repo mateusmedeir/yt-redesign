@@ -1,6 +1,7 @@
 function CreateDialog({
   title = '',
   content = null,
+  isOpen = false,
   onSubmit = null,
   submitText = 'Submit',
   validateForm = null
@@ -90,7 +91,8 @@ function CreateDialog({
     const dialogFooterButtonCancel = CreateButton({
       text: 'Cancel',
       variant: 'default',
-      onclick: () => {
+      type: 'button',
+      onclick: (event) => {
         dialog.close()
       }
     })
@@ -113,5 +115,6 @@ function CreateDialog({
     })
 
   document.body.appendChild(dialog)
+  if (isOpen) dialog.showModal()
   return dialog
 }

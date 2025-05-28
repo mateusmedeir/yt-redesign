@@ -76,6 +76,7 @@ function CreateMultSelect(label, name, placeholder = '', options) {
   multSelectInput.type = 'text'
   multSelectInput.name = name
   multSelectInput.placeholder = placeholder
+  multSelectInput.autocomplete = 'off'
   multSelect.appendChild(multSelectInput)
 
   const multSelectOptions = document.createElement('ul')

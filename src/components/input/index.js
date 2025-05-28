@@ -35,6 +35,7 @@ function CreateInput({
   input.name = name
   input.placeholder = placeholder
   input.value = defaultValue
+  input.autocomplete = 'off'
   inputWrapper.appendChild(input)
 
   inputWrapper.addEventListener('reset', event => {

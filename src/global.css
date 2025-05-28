@@ -61,6 +61,10 @@ yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER][selected] #chip-contai
     display: none !important;
 }
 
+.text {
+    color: var(--yt-spec-text-primary);
+}
+
 .text-sm {
     font-size: 12px !important;
     line-height: 18px !important;
@@ -77,6 +81,14 @@ yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER][selected] #chip-contai
 
 .text-lg {
     font-size: 18px !important;
+    line-height: 23px !important;
+    letter-spacing: 0% !important;
+    font-weight: 500 !important;
+    font-family: "Roboto", Arial, sans-serif !important;
+}
+
+.text-xl {
+    font-size: 20px !important;
     line-height: 28.29px !important;
     letter-spacing: 0% !important;
     font-weight: 500 !important;

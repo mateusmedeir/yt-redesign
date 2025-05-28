@@ -1,14 +1,25 @@
-ytd-browse[page-subtype="subscriptions-channels"] ytd-section-list-renderer[is-constrained-list][responsive-sizing=STANDARD],
+ytd-browse[page-subtype="subscriptions-channels"] ytd-section-list-renderer[is-constrained-list][responsive-sizing=STANDARD] {
+    max-width: -webkit-fill-available !important;
+}
+
+ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-shelf-contents-renderer {
+    justify-content: space-between !important;
+}
+
 ytd-tabbed-page-header[is-constrained-list][responsive-sizing=STANDARD] #page-header-container,
+ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-shelf-contents-renderer,
 .yt-collections__collections {
     max-width: 1470px !important;
+    margin: 0 auto !important;
 }
 
 /* YT Channel Card */
 
-ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-shelf-contents-renderer {
+ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-shelf-contents-renderer,
+.yt-collection__channels {
     display: flex !important;
     flex-direction: row !important;
+    flex-wrap: wrap !important;
 
     gap: 35px !important;
 }
@@ -96,10 +107,10 @@ ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-s
     display: none !important;
 }
 
-ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-shelf-contents-renderer #info-section #metadata > * {
+ytd-browse[page-subtype="subscriptions-channels"] #grid-container.ytd-expanded-shelf-contents-renderer #info-section #metadata>* {
     width: fit-content !important;
     margin: 0 auto !important;
-}   
+}
 
 /* CUSTOM */
 
@@ -159,7 +170,7 @@ ytd-browse[page-subtype="subscriptions-channels"]:has(.ytr-channel-collections__
 }
 
 .yt-collections__collection--collapsed .yt-collection__channels {
-    display: none;
+    display: none !important;
 }
 
 .yt-collection__channels {

@@ -5,6 +5,8 @@ function CreateButton({
   size = 'medium',
   textSize = 'medium',
   type = 'button',
+  className = null,
+  href = null,
   onclick = null,
   form = null,
   validateForm = null
@@ -17,6 +19,10 @@ function CreateButton({
   button.setAttribute('variant', variant)
   button.setAttribute('size', size)
   button.setAttribute('text-size', textSize)
+
+  if (className) {
+    button.classList.add(className)
+  }
 
   if (type === 'submit' && form && validateForm) {
     initialDisabled = !validateForm(form)
@@ -45,7 +51,11 @@ function CreateButton({
     })
   }
 
-  if (onclick) button.onclick = onclick
+  button.onclick = event => {
+    if (type === 'button') event.preventDefault()
+    if (onclick) onclick(event)
+    if (href) EndpointHrefRedirect(href)
+  }
 
   return button
 }
