@@ -1,6 +1,13 @@
+@media (min-width: 1230px) {
+    ytd-rich-grid-renderer {
+        --ytd-rich-grid-items-per-row: 4 !important;
+    }
+}
+
+
 #contents.ytd-rich-grid-renderer {
   display: grid !important;
-  grid-template-columns: repeat(var(--ytd-rich-grid-items-per-row, 4), 1fr) !important;
+  grid-template-columns: repeat(var(--ytd-rich-grid-items-per-row, 4), minmax(0, 1fr)) !important;
   row-gap:
     var(--ytd-rich-grid-row-margin, 32px) !important;
   column-gap: var(--ytd-rich-grid-item-margin, 16px) !important;
@@ -21,7 +28,7 @@ ytd-rich-item-renderer[rendered-from-rich-grid] {
   margin: 0 !important
 }
 
-ytd-rich-item-renderer[rendered-from-rich-grid][is-category-selected="false"] {
+ytd-rich-item-renderer[rendered-from-rich-grid][is-collection-selected="false"] {
   display: none !important;
 }
 

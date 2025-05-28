@@ -9,6 +9,8 @@ function CreateButton({
   form = null,
   validateForm = null
 }) {
+  let initialDisabled = false
+
   const button = document.createElement('button')
   button.classList.add('button')
   button.classList.add('ytr-button')
@@ -17,7 +19,8 @@ function CreateButton({
   button.setAttribute('text-size', textSize)
 
   if (type === 'submit' && form && validateForm) {
-    button.disabled = !validateForm(form)
+    initialDisabled = !validateForm(form)
+    button.disabled = initialDisabled
   }
 
   if (icon) {
@@ -35,6 +38,10 @@ function CreateButton({
   if (type === 'submit' && form && validateForm) {
     form.addEventListener('input', event => {
       button.disabled = !validateForm(form)
+    })
+
+    form.addEventListener('reset', event => {
+      button.disabled = initialDisabled
     })
   }
 

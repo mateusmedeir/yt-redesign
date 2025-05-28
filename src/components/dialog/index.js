@@ -10,8 +10,12 @@ function CreateDialog({
 
   dialog.onclick = event => {
     if (event.target === dialog) {
-      if (event.target.querySelectorAll('.ytr-mult-select[active="true"], .ytr-select[active="true"]').length == 0) 
-      dialog.close()
+      if (
+        event.target.querySelectorAll(
+          '.ytr-mult-select[active="true"], .ytr-select[active="true"]'
+        ).length == 0
+      )
+        dialog.close()
     }
   }
 

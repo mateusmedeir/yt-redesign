@@ -13,6 +13,7 @@ function UpsertCollectionCallback() {
     asideCollectionContent.innerHTML = ''
     InsertAsideCollectionsContent(asideCollectionContent)
   }
+  LoadChannelToCollectionsMap()
 }
 
 function UpdateSubscripedChannels() {

@@ -1,28 +1,18 @@
+let channelToCollectionsMap = {}
+
 function SubscriptionsVideosCallback(videosWrapper) {
   const selectedCollection = videosWrapper.getAttribute('collection-selected')
   const videos = videosWrapper.querySelectorAll('ytd-rich-item-renderer')
   if (videos.length === 0) return false
 
-  const channelToCollectionsMap = {}
-  if (collections) {
-    for (const [collectionName, channels] of Object.entries(collections)) {
-      for (const channelName in channels) {
-        if (!channelToCollectionsMap[channelName]) {
-          channelToCollectionsMap[channelName] = []
-        }
-        channelToCollectionsMap[channelName].push(collectionName)
-      }
-    }
-  }
-
   videos.forEach(video => {
     const channelName = video.querySelector(
       'ytd-channel-name yt-formatted-string a.yt-simple-endpoint'
     )
-    if (!channelName) return
+    if (!channelName) return false
 
     const channelNameText = channelName.textContent.trim()
-    if (!channelNameText) return
+    if (!channelNameText) return false
 
     const channelCollections = channelToCollectionsMap[channelNameText] || []
     const collectionsName = channelCollections.join(',')
@@ -32,9 +22,24 @@ function SubscriptionsVideosCallback(videosWrapper) {
       ? channelCollections.includes(selectedCollection)
       : true
 
-    video.setAttribute('is-category-selected', isSelected)
+    video.setAttribute('is-collection-selected', isSelected)
   })
   return false
+}
+
+function LoadChannelToCollectionsMap() {
+  channelToCollectionsMap = {}
+
+  if (!collections) return
+
+  for (const [collectionName, channels] of Object.entries(collections)) {
+    for (const channelName in channels) {
+      if (!channelToCollectionsMap[channelName]) {
+        channelToCollectionsMap[channelName] = []
+      }
+      channelToCollectionsMap[channelName].push(collectionName)
+    }
+  }
 }
 
 let subscriptionsVideosChecker = false
@@ -56,6 +61,8 @@ function SubscriptionsVideos(selectedCollection) {
   }
 
   subscriptionsVideosChecker = true
+
+  LoadChannelToCollectionsMap()
 
   const subscriptionsVideosObserver = new MutationObserver(() => {
     if (SubscriptionsVideosCallback(videosWrapper)) {
