@@ -47,7 +47,9 @@ function CreateDialog({
   const dialogCloseButton = document.createElement('button')
   dialogCloseButton.classList.add('button')
   dialogCloseButton.classList.add('ytr-dialog__close-button')
-  dialogCloseButton.onclick = () => {
+  dialogCloseButton.type = 'button'
+  dialogCloseButton.onclick = (event) => {
+    event.preventDefault()
     dialog.close()
   }
   dialogHeaderWrapper.appendChild(dialogCloseButton)
