@@ -1,7 +1,18 @@
 {
+  "manifest_version": 3,
   "name": "Youtube Redesign",
   "version": "0.4.0",
   "description": "Extension based on the Juxtopposed Youtube UI redesign",
+  "host_permissions": [
+    "https://*.youtube.com/*"
+  ],
+  "permissions": [
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -58,9 +69,6 @@
       ]
     }
   ],
-  "host_permissions": [
-    "https://*.youtube.com/*"
-  ],
   "web_accessible_resources": [
     {
       "resources": [
@@ -90,6 +98,5 @@
     "32": "src/assets/icon-32.png",
     "48": "src/assets/icon-48.png",
     "128": "src/assets/icon-128.png"
-  },
-  "manifest_version": 3
+  }
 }
