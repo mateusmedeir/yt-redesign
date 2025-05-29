@@ -1,6 +1,8 @@
 let channelToCollectionsMap = {}
 
 function SubscriptionsVideosCallback(videosWrapper) {
+  if (!collections) return true
+
   const selectedCollection = videosWrapper.getAttribute('collection-selected')
   const videos = videosWrapper.querySelectorAll('ytd-rich-item-renderer')
   if (videos.length === 0) return false
@@ -85,7 +87,9 @@ function SubscriptionsPageHeader() {
   )
   if (!wrapper) return false
 
-  let subscriptionsHeader = wrapper.parentNode.querySelector('.ytr-subscriptions__header')
+  let subscriptionsHeader = wrapper.parentNode.querySelector(
+    '.ytr-subscriptions__header'
+  )
   let headerTitleSpan
   let headerTitleText
   let headerManageCollectionButton
@@ -113,7 +117,7 @@ function SubscriptionsPageHeader() {
       text: 'Manage Subscriptions',
       textSize: 'small',
       href: '/feed/channels',
-      className: 'ytr-subscriptions__manage-subscriptions',
+      className: 'ytr-subscriptions__manage-subscriptions'
     })
     subscriptionsHeader.appendChild(headerManageSubscriptionsButton)
 

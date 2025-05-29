@@ -52,12 +52,24 @@ function RefactorAsideMenuSections() {
   let subscriptionsExists = 1
   const oldSubscriptionsButtonA =
     oldSubscriptionsButton.querySelector('a#endpoint')
+
   if (
     !oldSubscriptionsButtonA ||
     !oldSubscriptionsButtonA.href.includes('/feed/subscriptions')
   )
     subscriptionsExists = 0
   else oldSubscriptionsButton.id = 'ytr-old-subscriptions-button'
+
+  const subscriptionsTitle = oldSubscriptionsButtonA.getAttribute('title')
+  const sectionTitles = asideMenuDivs[1].querySelectorAll(
+    'h3 yt-formatted-string'
+  )
+  if (sectionTitles) {
+    const subscriptionsSectionTitle = Array.from(sectionTitles).find(
+      title => title.innerText === subscriptionsTitle
+    )
+    if (!subscriptionsSectionTitle) subscriptionsExists = 0
+  } else subscriptionsExists = 0
 
   const exploreDiv = ExtractAsideMenuSectionData(
     asideMenuDivs,
@@ -78,7 +90,10 @@ function RefactorAsideMenuSections() {
     const subscriptionsShowMore = subscriptionsDiv.content.querySelector(
       'ytd-guide-collapsible-entry-renderer'
     )
-    if (subscriptionsShowMore.getAttribute('can-show-more') === '') {
+    if (
+      subscriptionsShowMore &&
+      subscriptionsShowMore.getAttribute('can-show-more') === ''
+    ) {
       const subscriptionsShowMoreLink =
         subscriptionsShowMore.querySelector('a#endpoint')
 
@@ -124,7 +139,6 @@ function RefactorAsideMenuSections() {
       subscriptionsDiv.section.firstChild
     )
   }
-
   asideMenuFirstItems.insertBefore(
     createCollapsible(
       createCollapsibleButton({
