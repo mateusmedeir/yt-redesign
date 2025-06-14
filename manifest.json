@@ -1,14 +1,12 @@
 {
   "manifest_version": 3,
   "name": "Youtube Redesign",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Extension based on the Juxtopposed Youtube UI redesign",
   "host_permissions": [
     "https://*.youtube.com/*"
   ],
-  "permissions": [
-    "tabs"
-  ],
+  "permissions": [],
   "background": {
     "service_worker": "src/background.js",
     "type": "module"
