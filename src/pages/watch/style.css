@@ -1,9 +1,17 @@
+#thumbnail-input-row:has(#creation-box) #footer .yt-spec-button-shape-next--call-to-action.yt-spec-button-shape-next--filled,
 #subscribe-button-shape button {
     background: var(--yt-accent-color) !important;
-    color: var(--yt-spec-text-primary) !important;
+    color: var(--yt-white-color) !important;
     filter: brightness(80%) !important;
 }
 
+#thumbnail-input-row:has(#creation-box) #footer .yt-spec-button-shape-next--size-m,
+#thumbnail-input-row:has(#creation-box) #footer .yt-spec-button-shape-next--call-to-action.yt-spec-button-shape-next--filled,
+#subscribe-button-shape button {
+    padding: 10px 24px !important;
+}
+
+#thumbnail-input-row:has(#creation-box) #footer .yt-spec-button-shape-next--call-to-action.yt-spec-button-shape-next--filled:hover,
 #subscribe-button-shape button:hover {
     filter: brightness(100%) !important;
 }

@@ -9,7 +9,8 @@
     flex: none !important;
 }
 
-#top-row #owner, #top-row #actions {
+#top-row #owner,
+#top-row #actions {
     min-width: auto !important;
 }
 
@@ -20,19 +21,25 @@
 .yt-watch-menu-data {
     display: flex;
     font: 400 16px Roboto, Arial, sans-serif;
-    color: var(--yt-white-color);
+    color: rgb(var(--ytr-foreground));
     gap: 16px;
     margin-top: 12px;
     margin-right: 16px;
 }
 
-.yt-watch-menu-data__views, .yt-watch-menu-data__date {
+.yt-watch-menu-data__views,
+.yt-watch-menu-data__date {
     display: flex !important;
     align-items: center !important;
     gap: 4px !important;
 }
 
-.yt-watch-menu-data__views > #view-count > * {
+.yt-watch-menu-data__views img,
+.yt-watch-menu-data__date img {
+    filter: invert(var(--ytr-black-invert)) !important;
+}
+
+.yt-watch-menu-data__views>#view-count>* {
     display: block !important;
 }
 

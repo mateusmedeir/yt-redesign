@@ -69,9 +69,9 @@
     width: 100%;
     text-align: center;
     color: var(--yt-spec-text-primary);
-    background-color: var(--yt-spec-text-primary-inverse);
+    background: var(--yt-glass-background-color, --yt-spec-text-primary-inverse);
     padding: 8px 12px;
-    border: 1px solid var(--yt-outline-color);
+    border: 1px solid var(--ytr-outline-color);
     cursor: pointer;
 }
 

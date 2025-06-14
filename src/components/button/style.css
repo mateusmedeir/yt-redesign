@@ -8,15 +8,28 @@
   font-weight: 500;
 
   background-color: var(--ytr-foreground-color);
-  color: var(--yt-white-color);
+  color: rgb(var(--ytr-foreground));
 }
 
 .ytr-button:has(.ytr-button__icon) {
   padding: 6px 24px 6px 20px;
 }
 
-.ytr-button:hover {
+.ytr-button__icon[data-color="black"] {
+  filter: invert(var(--ytr-white-invert));
+}
+
+.ytr-button__icon[data-color="white"] {
+  filter: invert(var(--ytr-black-invert));
+}
+
+
+html[dark] .ytr-button:hover, [dark] .ytr-button:hover {
   filter: brightness(120%);
+}
+
+.ytr-button:hover {
+  filter: brightness(90%);
 }
 
 .ytr-button:disabled {
@@ -44,6 +57,7 @@
 
 .ytr-button[variant="accent"] {
   background: var(--yt-accent-color);
+  color: var(--yt-white-color);
   filter: brightness(80%);
 }
 

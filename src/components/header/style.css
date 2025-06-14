@@ -1,5 +1,5 @@
 #masthead #container #center, #masthead #container #center #voice-search-button button {
-    border: 1px solid var(--yt-outline-color) !important;
+    border: 1px solid var(--ytr-outline-color) !important;
     border-radius: 20000px !important;
 }
 
@@ -26,6 +26,7 @@
 
 #masthead #container #center yt-searchbox .ytSearchboxComponentInputBox, #masthead #container #center yt-searchbox button, #masthead #container #center #voice-search-button {
     background: transparent !important;
+    box-shadow: none !important;
     background-color: transparent !important;
 }
 

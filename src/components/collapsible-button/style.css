@@ -51,6 +51,10 @@ yt-img-shadow.ytd-guide-entry-renderer {
   border-radius: 0.625rem;
 }
 
+.collapsible-button img {
+  filter: invert(var(--ytr-black-invert));
+}
+
 #endpoint:hover {
   background-color: transparent !important;
 }

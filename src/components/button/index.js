@@ -1,6 +1,7 @@
 function CreateButton({
   text,
   icon = null,
+  iconColor = 'white',
   variant = '',
   size = 'medium',
   textSize = 'medium',
@@ -32,6 +33,7 @@ function CreateButton({
   if (icon) {
     const buttonIcon = document.createElement('img')
     buttonIcon.classList.add('ytr-button__icon')
+    buttonIcon.setAttribute('data-color', iconColor)
     buttonIcon.src = icon
     button.appendChild(buttonIcon)
   }

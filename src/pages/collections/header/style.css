@@ -13,8 +13,8 @@ ytd-browse[page-subtype="subscriptions-channels"]:not(:has(.ytr-channel-collecti
 .yt-collections__dialog {
     border-radius: 8px;
     font-size: 18px;
-    color: var(--yt-white-color);
-    background-color: var(--yt-button-bg-color);
+    color: rgb(var(--ytr-foreground));
+    background-color: var(--ytr-foreground-color);
     border: none;
 }
 
@@ -26,8 +26,8 @@ ytd-browse[page-subtype="subscriptions-channels"]:not(:has(.ytr-channel-collecti
 
 .yt-collections__button {
     display: flex;
-    color: var(--yt-white-color);
-    background-color: var(--yt-button-bg-color);
+    color: rgb(var(--ytr-foreground));
+    background-color: var(--ytr-foreground-color);
 
     width: fit-content;
     align-items: center;

@@ -12,7 +12,7 @@
   margin-top: 2px;
   padding: 12px 0;
 
-  background-color: var(--ytr-select-bg) !important;
+  background-color: var(--ytr-select-background-color) !important;
   border-radius: 8px !important;
   color: var(--yt-spec-text-primary) !important;
   list-style: none;
@@ -51,7 +51,7 @@
 }
 
 .ytr-mult-select__option:hover {
-  background-color: var(--ytr-select-bg-hover);
+  background-color: var(--ytr-select-background-color-hover);
 }
 
 .ytr-mult-select__option input[type="checkbox"] {
@@ -62,13 +62,14 @@
 }
 
 .ytr-mult-select__option:not(:has(input[type="checkbox"]:checked)) .ytr-mult-select__option-label {
-  margin-left: 27px;
+  margin-left: 26px;
 }
 
 .ytr-mult-select__option .ytr-mult-select__option-check {
   display: none;
-  width: 19px;
-  height: 19px;
+  width: 18px;
+  height: 18px;
+  filter: invert(var(--ytr-black-invert));
 }
 
 .ytr-mult-select__option:has(input[type="checkbox"]:checked) .ytr-mult-select__option-check {
@@ -87,7 +88,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 12px 6px 16px;
-  background-color: var(--yt-white-color) !important;
+  background-color: rgb(var(--ytr-foreground)) !important;
   border-radius: 8px !important;
   color: var(--yt-spec-text-primary-inverse) !important;
   font-size: 14px;
@@ -95,5 +96,5 @@
 }
 
 .ytr-mult-select__selected-option-remove {
-  filter: invert(1) brightness(0.06);
+  filter: invert(var(--ytr-white-invert));
 }

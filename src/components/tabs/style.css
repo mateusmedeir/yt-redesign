@@ -14,7 +14,7 @@
   padding: 18px 0;
   font-size: 20px;
   font-weight: 500;
-  color: var(--yt-white-color);
+  color: rgb(var(--ytr-foreground));
 }
 
 .ytr-tabs__option:not(:has(:checked)) {

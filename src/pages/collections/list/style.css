@@ -162,7 +162,11 @@ ytd-browse[page-subtype="subscriptions-channels"]:has(.ytr-channel-collections__
 }
 
 .yt-collection__title {
-    color: var(--yt-white-color);
+    color: rgb(var(--ytr-foreground));
+}
+
+.yt-collection__header-collapse {
+    filter: invert(var(--ytr-black-invert));
 }
 
 .yt-collections__collection--collapsed .yt-collection__header-collapse {

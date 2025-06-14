@@ -7,3 +7,7 @@
 .ytr-subscriptions-collapsible #items:not(:has(#expanded)) ytd-guide-entry-renderer:nth-last-child(-n+1) {
   display: none !important;
 }
+
+ytd-guide-renderer.ytd-app #footer {
+    display: none !important;
+}

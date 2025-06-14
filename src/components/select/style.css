@@ -12,7 +12,7 @@
     padding: 10px 12px 10px 16px;
     background-color: var(--yt-chip-cloud-chip-background) !important;
     border-radius: 8px !important;
-    color: var(--yt-white-color) !important;
+    color: rgb(var(--ytr-foreground)) !important;
 }
 
 .select__labels {
@@ -21,7 +21,16 @@
 }
 
 .select__label {
-    color: var(--yt-suport-text-color);
+    color: rgba(var(--ytr-foreground), 0.6);
+}
+
+.select__icon {
+    pointer-events: none;
+    filter: invert(var(--ytr-black-invert));
+}
+
+.select--active .select__icon {
+    transform: rotate(180deg);
 }
 
 .select__button-input {
@@ -40,7 +49,7 @@
 
     background-color: var(--yt-chip-cloud-chip-background) !important;
     border-radius: 8px !important;
-    color: var(--yt-white-color) !important;
+    color: rgb(var(--ytr-foreground)) !important;
     list-style: none;
     overflow: hidden;
 }
@@ -52,7 +61,7 @@
 }
 
 .select__option:hover:not(:has(input[type="radio"]:disabled)) {
-    background-color: var(--yt-select-option-hover-color);
+    background-color: var(--ytr-default-foreground-color);
 }
 
 .select__option:has(input[type="radio"]:disabled) {
@@ -70,6 +79,6 @@
     cursor: not-allowed;
 }
 
-.select__button:has(.select__button-input:checked) + .select__options {
+.select__button:has(.select__button-input:checked)+.select__options {
     display: block;
 }

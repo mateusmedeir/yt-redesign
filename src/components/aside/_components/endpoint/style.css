@@ -19,6 +19,10 @@ ytd-guide-entry-renderer {
   background-color: var(--yt-spec-endpoint-background) !important;
 }
 
+.ytr-endpoint__icon {
+  filter: invert(var(--ytr-black-invert));
+}
+
 .ytr-endpoint--active {
   background-color: var(--yt-spec-endpoint-background) !important;
 }
@@ -37,7 +41,7 @@ ytd-guide-entry-renderer {
 
 .ytr-endpoint--active:not(:has(.ytr-endpoint__a-icon)) .ytr-endpoint__icon {
   display: block !important;
-  filter: brightness(0) saturate(100%) invert(24%) sepia(96%) saturate(6047%) hue-rotate(347deg) brightness(98%) contrast(113%);
+  filter: brightness(0) saturate(100%) invert(24%) sepia(96%) saturate(6047%) hue-rotate(347deg) brightness(98%) contrast(113%) !important;
 }
 
 .ytr-endpoint__text {

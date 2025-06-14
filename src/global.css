@@ -1,30 +1,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
+    /* YTR Colors */
     --yt-primary-color: #FF0033 !important;
     --yt-secondary-color: #F50057 !important;
     --yt-tertiary-color: #FFAABB !important;
-    --yt-white-color: #FFFFFF !important;
-    --ytr-foreground-color: #1D1D1D !important;
-    --ytr-default-foreground-color: #3E3E3E !important;
     --yt-accent-color: #FF325B !important;
-    --yt-spec-text-primary: #F1F1F1 !important;
-    --yt-spec-text-primary-inverse: #0f0f0f !important;
-    --yt-outline-color: #2c2c2c !important;
-    --yt-spec-icon-inactive: #FFFFFF !important;
-    --yt-spec-endpoint-background: #322629 !important;
-    --yt-chip-cloud-chip-background: #323232 !important;
+    --yt-white-color: #FFFFFF !important;
+
+    --yt-spec-badge-chip-background: var(--yt-chip-cloud-chip-background) !important;
+    --yt-spec-endpoint-background: rgba(255, 170, 187, 0.14) !important;
     --yt-spec-additive-background: var(--ytr-foreground-color) !important;
-    /* Bg color of description, Watch page buttons, ... */
-    --yt-buttons-border-color: #ffffff33 !important;
+    --ytr-buttons-border-color: rgba(var(--ytr-foreground), 0.10) !important;
+    --ytr-input-border: rgba(var(--ytr-foreground), 0.15) !important;
+    --ytr-dialog-border: rgba(var(--ytr-foreground), 0.11) !important;
+    --ytr-default-foreground-color: rgba(var(--ytr-foreground), 0.14) !important;
+}
+
+html,
+[light] {
+    /* YT Native Colors */
+    --ytr-white-invert: 0;
+    --ytr-black-invert: 1;
+    --ytr-background: 255, 255, 255;
+    --ytr-foreground: 0, 0, 0;
+    --yt-spec-text-primary: #0f0f0f !important;
+    --yt-spec-text-primary-inverse: #F1F1F1 !important;
+
+    /* YTR Colors */
+    --ytr-background-color: #F1F1F1 !important;
+    --ytr-background-color-inverse: #0f0f0f !important;
+    --ytr-foreground-color: #f2f2f2 !important;
+    --yt-glass-background-color: rgba(255, 255, 255, 0.9);
+    --yt-glass-foreground-color: rgba(15, 15, 15, 0.8);
+    --ytr-outline-color: #D3D3D3 !important;
+    --yt-chip-cloud-chip-background: #F2F2F2 !important;
+    --ytr-select-background-color: #E1E1E1 !important;
+    --ytr-select-background-color-hover: #D0D0D0 !important;
+}
+
+html[dark],
+[dark] {
+    /* YT Native Colors */
+    --ytr-white-invert: 1;
+    --ytr-black-invert: 0;
+    --ytr-background: 0, 0, 0;
+    --ytr-foreground: 255, 255, 255;
+    --yt-spec-text-primary: var(--ytr-background-color-inverse) !important;
+    --yt-spec-text-primary-inverse: var(--ytr-background-color) !important;
+
+    /* YTR Colors */
+    --ytr-background-color: #0f0f0f !important;
+    --ytr-background-color-inverse: #F1F1F1 !important;
+    --ytr-foreground-color: #1D1D1D !important;
+    --yt-glass-background-color: rgba(15, 15, 15, 0.8);
+    --yt-glass-foreground-color: rgba(255, 255, 255, 0.9);
+    --ytr-outline-color: #2c2c2c !important;
+    --yt-spec-icon-inactive: #FFFFFF !important;
+    --yt-chip-cloud-chip-background: #1D1D1D !important;
+
     --yt-suport-text-color: #adadad !important;
     --yt-select-option-hover-color: #4F4F4F !important;
     --yt-player-config-option-border-color: #79747e !important;
-    --yt-button-bg-color: #1D1D1D !important;
-    --ytr-input-border: rgba(255, 255, 255, 0.15) !important;
-    --ytr-select-bg: #2F2F2F !important;
-    --ytr-select-bg-hover: #3E3E3E !important;
-    --ytr-dialog-border: rgba(255, 255, 255, 0.11) !important;
+    --ytr-select-background-color: #2F2F2F !important;
+    --ytr-select-background-color-hover: #3E3E3E !important;
 }
 
 #trigger-observer {
@@ -32,7 +71,8 @@
 }
 
 yt-chip-cloud-chip-renderer[chip-style=STYLE_DEFAULT] #chip-container.yt-chip-cloud-chip-renderer,
-yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER] #chip-container.yt-chip-cloud-chip-renderer {
+yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER] #chip-container.yt-chip-cloud-chip-renderer,
+.ytChipShapeInactive {
     background-color: var(--yt-chip-cloud-chip-background) !important;
     padding: 0.625rem 1rem !important;
     height: auto !important;
@@ -46,10 +86,6 @@ yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER][selected] #chip-contai
 }
 
 #sections ytd-guide-section-renderer:nth-child(n+3) {
-    display: none !important;
-}
-
-#footer {
     display: none !important;
 }
 
@@ -134,7 +170,7 @@ yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER][selected] #chip-contai
 }
 
 .divider {
-    background-color: var(--yt-button-bg-color);
+    background-color: var(--ytr-foreground-color);
 }
 
 .divider--vertical {

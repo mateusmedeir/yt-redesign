@@ -1,5 +1,5 @@
 body:has(.ytr-dialog[open]) {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .ytr-dialog {
@@ -9,9 +9,13 @@ body:has(.ytr-dialog[open]) {
   border-radius: 20px;
   padding: 18px 0;
   font-size: 18px;
-  color: var(--yt-white-color);
-  background-color: var(--yt-button-bg-color);
+  color: rgb(var(--ytr-foreground));
+  background-color: var(--ytr-foreground-color);
   border: none;
+}
+
+.ytr-dialog__close-button {
+  filter: invert(var(--ytr-black-invert));
 }
 
 .ytr-dialog::backdrop {
@@ -23,7 +27,8 @@ body:has(.ytr-dialog[open]) {
   flex-direction: column;
 }
 
-.ytr-dialog__header, .ytr-dialog__footer {
+.ytr-dialog__header,
+.ytr-dialog__footer {
   display: flex;
   flex-direction: column;
   gap: 18px;

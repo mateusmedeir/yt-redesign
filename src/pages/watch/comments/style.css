@@ -23,7 +23,8 @@
     display: none !important;
 }
 
-#creation-box .input-wrapper.tp-yt-paper-input-container, #header #placeholder-area {
+#creation-box .input-wrapper.tp-yt-paper-input-container,
+#header #placeholder-area {
     border: 1px solid var(--yt-spec-10-percent-layer) !important;
     border-radius: 8px !important;
 }
@@ -46,11 +47,13 @@
     margin: 0 !important;
 }
 
-#comment #main, #expander-contents #main {
+#comment #main,
+#expander-contents #main {
     gap: 10px !important
 }
 
-#comment #main > *, #expander-contents #main > * {
+#comment #main>*,
+#expander-contents #main>* {
     margin: 0 !important;
 }
 
@@ -58,11 +61,13 @@
     margin-top: 26px !important;
 }
 
-#comment #main #header-author, #expander-contents #main #header-author {
+#comment #main #header-author,
+#expander-contents #main #header-author {
     gap: 8px !important;
 }
 
-#comment #main #author-text, #expander-contents #main #author-text {
+#comment #main #author-text,
+#expander-contents #main #author-text {
     margin: 0 !important;
 }
 
@@ -93,7 +98,7 @@
 }
 
 .yt-watch-comment__buttons .yt-watch-comment__button:first-child {
-    border-right: 2px solid var(--yt-buttons-border-color) !important;
+    border-right: 2px solid var(--ytr-buttons-border-color) !important;
 }
 
 .yt-watch-comment__button {
@@ -104,11 +109,12 @@
     cursor: pointer !important;
 }
 
-.yt-watch-comment__button, #vote-count-middle.ytd-comment-engagement-bar {
+.yt-watch-comment__button,
+#vote-count-middle.ytd-comment-engagement-bar {
     font: 400 14px Roboto, Arial, sans-serif !important;
     line-height: 16.41px !important;
     margin: 0 !important;
-    color: var(--yt-white-color);
+    color: rgb(var(--ytr-foreground));
 }
 
 .yt-watch-comment__buttons #reply-button-end {
