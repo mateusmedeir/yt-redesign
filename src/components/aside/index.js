@@ -1,10 +1,19 @@
+function getAsideMenuSectionTitle(asideMenuSection, findFirst = true) {
+  let asideMenuSectionTitle = asideMenuSection.querySelectorAll(
+    '#items #header yt-formatted-string'
+  )
+  if (!asideMenuSectionTitle || asideMenuSectionTitle.length === 0)
+    asideMenuSectionTitle = asideMenuSection.querySelectorAll(
+      'h3 yt-formatted-string'
+    )
+  return findFirst ? asideMenuSectionTitle[0] : asideMenuSectionTitle
+}
+
 function ExtractAsideMenuSectionData(asideMenuSections, position) {
   if (position < 0 || position >= asideMenuSections.length) return null
 
   const asideMenuSection = asideMenuSections[position]
-  const asideMenuSectionTitle = asideMenuSection.querySelector(
-    'h3 yt-formatted-string'
-  )
+  const asideMenuSectionTitle = getAsideMenuSectionTitle(asideMenuSection)
 
   const asideMenuSectionContent = asideMenuSection.querySelector('div#items')
   return {
@@ -61,9 +70,7 @@ function RefactorAsideMenuSections() {
   else oldSubscriptionsButton.id = 'ytr-old-subscriptions-button'
 
   const subscriptionsTitle = oldSubscriptionsButtonA.getAttribute('title')
-  const sectionTitles = asideMenuDivs[1].querySelectorAll(
-    'h3 yt-formatted-string'
-  )
+  const sectionTitles = getAsideMenuSectionTitle(asideMenuDivs[1], false)
   if (sectionTitles) {
     const subscriptionsSectionTitle = Array.from(sectionTitles).find(
       title => title.innerText === subscriptionsTitle

@@ -13,16 +13,21 @@ ytd-browse[page-subtype="channels"] .page-header-view-model-wiz__page-header-tit
     margin-bottom: 18px !important;
 }
 
-ytd-browse[page-subtype="channels"] .yt-tab-group-shape-wiz__slider {
+ytd-browse[page-subtype="channels"] .tabGroupShapeSlider {
     background: linear-gradient(to right, var(--yt-primary-color), var(--yt-secondary-color)) !important;
 }
+
+ytd-browse[page-subtype="channels"] .tabGroupShapeHost {
+    width: 100% !important;
+}
+
     
-ytd-browse[page-subtype="channels"] .yt-tab-group-shape-wiz__slider , .yt-tab-shape-wiz:hover .yt-tab-shape-wiz__tab-bar {
+ytd-browse[page-subtype="channels"] .tabGroupShapeSlider , .yt-tab-shape:hover .yt-tab-shape__tab-bar {
     height: 3px !important;
     border-radius: 100px 100px 0 0 !important;
 }
 
-ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline-image {
+ytd-browse[page-subtype="channels"] #page-header .yt-page-header-view-model__page-header-headline-image {
     margin-top: -81px !important;
     margin-left: 27px !important;
     margin-right: 0 !important;
@@ -30,28 +35,28 @@ ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__pa
     border-radius: 100% !important;
 }
 
-ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info {
+ytd-browse[page-subtype="channels"] #page-header .yt-page-header-view-model__page-header-headline .yt-page-header-view-model__page-header-headline-info {
     display: grid;
     grid-template-columns: 1fr auto;
     padding-top: 16px;
     padding-left: 20px;
 }
 
-ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info > :nth-last-child(1) {
+ytd-browse[page-subtype="channels"] #page-header .yt-page-header-view-model__page-header-headline .yt-page-header-view-model__page-header-headline-info > :nth-last-child(1) {
     grid-column: 2;
     grid-row: 1;
     margin: 0 !important;
 }
 
-ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info > :not(:nth-last-child(1)) {
+ytd-browse[page-subtype="channels"] #page-header .yt-page-header-view-model__page-header-headline .yt-page-header-view-model__page-header-headline-info > :not(:nth-last-child(1)) {
     grid-column: 1;
 }
 
-ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-description, #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-attribution {
+ytd-browse[page-subtype="channels"] #page-header .yt-page-header-view-model__page-header-headline .yt-page-header-view-model__page-header-headline-info .page-header-view-model-wiz__page-header-description, #page-header .yt-page-header-view-model__page-header-headline .yt-page-header-view-model__page-header-headline-info .page-header-view-model-wiz__page-header-attribution {
     margin-top: 6px !important;
 }
 
-ytd-browse[page-subtype="channels"] #page-header .page-header-view-model-wiz__page-header-headline .page-header-view-model-wiz__page-header-headline-info .page-header-view-model-wiz__page-header-title--page-header-title-large {
+ytd-browse[page-subtype="channels"] #page-header .yt-page-header-view-model__page-header-headline .yt-page-header-view-model__page-header-headline-info .page-header-view-model-wiz__page-header-title--page-header-title-large {
     margin-bottom: 18px !important;
 }
 
@@ -59,7 +64,7 @@ ytd-browse[page-subtype="channels"] #header #wrapper #tabsContent, #header #wrap
     width: 100% !important;
 }
 
-ytd-browse[page-subtype="channels"] #header #wrapper .yt-tab-shape-wiz__tab--last-tab {
+ytd-browse[page-subtype="channels"] #header #wrapper .yt-tab-shape__tab--last-tab {
     margin-left: auto !important;
 }
 

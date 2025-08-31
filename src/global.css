@@ -7,10 +7,16 @@
     --yt-tertiary-color: #FFAABB !important;
     --yt-accent-color: #FF325B !important;
     --yt-white-color: #FFFFFF !important;
+    --ytr-text-color: var(--ytr-background-color-inverse) !important;
+    --ytr-text-inverse-color: var(--ytr-background-color) !important;
 
+
+    --yt-spec-text-primary: var(--ytr-background-color-inverse) !important;
+    --yt-spec-text-primary-inverse: var(--ytr-background-color) !important;
     --yt-spec-badge-chip-background: var(--yt-chip-cloud-chip-background) !important;
     --yt-spec-endpoint-background: rgba(255, 170, 187, 0.14) !important;
     --yt-spec-additive-background: var(--ytr-foreground-color) !important;
+    --ytr-buttons-primary-border-color: rgba(var(--ytr-foreground), 0.20) !important;
     --ytr-buttons-border-color: rgba(var(--ytr-foreground), 0.10) !important;
     --ytr-input-border: rgba(var(--ytr-foreground), 0.15) !important;
     --ytr-dialog-border: rgba(var(--ytr-foreground), 0.11) !important;
@@ -24,8 +30,6 @@ html,
     --ytr-black-invert: 1;
     --ytr-background: 255, 255, 255;
     --ytr-foreground: 0, 0, 0;
-    --yt-spec-text-primary: #0f0f0f !important;
-    --yt-spec-text-primary-inverse: #F1F1F1 !important;
 
     /* YTR Colors */
     --ytr-background-color: #F1F1F1 !important;
@@ -46,8 +50,6 @@ html[dark],
     --ytr-black-invert: 0;
     --ytr-background: 0, 0, 0;
     --ytr-foreground: 255, 255, 255;
-    --yt-spec-text-primary: var(--ytr-background-color-inverse) !important;
-    --yt-spec-text-primary-inverse: var(--ytr-background-color) !important;
 
     /* YTR Colors */
     --ytr-background-color: #0f0f0f !important;

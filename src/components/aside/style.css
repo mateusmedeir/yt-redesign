@@ -3,6 +3,7 @@
 }
 
 .ytr-subscriptions-collapsible #items #expanded #collapser-item,
+.ytr-subscriptions-collapsible #items #header,
 .ytr-subscriptions-collapsible #items #expanded #expandable-items ytd-guide-entry-renderer:nth-last-child(-n+1),
 .ytr-subscriptions-collapsible #items:not(:has(#expanded)) ytd-guide-entry-renderer:nth-last-child(-n+1) {
   display: none !important;

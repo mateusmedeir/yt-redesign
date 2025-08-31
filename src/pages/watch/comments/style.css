@@ -1,5 +1,55 @@
 /* +===== HEADER =====+ */
 
+#comments #header #title {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 24px;
+}
+
+#comments #header #title #sort-menu #trigger {
+    display: none !important;
+}
+
+#comments #header #title #sort-menu #dropdown {
+    display: flex !important;
+    position: static !important;
+}
+
+#comments #header #title #sort-menu #dropdown * {
+    overflow: initial !important;
+    box-shadow: none !important;
+}
+
+#comments #header #title #sort-menu #dropdown #menu {
+    padding: 0 !important;
+    display: flex !important;
+    gap: 8px !important;
+    background-color: transparent !important;
+}
+
+#comments #header #title #sort-menu #dropdown #menu * {
+    min-height: 0 !important;
+}
+
+#comments #header #title #sort-menu #dropdown #menu > * {
+    padding: 9px 16px;
+    border-radius: 8px !important;
+    border: 1px solid var(--ytr-buttons-primary-border-color) !important;
+    color: var(--ytr-text-color) !important;
+}
+
+#comments #header #title #sort-menu #dropdown #menu > *[aria-selected="true"] {
+    background-color: rgb(var(--ytr-foreground)) !important;
+    color: var(--ytr-text-inverse-color) !important;
+}
+
+#comments #header #title #sort-menu #dropdown #menu > * * {
+    padding: 0 !important;
+    color: unset !important;
+    background-color: unset !important;
+}
+
 #comments #header #count .count-text {
     display: flex !important;
     flex-direction: row-reverse !important;

@@ -39,6 +39,14 @@ ytd-guide-entry-renderer {
   display: none;
 }
 
+ytd-guide-entry-renderer[active]:has(> #endpoint).guide-icon.ytd-guide-entry-renderer {
+  color: var(--yt-primary-color) !important;
+}
+
+ytd-guide-entry-renderer[active]:has(#endpoint) .guide-icon.ytd-guide-entry-renderer {
+  color: var(--yt-primary-color) !important;
+}
+
 .ytr-endpoint--active:not(:has(.ytr-endpoint__a-icon)) .ytr-endpoint__icon {
   display: block !important;
   filter: brightness(0) saturate(100%) invert(24%) sepia(96%) saturate(6047%) hue-rotate(347deg) brightness(98%) contrast(113%) !important;
