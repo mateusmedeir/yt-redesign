@@ -158,6 +158,8 @@ yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER][selected] #chip-contai
 }
 
 .ytr-input {
+    width: 100%;
+    width: -moz-available;
     width: -webkit-fill-available;
     background: transparent;
     padding: 18px 16px;
@@ -177,7 +179,7 @@ yt-chip-cloud-chip-renderer[chip-style=STYLE_HOME_FILTER][selected] #chip-contai
 
 .divider--vertical {
     width: 100%;
-    max-width: 0.5px;
+    max-width: 1px;
     margin: 8px 0;
     background-color: var(--yt-spec-10-percent-layer);
 }

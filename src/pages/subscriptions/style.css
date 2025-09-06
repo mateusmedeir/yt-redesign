@@ -18,6 +18,8 @@ ytd-rich-section-renderer:first-of-type {
 
 #contents.ytd-rich-grid-renderer,
 .ytr-subscriptions__header {
+  max-width: 100% !important;
+  max-width: -moz-available !important;
   max-width: -webkit-fill-available !important;
   width: calc(var(--ytd-rich-grid-content-max-width) + 48px) !important;
   padding-left: calc(var(--ytd-rich-grid-item-margin) / 2 + var(--ytd-rich-grid-gutter-margin));
@@ -40,6 +42,8 @@ ytd-rich-section-renderer:first-of-type {
 }
 
 ytd-rich-item-renderer[rendered-from-rich-grid] {
+  width: 100% !important;
+  width: -moz-available !important;
   width: -webkit-fill-available !important;
   margin: 0 !important
 }

@@ -3,6 +3,8 @@ ytd-guide-entry-renderer {
 }
 
 .ytr-endpoint {
+  max-width: 100% !important;
+  max-width: -moz-available !important;
   max-width: -webkit-fill-available !important;
   width: 100% !important;
   height: 40px !important;

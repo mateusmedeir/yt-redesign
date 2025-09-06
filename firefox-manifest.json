@@ -1,0 +1,106 @@
+{
+  "manifest_version": 3,
+  "name": "Youtube Redesign",
+  "version": "0.5.2",
+  "description": "Extension based on the Juxtopposed Youtube UI redesign",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "extension_id@youtuberedesign.com"
+    }
+  },
+  "host_permissions": [
+    "https://*.youtube.com/*"
+  ],
+  "permissions": [],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*"
+      ],
+      "js": [
+        "src/main.js",
+        "src/components/aside/index.js",
+        "src/components/aside/_components/endpoint/index.js",
+        "src/components/button/index.js",
+        "src/components/collapsible-button/index.js",
+        "src/components/dialog/index.js",
+        "src/components/form/index.js",
+        "src/components/input/index.js",
+        "src/components/mult-select/index.js",
+        "src/components/select/index.js",
+        "src/components/tabs/index.js",
+        "src/pages/collections/index.js",
+        "src/pages/collections/header/index.js",
+        "src/pages/collections/list/index.js",
+        "src/pages/subscriptions/index.js",
+        "src/pages/results/index.js",
+        "src/pages/results/filters/index.js",
+        "src/pages/watch/index.js",
+        "src/pages/watch/tabs/index.js",
+        "src/pages/watch/player/index.js",
+        "src/pages/watch/menu/index.js",
+        "src/pages/watch/comments/index.js"
+      ],
+      "css": [
+        "src/global.css",
+        "src/components/aside/style.css",
+        "src/components/aside/_components/endpoint/style.css",
+        "src/components/button/style.css",
+        "src/components/collapsible-button/style.css",
+        "src/components/dialog/style.css",
+        "src/components/header/style.css",
+        "src/components/input/style.css",
+        "src/components/mult-select/style.css",
+        "src/components/select/style.css",
+        "src/components/tabs/style.css",
+        "src/pages/channel/tabs/style.css",
+        "src/pages/subscriptions/style.css",
+        "src/pages/collections/style.css",
+        "src/pages/collections/header/style.css",
+        "src/pages/collections/list/style.css",
+        "src/pages/results/filters/style.css",
+        "src/pages/watch/style.css",
+        "src/pages/watch/tabs/style.css",
+        "src/pages/watch/player/style.css",
+        "src/pages/watch/player-config/style.css",
+        "src/pages/watch/menu/style.css",
+        "src/pages/watch/comments/style.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/assets/arrow-down-icon.svg",
+        "src/assets/calendar-icon.svg",
+        "src/assets/check-icon.svg",
+        "src/assets/collections-icon.svg",
+        "src/assets/collections-a-icon.svg",
+        "src/assets/comments-icon.svg",
+        "src/assets/explore-icon.svg",
+        "src/assets/explore-a-icon.svg",
+        "src/assets/pencil-icon.svg",
+        "src/assets/sticky-player-icon.svg",
+        "src/assets/subscriptions-icon.svg",
+        "src/assets/subscriptions-a-icon.svg",
+        "src/assets/verified-icon.svg",
+        "src/assets/views-icon.svg",
+        "src/assets/x-icon.svg"
+      ],
+      "matches": [
+        "https://*.youtube.com/*"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "src/assets/icon-16.png",
+    "32": "src/assets/icon-32.png",
+    "48": "src/assets/icon-48.png",
+    "128": "src/assets/icon-128.png"
+  }
+}

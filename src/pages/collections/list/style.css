@@ -1,4 +1,6 @@
 ytd-browse[page-subtype="subscriptions-channels"] ytd-section-list-renderer[is-constrained-list][responsive-sizing=STANDARD] {
+    max-width: 100% !important;
+    max-width: -moz-available !important;
     max-width: -webkit-fill-available !important;
 }
 

@@ -2,6 +2,12 @@
   position: relative;
 }
 
+.ytr-mult-select__input {
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+}
+
 .ytr-mult-select__options {
   display: none;
   position: fixed;
