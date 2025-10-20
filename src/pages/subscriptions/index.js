@@ -8,9 +8,14 @@ function SubscriptionsVideosCallback(videosWrapper) {
   if (videos.length === 0) return false
 
   videos.forEach(video => {
-    const channelName = video.querySelector(
-      'ytd-channel-name yt-formatted-string a.yt-simple-endpoint'
+    let channelName = video.querySelector(
+      '.yt-lockup-view-model__metadata .yt-lockup-metadata-view-model__metadata .yt-content-metadata-view-model__metadata-row a'
     )
+    if (!channelName) {
+      channelName = video.querySelector(
+        'ytd-channel-name yt-formatted-string a.yt-simple-endpoint'
+      )
+    }
     if (!channelName) return false
 
     const channelNameText = channelName.textContent.trim()

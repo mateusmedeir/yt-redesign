@@ -22,11 +22,8 @@ function WatchMiniPlayer() {
 
   const playerRightControls =
     document.getElementsByClassName("ytp-right-controls")[0];
-  const miniPlayerButton = document.getElementsByClassName(
-    "ytp-miniplayer-button"
-  )[0];
 
-  if (playerRightControls && miniPlayerButton) {
+  if (playerRightControls) {
     playerRightControls.display = "flex";
 
     const stickyButton = document.createElement("button");

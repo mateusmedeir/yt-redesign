@@ -1,5 +1,4 @@
-const watchTabsArray = [
-  {
+const watchTabsObject = {
     label: "Suggestions",
     name: "watch-tabs",
     options: [
@@ -18,7 +17,6 @@ const watchTabsArray = [
       },
     ],
   }
-]
 
 function createWatchTabs(name, options) {
   const tabOptions = document.createElement("ul");
@@ -49,11 +47,11 @@ function createWatchTabs(name, options) {
 function WatchTabsIsLive() {
   const isLive = document.getElementsByClassName("ytp-live");
   if (isLive.length > 0) {
-    watchTabsArray[0].options[0].activated = false;
-    watchTabsArray[0].options[watchTabsArray[0].options.length - 1].activated = true;
+    watchTabsObject.options[0].activated = false;
+    watchTabsObject.options[watchTabsObject.options.length - 1].activated = true;
   } else {
-    watchTabsArray[0].options[0].activated = true;
-    watchTabsArray[0].options[watchTabsArray[0].options.length - 1].activated = false;
+    watchTabsObject.options[0].activated = true;
+    watchTabsObject.options[watchTabsObject.options.length - 1].activated = false;
   }
 }
 
@@ -63,13 +61,12 @@ function WatchTabsUpdate(secondaryTabs) {
   } catch (error) {}
 
   const tabs = secondaryTabs.querySelectorAll(".yt-watch-tabs__option");
-  watchTabsArray[0].options.forEach((option, index) => {
+  watchTabsObject.options.forEach((option, index) => {
     const tab = tabs[index];
     const tabInput = tab.querySelector("input");
     tabInput.checked = !!option.activated;
   }
   );
-
   return true;
 }
 
@@ -84,8 +81,8 @@ function WatchTabsCreate(secondaryVideoWrapper, secondaryInner) {
   newSecondaryVideoOptions.classList.add("text-base", "secondary__tabs");
 
   const watchTabs = createWatchTabs(
-    watchTabsArray[0].name,
-    watchTabsArray[0].options
+    watchTabsObject.name,
+    watchTabsObject.options
   )
 
   newSecondaryVideoOptions.appendChild(watchTabs);

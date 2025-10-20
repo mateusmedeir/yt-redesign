@@ -14,17 +14,12 @@
     min-width: auto !important;
 }
 
-.yt-watch-info-text {
-    display: none !important;
-}
-
 .yt-watch-menu-data {
     display: flex;
     font: 400 16px Roboto, Arial, sans-serif;
     color: rgb(var(--ytr-foreground));
     gap: 16px;
-    margin-top: 12px;
-    margin-right: 16px;
+    margin: 12px 16px 0 auto;
 }
 
 .yt-watch-menu-data__views,
