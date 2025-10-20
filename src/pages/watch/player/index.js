@@ -44,7 +44,6 @@ function WatchMiniPlayer() {
       WatchPlayer();
     });
 
-    playerRightControls.children[4].remove();
     playerRightControls.insertBefore(
       stickyButton,
       playerRightControls.children[4]
