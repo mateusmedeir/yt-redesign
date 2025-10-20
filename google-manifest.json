@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Youtube Redesign",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Extension based on the Juxtopposed Youtube UI redesign",
   "host_permissions": [
     "https://*.youtube.com/*"
